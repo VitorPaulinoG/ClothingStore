@@ -16,6 +16,7 @@ public class App extends Application {
         mainStage = stage;
         Font.loadFont(getClass().getResourceAsStream("/com/vitorpg/clothingstore/fonts/Inter-SemiBold.ttf"), 16);
         Font.loadFont(getClass().getResourceAsStream("/com/vitorpg/clothingstore/fonts/Khand-Regular.ttf"), 16);
+        Font.loadFont(getClass().getResourceAsStream("/com/vitorpg/clothingstore/fonts/Khand-Medium.ttf"), 16);
         Font.loadFont(getClass().getResourceAsStream("/com/vitorpg/clothingstore/fonts/Ubuntu-Medium.ttf"), 16);
 
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("signin-view.fxml"));
