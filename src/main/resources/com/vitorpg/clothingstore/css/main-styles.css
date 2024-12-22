@@ -1,0 +1,170 @@
+
+* {
+    -fx-white-color: #FFFFFF;
+    -fx-light-color: #F3F4F7;
+    -fx-gray-color: #7D879B;
+    -fx-dark-color: #141B29;
+    -fx-primary-color: #C03B39;
+    -fx-primary-light-color: #CF5E5E ;
+    -fx-secundary-color: #203A4B;
+    -fx-secundary-light-color: #40798C;
+}
+
+.inter-font-semibold {
+    -fx-font-family: 'Inter 24pt SemiBold';
+}
+
+.khand-font {
+    -fx-font-family: 'Khand';
+}
+
+.bg-upscaling {
+    -fx-scale-x: 1.15;
+    -fx-scale-y: 1.15;
+}
+
+.circle-18 {
+    -fx-stroke-width: 18;
+    -fx-fill: transparent;
+    -fx-stroke: -fx-light-color;
+}
+
+.circle-3 {
+    -fx-stroke-width: 3;
+    -fx-fill: transparent;
+    -fx-stroke: -fx-light-color;
+}
+
+.no-effects { 
+    -fx-effect: null; 
+}
+.bg-signin {
+    -fx-background-image: url("../images/pawel-czerwinski-unsplash.jpg");
+    -fx-background-size: cover;
+    -fx-background-position: center;
+    
+}
+
+.ubuntu-font-medium {
+    -fx-font-family: 'Ubuntu Medium';
+}
+
+.fs-24 {
+    -fx-font-size: 24px;
+}
+
+.bg-dark {
+    -fx-background-color: -fx-dark-color;
+}
+
+.bg-primary {
+    -fx-background-color: -fx-primary-color;
+}
+
+.p-0 {
+    -fx-padding: 0px;
+}
+
+
+.p-logo {
+    -fx-padding: 30 10 10 10;
+}
+
+.gap-0 {
+    -fx-spacing: 0px;
+}
+
+
+.btn-primary {
+    -fx-background-color: -fx-primary-color;
+}
+.btn-primary:pressed {
+    -fx-background-color: -fx-primary-light-color; 
+}
+
+.bg-secundary {
+    -fx-background-color: -fx-secundary-color;
+}
+
+.link {
+    -fx-underline: true;
+    -fx-text-fill: -fx-secundary-light-color;
+    -fx-cursor: hand;
+}
+
+.p-32 {
+    -fx-padding: 32px;
+}
+
+.gap-80 {
+    -fx-spacing: 80;
+}
+
+.bg-radius-8 {
+    -fx-background-radius: 8px;
+}
+
+.b-radius-16 {
+    -fx-border-radius: 16px;
+}
+
+.bg-radius-16 {
+    -fx-background-radius: 16px;
+}
+
+.gap-10 {
+    -fx-spacing: 10px;
+}
+
+.gap-5 {
+    -fx-spacing: 5px;
+}
+
+.gap-16 {
+    -fx-spacing: 16px;
+}
+
+.min-h-70 {
+    -fx-min-height: 70px;
+}
+
+.h-70 {
+    -fx-pref-height: 70px;
+}
+
+
+.txt-white {
+    -fx-text-fill: -fx-white-color;
+}
+
+.txt-gray {
+    -fx-text-fill: -fx-gray-color;
+}
+
+.prompt-txt-gray {
+    -fx-prompt-text-fill: -fx-gray-color;
+}
+
+.p-85 {
+    -fx-padding: 85px;
+}
+
+.p-5-10 {
+    -fx-padding: 10 5; 
+}
+
+.gap-32 {
+    -fx-spacing: 32px;
+}
+
+.all-nav-button {
+    -fx-cursor: hand;
+}
+
+.nav-button {
+    -fx-background-color: transparent;
+}
+
+.nav-button-current {
+    -fx-background-color: -fx-primary-color;
+}
