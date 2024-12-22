@@ -23,6 +23,10 @@
     -fx-scale-y: 1.15;
 }
 
+.bg-light {
+    -fx-background-color: -fx-light-color;
+}
+
 .circle-18 {
     -fx-stroke-width: 18;
     -fx-fill: transparent;
@@ -147,6 +151,10 @@
 
 .p-85 {
     -fx-padding: 85px;
+}
+
+.p-10 {
+    -fx-padding: 10px;
 }
 
 .p-5-10 {
