@@ -48,11 +48,26 @@
 
 .stroke-2 {
     -fx-stroke-width: 2;
-    
+}
+
+.b-3 {
+    -fx-border-width: 3;
+}
+
+.stroke-3 {
+    -fx-stroke-width: 3;
 }
 
 .stroke-gray {
     -fx-stroke: -fx-gray-color;
+}
+
+.stroke-secundary {
+    -fx-stroke: -fx-secundary-color;
+}
+
+.fill-secundary {
+    -fx-fill: -fx-secundary-color;
 }
 
 .circle-3 {
@@ -75,6 +90,10 @@
     -fx-font-family: 'Ubuntu Medium';
 }
 
+.fs-40 {
+    -fx-font-size: 40px;
+}
+
 .fs-24 {
     -fx-font-size: 24px;
 }
@@ -87,6 +106,10 @@
     -fx-background-color: -fx-dark-color;
 }
 
+.bg-transparent {
+    -fx-background-color: transparent;
+}
+
 .bg-primary {
     -fx-background-color: -fx-primary-color;
 }
@@ -95,6 +118,9 @@
     -fx-padding: 0px;
 }
 
+.p-10-10-32-24 {
+    -fx-padding: 32 10 24 10;
+}
 
 .p-logo {
     -fx-padding: 30 10 10 10;
@@ -147,8 +173,16 @@
     -fx-spacing: 80;
 }
 
+.rounded-28 {
+    -fx-border-radius: 28px;
+}
+
 .bg-radius-8 {
     -fx-background-radius: 8px;
+}
+
+.b-primary {
+    -fx-border-color: -fx-primary-color;
 }
 
 .b-radius-16 {
@@ -188,6 +222,9 @@
     -fx-text-fill: -fx-primary-color;
 }
 
+.txt-secundary {
+    -fx-text-fill: -fx-secundary-color;
+}
 
 .txt-gray {
     -fx-text-fill: -fx-gray-color;
