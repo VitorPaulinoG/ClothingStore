@@ -6,4 +6,14 @@ public class Size {
     private Long id;
     private String value;
     private SizeType sizeType;
+
+    public Size() {
+
+    }
+
+    public Size(Long id, String value, SizeType sizeType) {
+        this.id = id;
+        this.value = value;
+        this.sizeType = sizeType;
+    }
 }
