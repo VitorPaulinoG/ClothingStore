@@ -9,7 +9,7 @@
 <?import javafx.scene.shape.Ellipse?>
 <?import javafx.scene.shape.SVGPath?>
 
-<HBox prefHeight="1024.0" prefWidth="1440.0" stylesheets="@css/main-styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.vitorpg.clothingstore.controllers.StoreRootController">
+<HBox maxWidth="1.7976931348623157E308" prefHeight="1024.0" prefWidth="1440.0" stylesheets="@css/main-styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.vitorpg.clothingstore.controllers.StoreRootController">
    <styleClass>
       <String fx:value="gap-0" />
       <String fx:value="p-0" />
@@ -67,6 +67,6 @@
             <String fx:value="p-logo" />
             <String fx:value="gap-80" />
          </styleClass></VBox>
-      <Pane fx:id="paneSubScene" prefHeight="1024.0" HBox.hgrow="ALWAYS" />
+      <Pane fx:id="paneSubScene" maxWidth="1.7976931348623157E308" prefHeight="1024.0" HBox.hgrow="ALWAYS" />
    </children>
 </HBox>

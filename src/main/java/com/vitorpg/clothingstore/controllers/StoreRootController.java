@@ -29,7 +29,7 @@ public class StoreRootController {
 
         btnProducts.setOnAction(e -> {
             setCurrentPage(btnProducts);
-//            loadSubScene("");
+            loadSubScene("product-list-view");
         });
         btnSale.setOnAction(e -> {
             setCurrentPage(btnSale);
@@ -52,6 +52,8 @@ public class StoreRootController {
 
             FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(String.format("%s.fxml", sceneFxmlName)));
             Pane pane = fxmlLoader.load();
+            pane.prefWidthProperty().bind(paneSubScene.widthProperty());
+            pane.prefHeightProperty().bind(paneSubScene.heightProperty());
             paneSubScene.getChildren().setAll(pane);
 
         } catch (IOException ex) {
