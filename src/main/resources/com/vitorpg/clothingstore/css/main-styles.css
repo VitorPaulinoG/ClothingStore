@@ -18,6 +18,10 @@
     -fx-font-family: 'Khand';
 }
 
+.khand-medium-font {
+    -fx-font-family: 'Khand Medium';
+}
+
 .bg-upscaling {
     -fx-scale-x: 1.15;
     -fx-scale-y: 1.15;
@@ -31,6 +35,24 @@
     -fx-stroke-width: 18;
     -fx-fill: transparent;
     -fx-stroke: -fx-light-color;
+}
+
+.no-stroke {
+    -fx-stroke-width: 0;
+    -fx-stroke: transparent;
+}
+
+.fill-gray {
+    -fx-fill: -fx-gray-color;
+}
+
+.stroke-2 {
+    -fx-stroke-width: 2;
+    
+}
+
+.stroke-gray {
+    -fx-stroke: -fx-gray-color;
 }
 
 .circle-3 {
@@ -57,6 +79,10 @@
     -fx-font-size: 24px;
 }
 
+.fs-36 {
+    -fx-font-size: 36px;
+}
+
 .bg-dark {
     -fx-background-color: -fx-dark-color;
 }
@@ -72,6 +98,15 @@
 
 .p-logo {
     -fx-padding: 30 10 10 10;
+}
+
+
+.bg-rounded-top-8 {
+    -fx-background-radius: 8 8 0 0;
+}
+
+.bg-rounded-bottom-8 {
+    -fx-background-radius: 0 0 8 8;
 }
 
 .gap-0 {
@@ -90,6 +125,10 @@
     -fx-background-color: -fx-secundary-color;
 }
 
+.bg-white {
+    -fx-background-color: -fx-white-color;
+}
+
 .link {
     -fx-underline: true;
     -fx-text-fill: -fx-secundary-light-color;
@@ -98,6 +137,10 @@
 
 .p-32 {
     -fx-padding: 32px;
+}
+
+.p-32-8 {
+    -fx-padding: 8 32 8 32;
 }
 
 .gap-80 {
@@ -140,6 +183,11 @@
 .txt-white {
     -fx-text-fill: -fx-white-color;
 }
+
+.txt-primary {
+    -fx-text-fill: -fx-primary-color;
+}
+
 
 .txt-gray {
     -fx-text-fill: -fx-gray-color;

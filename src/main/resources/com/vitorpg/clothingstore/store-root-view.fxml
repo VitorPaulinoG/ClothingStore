@@ -15,7 +15,7 @@
       <String fx:value="p-0" />
    </styleClass>
    <children>
-      <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" prefHeight="200.0" prefWidth="102.0">
+      <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="102.0">
          <children>
             <StackPane maxWidth="-Infinity">
                <children>
