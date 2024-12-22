@@ -18,6 +18,8 @@ public class StoreRootController {
         btnOverview.setOnAction(e -> setCurrentPage(btnOverview));
         btnProducts.setOnAction(e -> setCurrentPage(btnProducts));
         btnSale.setOnAction(e -> setCurrentPage(btnSale));
+
+        setCurrentPage(btnOverview);
     }
 
     private void setCurrentPage(Button button) {
