@@ -37,7 +37,7 @@ public class UserDao implements Dao<User> {
     @Override
     public List<User> findAll() {
         String query = "select * from tb_user";
-        List<User> users = new ArrayList<User>();
+        List<User> users = new ArrayList<>();
 
         try (Connection conn = DbConnection.getConnection()){
             PreparedStatement statement = conn.prepareStatement(query);
