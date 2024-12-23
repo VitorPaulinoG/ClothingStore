@@ -1,6 +1,6 @@
 package com.vitorpg.clothingstore.repositories.interfaces;
 
-public interface DeleterDao<T>{
+public interface RemovableDao{
 
     boolean delete(Long id);
 }
