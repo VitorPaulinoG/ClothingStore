@@ -1,15 +1,15 @@
 package com.vitorpg.clothingstore.repositories;
 
 import com.vitorpg.clothingstore.models.User;
+import com.vitorpg.clothingstore.repositories.interfaces.Dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDao implements Dao<User>{
+public class UserDao implements Dao<User> {
 
     @Override
     public User findById(Long id) {
