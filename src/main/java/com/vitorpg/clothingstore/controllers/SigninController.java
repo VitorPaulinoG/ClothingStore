@@ -52,7 +52,10 @@ public class SigninController {
             return;
         }
 
-        User user = new User(txtName.getText(), txtEmail.getText(), txtPassword.getText());
+        User user = new User();
+        user.setName(txtName.getText());
+        user.setEmail(txtEmail.getText());
+        user.setPassword(txtPassword.getText());
 
         // Cadastrar Usuário
 

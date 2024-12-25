@@ -78,7 +78,7 @@ public class UserDao extends  BaseDao<User> implements Dao<User> {
 
     @Override
     public boolean save(User user) {
-        String sql = "insert into tb_user (name, email, password) value (?, ?, ?)";
+        String sql = "insert into tb_user (name, email, password) values (?, ?, ?)";
 
         return super.execute(
                 sql,
@@ -90,7 +90,7 @@ public class UserDao extends  BaseDao<User> implements Dao<User> {
     public boolean update(Long id, User user) {
         String sql =
                 """
-                update table tb_user
+                update tb_user
                 set name = ?, email = ?, password = ?
                 where id = ?
                 """;

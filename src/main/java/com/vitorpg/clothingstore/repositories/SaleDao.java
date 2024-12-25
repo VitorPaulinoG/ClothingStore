@@ -81,7 +81,7 @@ public class SaleDao extends BaseDao<Sale> implements Dao<Sale> {
         String sql =
             """
             insert into tb_sale (amount, dateTime, totalPrice, productId, vendorId)
-            value (?, ?, ?, ?, ?)
+            values (?, ?, ?, ?, ?)
             """;
 
         return super.execute(
@@ -94,7 +94,7 @@ public class SaleDao extends BaseDao<Sale> implements Dao<Sale> {
     public boolean update(Long id, Sale sale) {
         String sql =
                 """
-                update table tb_sale
+                update tb_sale
                 set amount = ?, dateTime = ?, totalPrice = ?, productId = ?, vendorId = ?
                 where id = ?
                 """;

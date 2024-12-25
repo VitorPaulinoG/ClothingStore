@@ -58,7 +58,7 @@ public class SupplierDao extends BaseDao<Supplier> implements Dao<Supplier> {
 
     @Override
     public boolean save(Supplier supplier) {
-        String sql = "insert into tb_supplier (name) value (?)";
+        String sql = "insert into tb_supplier (name) values (?)";
 
         return super.execute(
             sql,
@@ -70,7 +70,7 @@ public class SupplierDao extends BaseDao<Supplier> implements Dao<Supplier> {
     public boolean update(Long id, Supplier supplier) {
         String sql =
                 """
-                update table tb_supplier
+                update tb_supplier
                 set name = ?
                 where id = ?
                 """;

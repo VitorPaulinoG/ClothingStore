@@ -58,7 +58,7 @@ public class ColorDao extends BaseDao<Color> implements Dao<Color> {
 
     @Override
     public boolean save(Color color) {
-        String sql = "insert into tb_color (name) value (?)";
+        String sql = "insert into tb_color (name) values (?)";
 
         return super.execute(
             sql,
@@ -70,7 +70,7 @@ public class ColorDao extends BaseDao<Color> implements Dao<Color> {
     public boolean update(Long id, Color color) {
         String sql =
                 """
-                update table tb_color
+                update tb_color
                 set name = ?
                 where id = ?
                 """;

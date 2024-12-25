@@ -1,5 +1,6 @@
 package com.vitorpg.clothingstore;
 
+import com.vitorpg.clothingstore.repositories.DbConnection;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -14,6 +15,8 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         mainStage = stage;
+        DbConnection.loadConfig("production");
+
         Font.loadFont(getClass().getResourceAsStream("/com/vitorpg/clothingstore/fonts/Inter-SemiBold.ttf"), 16);
         Font.loadFont(getClass().getResourceAsStream("/com/vitorpg/clothingstore/fonts/Khand-Regular.ttf"), 16);
         Font.loadFont(getClass().getResourceAsStream("/com/vitorpg/clothingstore/fonts/Khand-Medium.ttf"), 16);

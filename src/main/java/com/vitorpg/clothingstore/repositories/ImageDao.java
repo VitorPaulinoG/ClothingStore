@@ -52,7 +52,7 @@ public class ImageDao extends BaseDao<byte[]> implements RemovableDao, UpdaterDa
         String sql =
             """
             insert into tb_image (data, productId)
-            value (?, ?)
+            values (?, ?)
             """;
         return super.execute(
                 sql,
@@ -70,7 +70,7 @@ public class ImageDao extends BaseDao<byte[]> implements RemovableDao, UpdaterDa
     public boolean update(Long id, byte[] imageData) {
         String sql =
                 """
-                update table tb_image
+                update tb_image
                 set data = ?
                 where id = ?
                 """;

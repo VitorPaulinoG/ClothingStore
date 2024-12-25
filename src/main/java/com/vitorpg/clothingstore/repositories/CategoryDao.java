@@ -58,7 +58,7 @@ public class CategoryDao extends BaseDao<Category> implements Dao<Category> {
 
     @Override
     public boolean save(Category category) {
-        String sql = "insert into tb_category (name) value (?)";
+        String sql = "insert into tb_category (name) values (?)";
 
         return super.execute(
             sql,
@@ -70,7 +70,7 @@ public class CategoryDao extends BaseDao<Category> implements Dao<Category> {
     public boolean update(Long id, Category category) {
         String sql =
                 """
-                update table tb_category
+                update tb_category
                 set name = ?
                 where id = ?
                 """;

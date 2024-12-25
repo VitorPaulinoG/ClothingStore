@@ -1,0 +1,117 @@
+CREATE TABLE tb_User (
+	id BIGSERIAL,
+	name VARCHAR(300) NOT NULL,
+	email VARCHAR(500) NOT NULL,
+	password VARCHAR(400) NOT NULL,
+	CONSTRAINT PK_User PRIMARY KEY (id)
+);
+
+CREATE TABLE tb_Style (
+	id BIGSERIAL, 
+	name VARCHAR(500) NOT NULL,
+	CONSTRAINT PK_Style PRIMARY KEY (id)
+);
+
+CREATE TABLE tb_Color (
+	id BIGSERIAL, 
+	name VARCHAR(500) NOT NULL,
+	CONSTRAINT PK_Color PRIMARY KEY (id)
+);
+
+CREATE TABLE tb_Material (
+	id BIGSERIAL, 
+	name VARCHAR(500) NOT NULL,
+	CONSTRAINT PK_Material PRIMARY KEY (id)
+);
+
+CREATE TABLE tb_Supplier (
+	id BIGSERIAL, 
+	name VARCHAR(500) NOT NULL,
+	CONSTRAINT PK_Supplier PRIMARY KEY (id)
+);
+
+CREATE TABLE tb_Category (
+	id BIGSERIAL, 
+	name VARCHAR(500) NOT NULL,
+	CONSTRAINT PK_Category PRIMARY KEY (id)
+);
+
+CREATE TABLE tb_Size (
+	id BIGSERIAL, 
+	value VARCHAR(500) NOT NULL,
+	sizeType VARCHAR(500) NOT NULL,
+	CONSTRAINT PK_Size PRIMARY KEY (id)
+);
+
+CREATE TABLE tb_CategorySize (
+	categoryId BIGINT NOT NULL, 
+	sizeId BIGINT NOT NULL, 
+	CONSTRAINT PK_CategorySize PRIMARY KEY (categoryId, sizeId),
+	CONSTRAINT FK_CategorySize_Category FOREIGN KEY (categoryId)
+		REFERENCES tb_Category(id),
+	CONSTRAINT FK_CategorySize_Size FOREIGN KEY (sizeId)
+		REFERENCES tb_Size(id)
+);
+
+CREATE TABLE tb_Product (
+	id SERIAL,
+	name VARCHAR(600) NOT NULL,
+	gender VARCHAR(200) NOT NULL,
+	amount BIGINT NOT NULL DEFAULT(0),
+	price DOUBLE PRECISION NOT NULL,
+	categoryId BIGINT NOT NULL,
+	styleId BIGINT NOT NULL,
+	sizeId BIGINT NOT NULL,
+	colorId BIGINT NOT NULL,
+	materialId BIGINT NOT NULL,
+	CONSTRAINT PK_Product PRIMARY KEY (id),
+	CONSTRAINT FK_Product_Category FOREIGN KEY (categoryId)
+		REFERENCES tb_Category (id),
+	CONSTRAINT FK_Product_Style FOREIGN KEY (styleId)
+		REFERENCES tb_Style (id),
+	CONSTRAINT FK_Product_Size FOREIGN KEY (sizeId)
+		REFERENCES tb_Size (id),
+	CONSTRAINT FK_Product_Color FOREIGN KEY (colorId)
+		REFERENCES tb_Color (id),
+	CONSTRAINT FK_Product_Material FOREIGN KEY (materialId)
+		REFERENCES tb_Material (id)
+);
+
+CREATE TABLE tb_Image (
+	id BIGSERIAL, 
+	data BYTEA NOT NULL,
+	productId BIGINT NOT NULL,
+	CONSTRAINT PK_Image PRIMARY KEY (id),
+	CONSTRAINT FK_Image_Product FOREIGN KEY (productId)
+		REFERENCES tb_Product (id)
+);
+
+CREATE TABLE tb_Sale (
+	id BIGSERIAL,
+	amount BIGINT NOT NULL,
+	dateTime TIMESTAMP NOT NULL,
+	totalPrice DOUBLE PRECISION NOT NULL,
+	productId BIGINT NOT NULL,
+	vendorId BIGINT NOT NULL,
+	CONSTRAINT PK_Sale PRIMARY KEY (id),
+	CONSTRAINT FK_Sale_Product FOREIGN KEY (productId)
+		REFERENCES tb_Product (id),
+	CONSTRAINT FK_Sale_User FOREIGN KEY (vendorId)
+		REFERENCES tb_User (id)
+);
+
+CREATE TABLE tb_Supply (
+	id BIGSERIAL, 
+	deliveryPrice DOUBLE PRECISION NOT NULL DEFAULT(0),
+	price DOUBLE PRECISION NOT NULL,
+	productId BIGINT NOT NULL,
+	supplierId BIGINT NOT NULL,
+	date DATE NOT NULL,
+	status VARCHAR(400),
+	CONSTRAINT PK_Supply PRIMARY KEY (id),
+	CONSTRAINT FK_Supply_Product FOREIGN KEY (productId)
+		REFERENCES tb_Product (id),
+	CONSTRAINT FK_Supply_Supplier FOREIGN KEY (supplierId)
+		REFERENCES tb_Supplier (id)
+);
+

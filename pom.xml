@@ -75,7 +75,6 @@
         </executions>
       </plugin>
     </plugins>
-
     <resources>
       <resource>
         <directory>src/main/resources/com/vitorpg/clothingstore/images</directory>
@@ -88,6 +87,9 @@
       </resource>
       <resource>
         <directory>src/main/resources</directory>
+        <includes>
+          <include>**/*.properties</include>
+        </includes>
       </resource>
 
 

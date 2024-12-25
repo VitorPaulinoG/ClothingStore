@@ -81,7 +81,7 @@ public class SizeDao extends BaseDao<Size> implements FinderDao<Size>, UpdaterDa
                 """
                 with newSize as (
                     insert into tb_size (value, sizeType)
-                    value (?, ?)
+                    values (?, ?)
                     returning id
                 )
                 insert into tb_categorySize (categoryId, sizeId)
@@ -105,7 +105,7 @@ public class SizeDao extends BaseDao<Size> implements FinderDao<Size>, UpdaterDa
     public boolean update(Long id, Size size) {
         String sql =
                 """
-                update table tb_size
+                update tb_size
                 set value = ?, sizeType = ?
                 where id = ?
                 """;

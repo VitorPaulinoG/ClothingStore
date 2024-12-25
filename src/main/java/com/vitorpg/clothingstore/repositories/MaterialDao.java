@@ -58,7 +58,7 @@ public class MaterialDao extends BaseDao<Material> implements Dao<Material> {
 
     @Override
     public boolean save(Material material) {
-        String sql = "insert into tb_material (name) value (?)";
+        String sql = "insert into tb_material (name) values (?)";
 
         return super.execute(
             sql,
@@ -70,7 +70,7 @@ public class MaterialDao extends BaseDao<Material> implements Dao<Material> {
     public boolean update(Long id, Material material) {
         String sql =
                 """
-                update table tb_material
+                update tb_material
                 set name = ?
                 where id = ?
                 """;

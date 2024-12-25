@@ -58,7 +58,7 @@ public class StyleDao extends BaseDao<Style> implements Dao<Style> {
 
     @Override
     public boolean save(Style style) {
-        String sql = "insert into tb_style (name) value (?)";
+        String sql = "insert into tb_style (name) values (?)";
 
         return super.execute(
             sql,
@@ -70,7 +70,7 @@ public class StyleDao extends BaseDao<Style> implements Dao<Style> {
     public boolean update(Long id, Style style) {
         String sql =
             """
-            update table tb_style
+            update tb_style
             set name = ?
             where id = ?
             """;

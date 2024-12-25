@@ -79,7 +79,7 @@ public class SupplyDao extends BaseDao<Supply> implements Dao<Supply> {
         String sql =
             """
             insert into tb_supply (deliveryPrice, price, productId, supplierId, date, status)
-            value (?, ?, ?, ?, ?, ?)
+            values (?, ?, ?, ?, ?, ?)
             """;
 
         return super.execute(
@@ -92,7 +92,7 @@ public class SupplyDao extends BaseDao<Supply> implements Dao<Supply> {
     public boolean update(Long id, Supply supply) {
         String sql =
             """
-            update table tb_supply
+            update tb_supply
             set deliveryPrice = ?, price = ?, productId = ?, supplierId = ?, date = ?, status = ?
             where id = ?
             """;

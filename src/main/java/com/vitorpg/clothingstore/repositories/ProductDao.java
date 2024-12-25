@@ -140,7 +140,7 @@ public class ProductDao extends BaseDao<Product> implements Dao<Product>, Pagina
         String sql =
             """
             insert into tb_product (name, gender, amount, price, categoryId, styleId, sizeId, colorId, materialId)
-            value (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            values (?, ?, ?, ?, ?, ?, ?, ?, ?)
             """;
 
         return super.execute(
@@ -153,7 +153,7 @@ public class ProductDao extends BaseDao<Product> implements Dao<Product>, Pagina
     public boolean update(Long id, Product product) {
         String sql =
                 """
-                update table tb_product
+                update tb_product
                 set name = ?, gender = ?, amount = ?, price = ?, categoryId = ?,
                 styleId = ?, sizeId = ?, colorId = ?, materialId = ?
                 where id = ?

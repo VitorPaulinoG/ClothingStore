@@ -17,7 +17,7 @@ public abstract class BaseDao<T> {
             statementBuilder.accept(statement);
 
             ResultSet result = statement.executeQuery();
-            if (result.first()) {
+            if (result.next()) {
                 entity = entityBuilder.apply(result);
             }
         } catch (Exception ex) {
