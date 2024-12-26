@@ -38,6 +38,7 @@ public class SizeDao extends BaseDao<Size> implements FinderDao<Size>, UpdaterDa
             result -> buildEntity(result)
         );
     }
+
     private Size buildEntity (ResultSet result) {
         try {
             Size size = new Size();
