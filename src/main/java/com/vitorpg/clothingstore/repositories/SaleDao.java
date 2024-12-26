@@ -5,6 +5,7 @@ import com.vitorpg.clothingstore.repositories.interfaces.Dao;
 
 import java.sql.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class SaleDao extends BaseDao<Sale> implements Dao<Sale> {
@@ -45,7 +46,7 @@ public class SaleDao extends BaseDao<Sale> implements Dao<Sale> {
             Sale sale = new Sale();
             sale.setId(result.getLong("id"));
             sale.setAmount(result.getLong("amount"));
-            sale.setDateTime(LocalDateTime.parse(result.getString("dateTime")));
+            sale.setDateTime(LocalDateTime.parse(result.getString("dateTime"), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSSSSS")));
             sale.setTotalPrice(result.getDouble("totalPrice"));
             sale.setProduct(
                 new Product(){{

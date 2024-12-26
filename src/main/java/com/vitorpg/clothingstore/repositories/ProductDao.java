@@ -23,7 +23,7 @@ public class ProductDao extends BaseDao<Product> implements Dao<Product>, Pagina
                 """
                 select *
                 from tb_product
-                where p.id = ?
+                where id = ?
                 """;
 
         return super.queryOne(
@@ -164,7 +164,7 @@ public class ProductDao extends BaseDao<Product> implements Dao<Product>, Pagina
             statement -> {
                 try {
                     buildStatement(statement, product);
-                    statement.setLong(1, id);
+                    statement.setLong(10, id);
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 }
@@ -175,7 +175,7 @@ public class ProductDao extends BaseDao<Product> implements Dao<Product>, Pagina
     public boolean adjustAmount(Long id, Long amount) {
         String sql =
                 """
-                update table tb_product
+                update tb_product
                 set amount = amount + ?
                 where id = ?
                 """;

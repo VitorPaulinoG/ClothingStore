@@ -9,7 +9,26 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class ImageDao extends BaseDao<byte[]> implements RemovableDao, UpdaterDao<byte[]> {
+    public byte[] findById (Long id) {
+        String query =
+                """
+                select *
+                from tb_image
+                where id = ?
+                """;
 
+        return super.queryOne(
+                query,
+                result -> buildEntity(result),
+                statement -> {
+                    try {
+                        statement.setLong(1, id);
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+        );
+    }
     public List<byte[]> getAllByProductId(Long productId) {
         String query =
              """

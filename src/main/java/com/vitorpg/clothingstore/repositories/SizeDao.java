@@ -139,7 +139,7 @@ public class SizeDao extends BaseDao<Size> implements FinderDao<Size>, UpdaterDa
         );
     }
 
-    public boolean removeOfCategory(Long sizeId, Long categoryId) {
+    public boolean removeFromCategory(Long sizeId, Long categoryId) {
         String sql = "delete from tb_categorySize where sizeId = ? and categoryId = ?";
 
         return super.execute(

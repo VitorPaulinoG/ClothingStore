@@ -53,6 +53,7 @@ public class SupplyDao extends BaseDao<Supply> implements Dao<Supply> {
                 }}
             );
             supply.setDate(result.getDate("date").toLocalDate());
+            supply.setStatus(result.getString("status"));
 
             return supply;
         } catch (SQLException ex) {

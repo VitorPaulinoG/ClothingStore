@@ -48,9 +48,9 @@ CREATE TABLE tb_CategorySize (
 	sizeId BIGINT NOT NULL, 
 	CONSTRAINT PK_CategorySize PRIMARY KEY (categoryId, sizeId),
 	CONSTRAINT FK_CategorySize_Category FOREIGN KEY (categoryId)
-		REFERENCES tb_Category(id),
+		REFERENCES tb_Category(id) ON DELETE CASCADE,
 	CONSTRAINT FK_CategorySize_Size FOREIGN KEY (sizeId)
-		REFERENCES tb_Size(id)
+		REFERENCES tb_Size(id) ON DELETE CASCADE
 );
 
 CREATE TABLE tb_Product (
@@ -83,7 +83,7 @@ CREATE TABLE tb_Image (
 	productId BIGINT NOT NULL,
 	CONSTRAINT PK_Image PRIMARY KEY (id),
 	CONSTRAINT FK_Image_Product FOREIGN KEY (productId)
-		REFERENCES tb_Product (id)
+		REFERENCES tb_Product (id) ON DELETE CASCADE
 );
 
 CREATE TABLE tb_Sale (
@@ -95,9 +95,9 @@ CREATE TABLE tb_Sale (
 	vendorId BIGINT NOT NULL,
 	CONSTRAINT PK_Sale PRIMARY KEY (id),
 	CONSTRAINT FK_Sale_Product FOREIGN KEY (productId)
-		REFERENCES tb_Product (id),
+		REFERENCES tb_Product (id) ON DELETE RESTRICT,
 	CONSTRAINT FK_Sale_User FOREIGN KEY (vendorId)
-		REFERENCES tb_User (id)
+		REFERENCES tb_User (id) ON DELETE RESTRICT
 );
 
 CREATE TABLE tb_Supply (
@@ -110,8 +110,8 @@ CREATE TABLE tb_Supply (
 	status VARCHAR(400),
 	CONSTRAINT PK_Supply PRIMARY KEY (id),
 	CONSTRAINT FK_Supply_Product FOREIGN KEY (productId)
-		REFERENCES tb_Product (id),
+		REFERENCES tb_Product (id) ON DELETE RESTRICT,
 	CONSTRAINT FK_Supply_Supplier FOREIGN KEY (supplierId)
-		REFERENCES tb_Supplier (id)
+		REFERENCES tb_Supplier (id) ON DELETE RESTRICT
 );
 

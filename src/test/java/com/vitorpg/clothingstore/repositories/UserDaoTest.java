@@ -17,12 +17,17 @@ class UserDaoTest {
     }
 
     @BeforeEach
-    @Tag("useEntity")
-    void createEntityPreviously () {
+    void createEntityBeforeTest (TestInfo testInfo) {
+        if (testInfo.getTags().contains("save")) {
+            return;
+        }
+
         save_Success();
     }
 
     @Test
+    @Tag("save")
+    @DisplayName("save user")
     @Order(1)
     void save_Success() {
         User user = new User();
@@ -31,76 +36,76 @@ class UserDaoTest {
         user.setPassword("1234125345");
 
         UserDao userDao = new UserDao();
-        assertTrue(userDao.save(user), "user was saved");
+        assertTrue(userDao.save(user));
     }
 
     @Test
-    @Tag("useEntity")
+    @DisplayName("find user by id")
     @Order(2)
     void findById_Success() {
         UserDao userDao = new UserDao();
         User user = userDao.findById(1L);
-        assertNotNull(user, "user with id = 1 was found");
-        assertNotNull(user.getId(), "user.id is not null");
-        assertNotNull(user.getName(), "user.name is not null");
-        assertNotNull(user.getEmail(), "user.email is not null");
-        assertNotNull(user.getPassword(), "user.password is not null");
+        assertNotNull(user);
+        assertNotNull(user.getId());
+        assertNotNull(user.getName());
+        assertNotNull(user.getEmail());
+        assertNotNull(user.getPassword());
     }
 
     @Test
-    @Tag("useEntity")
+    @DisplayName("not find user by id")
     @Order(3)
     void findById_Error() {
         UserDao userDao = new UserDao();
-        assertNull(userDao.findById(400L), "user with id = 400 not found");
+        assertNull(userDao.findById(400L));
     }
 
     @Test
-    @Tag("useEntity")
+    @DisplayName("find all users")
     @Order(4)
     void findAll_Success() {
         UserDao userDao = new UserDao();
         List<User> users = userDao.findAll();
-        assertNotNull(users, "users not found");
-        assertFalse(users.isEmpty(), "users list is not empty");
-        assertTrue(users.stream().allMatch(x -> x != null), "no user is null");
+        assertNotNull(users);
+        assertFalse(users.isEmpty());
+        assertTrue(users.stream().allMatch(x -> x != null));
     }
 
     @Test
-    @Tag("useEntity")
+    @DisplayName("find user by email")
     @Order(5)
     void findFirstByEmail_Success() {
         UserDao userDao = new UserDao();
         User user = userDao.findFirstByEmail("fulano@gmail.com");
-        assertNotNull(user, "user with email = fulano@gmail.com was found");
-        assertNotNull(user.getId(), "user.id is not null");
-        assertNotNull(user.getName(), "user.name is not null");
-        assertNotNull(user.getEmail(), "user.email is not null");
-        assertNotNull(user.getPassword(), "user.password is not null");
+        assertNotNull(user);
+        assertNotNull(user.getId());
+        assertNotNull(user.getName());
+        assertNotNull(user.getEmail());
+        assertNotNull(user.getPassword());
     }
 
     @Test
-    @Tag("useEntity")
+    @DisplayName("not find non-existent user with email")
     @Order(6)
     void findFirstByEmail_Error() {
         UserDao userDao = new UserDao();
         User user = userDao.findFirstByEmail("anonymous@gmail.com");
-        assertNull(user, "user with email = anonymous@gmail.com not found");
+        assertNull(user);
     }
 
     @Test
-    @Tag("useEntity")
+    @DisplayName("update user")
     @Order(7)
     void update_Success() {
         UserDao userDao = new UserDao();
         User oldUser = userDao.findById(1L);
         oldUser.setEmail("fulanodetal@gmail.com");
 
-        assertTrue(userDao.update(1L, oldUser), "user with id = 1 updated");
+        assertTrue(userDao.update(1L, oldUser));
     }
 
     @Test
-    @Tag("useEntity")
+    @DisplayName("not update non-existent user")
     @Order(8)
     void update_Error() {
         UserDao userDao = new UserDao();
@@ -111,23 +116,23 @@ class UserDaoTest {
             setName("algumacoisa");
             setEmail("algumacoisa@gmail.com");
             setPassword("13e32r353");
-        }}), "user with id = 400 not updated");
+        }}));
     }
 
     @Test
-    @Tag("useEntity")
+    @DisplayName("delete user")
     @Order(9)
     void delete_Success() {
         UserDao userDao = new UserDao();
-        assertTrue(userDao.delete(1L), "user with id = 1 deleted");
+        assertTrue(userDao.delete(1L));
     }
 
     @Test
-    @Tag("useEntity")
+    @DisplayName("not delete non-existent user")
     @Order(10)
     void delete_Error() {
         UserDao userDao = new UserDao();
-        assertFalse(userDao.delete(400L), "user with id = 400 not deleted");
+        assertFalse(userDao.delete(400L));
     }
 
     @AfterEach
