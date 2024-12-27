@@ -80,6 +80,7 @@ CREATE TABLE tb_Product (
 CREATE TABLE tb_Image (
 	id BIGSERIAL, 
 	data BYTEA NOT NULL,
+	format VARCHAR(200) NOT NULL,
 	productId BIGINT NOT NULL,
 	CONSTRAINT PK_Image PRIMARY KEY (id),
 	CONSTRAINT FK_Image_Product FOREIGN KEY (productId)

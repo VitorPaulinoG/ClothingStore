@@ -1,5 +1,6 @@
 package com.vitorpg.clothingstore.repositories;
 
+import com.vitorpg.clothingstore.models.Image;
 import com.vitorpg.clothingstore.repositories.interfaces.RemovableDao;
 import com.vitorpg.clothingstore.repositories.interfaces.UpdaterDao;
 
@@ -8,8 +9,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class ImageDao extends BaseDao<byte[]> implements RemovableDao, UpdaterDao<byte[]> {
-    public byte[] findById (Long id) {
+public class ImageDao extends BaseDao<Image> implements RemovableDao, UpdaterDao<Image> {
+    public Image findById (Long id) {
         String query =
                 """
                 select *
@@ -29,7 +30,7 @@ public class ImageDao extends BaseDao<byte[]> implements RemovableDao, UpdaterDa
                 }
         );
     }
-    public List<byte[]> getAllByProductId(Long productId) {
+    public List<Image> getAllByProductId(Long productId) {
         String query =
              """
              select *
@@ -50,35 +51,41 @@ public class ImageDao extends BaseDao<byte[]> implements RemovableDao, UpdaterDa
         );
     }
 
-    private byte[] buildEntity (ResultSet result) {
+    private Image buildEntity (ResultSet result) {
         try {
-            return result.getBytes("data");
+            Image image = new Image();
+            image.setId(result.getLong("id"));
+            image.setData(result.getBytes("data"));
+            image.setFormat(result.getString("format"));
+            image.setProductId(result.getLong("productId"));
+            return image;
         } catch (SQLException ex) {
             ex.printStackTrace();
             return null;
         }
     }
 
-    private void buildStatement(PreparedStatement statement, byte[] data) {
+    private void buildStatement(PreparedStatement statement, Image image) {
         try {
-            statement.setBytes(1, data);
+            statement.setBytes(1, image.getData());
+            statement.setString(2, image.getFormat());
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
     }
 
-    public boolean addToProduct(byte[] imageData, Long productId) {
+    public boolean addToProduct(Image image, Long productId) {
         String sql =
             """
-            insert into tb_image (data, productId)
-            values (?, ?)
+            insert into tb_image (data, format, productId)
+            values (?, ?, ?)
             """;
         return super.execute(
                 sql,
                 statement -> {
                     try {
-                        buildStatement(statement, imageData);
-                        statement.setLong(2, productId);
+                        buildStatement(statement, image);
+                        statement.setLong(3, productId);
                     } catch (SQLException ex) {
                         ex.printStackTrace();
                     }
@@ -86,11 +93,11 @@ public class ImageDao extends BaseDao<byte[]> implements RemovableDao, UpdaterDa
         );
     }
 
-    public boolean update(Long id, byte[] imageData) {
+    public boolean update(Long id, Image image) {
         String sql =
                 """
                 update tb_image
-                set data = ?
+                set data = ?, format = ?
                 where id = ?
                 """;
 
@@ -98,8 +105,8 @@ public class ImageDao extends BaseDao<byte[]> implements RemovableDao, UpdaterDa
                 sql,
                 statement -> {
                     try {
-                        buildStatement(statement, imageData);
-                        statement.setLong(2, id);
+                        buildStatement(statement, image);
+                        statement.setLong(3, id);
                     } catch (SQLException ex) {
                         ex.printStackTrace();
                     }

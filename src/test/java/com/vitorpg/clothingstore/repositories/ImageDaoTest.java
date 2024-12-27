@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URLConnection;
 import java.nio.file.Files;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -77,11 +78,14 @@ class ImageDaoTest {
     @Order(1)
     void addToProduct_Success() {
         try {
+            Image image = new Image();
             File file = new File("src/main/resources/com/vitorpg/clothingstore/images/login-bg.png");
-            byte[] imageBytes = Files.readAllBytes(file.toPath());
+
+            image.setData(Files.readAllBytes(file.toPath()));
+            image.setFormat(Files.probeContentType(file.toPath()).split("/")[1]);
 
             ImageDao imageDao = new ImageDao();
-            assertTrue(imageDao.addToProduct(imageBytes, 1L));
+            assertTrue(imageDao.addToProduct(image, 1L));
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -91,7 +95,7 @@ class ImageDaoTest {
     @Order(2)
     void findById_Success () {
         ImageDao imageDao = new ImageDao();
-        byte[] image = imageDao.findById(1L);
+        Image image = imageDao.findById(1L);
         assertNotNull(image);
     }
 
@@ -100,7 +104,7 @@ class ImageDaoTest {
     @Order(3)
     void findById_Error () {
         ImageDao imageDao = new ImageDao();
-        byte[] image = imageDao.findById(400L);
+        Image image = imageDao.findById(400L);
         assertNull(image);
     }
 
@@ -109,7 +113,7 @@ class ImageDaoTest {
     @Order(4)
     void getAllByProductId_Success() {
         ImageDao imageDao = new ImageDao();
-        List<byte[]> images = imageDao.getAllByProductId(1L);
+        List<Image> images = imageDao.getAllByProductId(1L);
         assertNotNull(images);
         assertFalse(images.isEmpty());
         assertTrue(images.stream().allMatch(x -> x != null));
@@ -122,10 +126,13 @@ class ImageDaoTest {
     void update_Success() {
         try {
             File file = new File("src/main/resources/com/vitorpg/clothingstore/images/jason-leung-UMncYEfO9-U-unsplash.jpg");
-            byte[] imageBytes = Files.readAllBytes(file.toPath());
+            Image image = new Image();
+            image.setData(Files.readAllBytes(file.toPath()));
+            image.setFormat(Files.probeContentType(file.toPath()).split("/")[1]);
+
             ImageDao imageDao = new ImageDao();
 
-            assertTrue(imageDao.update(1L, imageBytes));
+            assertTrue(imageDao.update(1L, image));
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -137,10 +144,12 @@ class ImageDaoTest {
     void update_Error() {
         try {
             File file = new File("src/main/resources/images/jason-leung-UMncYEfO9-U-unsplash.jpg");
-            byte[] imageBytes = Files.readAllBytes(file.toPath());
+            Image image = new Image();
+            image.setData(Files.readAllBytes(file.toPath()));
+            image.setFormat(Files.probeContentType(file.toPath()).split("/")[1]);
             ImageDao imageDao = new ImageDao();
 
-            assertTrue(imageDao.update(400L, imageBytes));
+            assertTrue(imageDao.update(400L, image));
         } catch (IOException ex) {
             ex.printStackTrace();
         }

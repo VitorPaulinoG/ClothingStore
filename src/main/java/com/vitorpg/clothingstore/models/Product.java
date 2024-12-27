@@ -9,7 +9,7 @@ public class Product {
     private String name;
     private Category category;
     private Style style;
-    private List<byte[]> images;
+    private List<Image> images;
     private Gender gender;
     private Size size;
     private Color color;
@@ -21,7 +21,7 @@ public class Product {
 
     }
 
-    public Product(Long id, String name, Category category, Style style, List<byte[]> images,
+    public Product(Long id, String name, Category category, Style style, List<Image> images,
                    Gender gender, Size size, Color color, Material material, Long amount, Double price) {
         this.id = id;
         this.name = name;
@@ -68,11 +68,11 @@ public class Product {
         this.style = style;
     }
 
-    public List<byte[]> getImages() {
+    public List<Image> getImages() {
         return images;
     }
 
-    public void setImages(List<byte[]> images) {
+    public void setImages(List<Image> images) {
         this.images = images;
     }
 
