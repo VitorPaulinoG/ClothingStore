@@ -93,7 +93,11 @@
       <resource>
         <directory>src/main/resources</directory>
         <includes>
+          <include>**/*.fxml</include>
+          <include>**/*.css</include>
           <include>**/*.properties</include>
+          <include>**/*.png</include>
+          <include>**/*.jpg</include>
         </includes>
       </resource>
 

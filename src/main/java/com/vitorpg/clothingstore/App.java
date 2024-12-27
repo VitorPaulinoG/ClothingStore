@@ -1,6 +1,9 @@
 package com.vitorpg.clothingstore;
 
-import com.vitorpg.clothingstore.repositories.DbConnection;
+import com.vitorpg.clothingstore.models.*;
+import com.vitorpg.clothingstore.models.enums.Gender;
+import com.vitorpg.clothingstore.models.enums.SizeType;
+import com.vitorpg.clothingstore.repositories.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
