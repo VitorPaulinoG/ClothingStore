@@ -2,8 +2,8 @@
 
 <?import java.lang.String?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Ellipse?>
@@ -67,6 +67,6 @@
             <String fx:value="p-logo" />
             <String fx:value="gap-80" />
          </styleClass></VBox>
-      <Pane fx:id="paneSubScene" maxWidth="1.7976931348623157E308" prefHeight="1024.0" HBox.hgrow="ALWAYS" />
+      <ScrollPane fx:id="paneSubScene" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="1024.0" HBox.hgrow="ALWAYS" />
    </children>
 </HBox>

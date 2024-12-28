@@ -59,6 +59,33 @@
     -fx-border-width: 3;
 }
 
+.btn-group-outline {
+    -fx-text-fill: -fx-primary-color;
+}
+
+.btn-group-outline:hover {
+    -fx-background-color: -fx-primary-color;
+}
+
+.btn-group-outline:pressed {
+    -fx-background-color: -fx-primary-light-color;
+    -fx-border-color: -fx-primary-light-color;
+}
+
+.btn-group-outline-start {
+    -fx-border-width: 3 1.5 3 3;
+    -fx-background-color: -fx-white-color;
+    -fx-background-radius: 28 0 0 28;
+    -fx-background-insets: 1;
+}
+
+.btn-group-outline-end {
+    -fx-border-width: 3 3 3 1.5;
+    -fx-background-color: -fx-white-color;
+    -fx-background-radius: 0 28 28 0;
+    -fx-background-insets: 1;
+}
+
 .b-gray {
     -fx-border-color: -fx-gray-color;
 }
@@ -296,6 +323,14 @@
     -fx-border-radius: 28px;
 }
 
+.rounded-left-28 {
+    -fx-border-radius: 28 0 0 28;
+}
+
+.rounded-right-28 {
+    -fx-border-radius: 0 28 28 0;
+}
+
 .bg-radius-8 {
     -fx-background-radius: 8px;
 }
@@ -336,6 +371,19 @@
 
 }
 
+
+.image-view {
+    -fx-alignment: center;
+    -fx-padding: 0;
+}
+
+.image-container .image-view .image {
+    -fx-alignment: center;
+    -fx-padding: 0;
+}
+
+
+
 .table-view .column-header-background .filler{
     -fx-background-color: -fx-white-color;
     -fx-fill: -fx-white-color;
@@ -363,6 +411,8 @@
 .product-table-view .table-cell {
     -fx-font-family: 'Khand Medium'; 
     -fx-font-size: 24px;  
+    -fx-alignment: center-left;
+    -fx-padding: 0;
     -fx-text-fill: -fx-gray-color;
     -fx-border-color: transparent;
     -fx-border-width: 0;
@@ -377,6 +427,8 @@
     -fx-border-color: -fx-gray-color;
     -fx-border-width: 0 0 2 0;
     -fx-min-height: 156;
+    -fx-max-height: 156;
+    -fx-padding: 0;
 }
 
 .table-row-cell:filled:selected {
@@ -390,6 +442,16 @@
 .table-row-cell:filled:selected .text {
     -fx-text-fill: -fx-white-color;
     -fx-fill: -fx-white-color;
+}
+
+.table-row-cell .button .text {
+    -fx-text-fill: -fx-primary-color;
+    -fx-fill: -fx-primary-color;
+}
+
+.table-row-cell .button:hover .text {
+    -fx-text-fill: -fx-white-color;
+    -fx-fill:  -fx-white-color;
 }
 
 .table-row-cell .text {
@@ -473,6 +535,10 @@
 
 .gap-32 {
     -fx-spacing: 32px;
+}
+
+.cursor-hand {
+    -fx-cursor: hand;
 }
 
 .all-nav-button {

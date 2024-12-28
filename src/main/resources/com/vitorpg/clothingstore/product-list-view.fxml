@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Pagination?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -15,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.SVGPath?>
 
-<VBox maxWidth="1.7976931348623157E308" prefHeight="1024.0" prefWidth="1338.0" stylesheets="@css/main-styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.vitorpg.clothingstore.controllers.ProductListController">
+<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="1024.0" prefWidth="1338.0" stylesheets="@css/main-styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.vitorpg.clothingstore.controllers.ProductListController">
    <styleClass>
       <String fx:value="bg-light" />
       <String fx:value="p-10-10-32-24" />
@@ -176,7 +177,7 @@
             </VBox>
          </children>
       </HBox>
-      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="674.0" VBox.vgrow="ALWAYS">
+      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" VBox.vgrow="ALWAYS">
          <styleClass>
             <String fx:value="b-0" />
             <String fx:value="bg-white" />
@@ -184,15 +185,16 @@
             <String fx:value="px-16" />
          </styleClass>
          <children>
-            <TableView fx:id="tb_productList" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefHeight="200.0" styleClass="product-table-view" VBox.vgrow="ALWAYS">
+            <TableView fx:id="tb_productList" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" styleClass="product-table-view" VBox.vgrow="ALWAYS">
               <columns>
-               <TableColumn fx:id="tbc_productId" prefWidth="111.0" text="Id" reorderable="false"/>
-               <TableColumn fx:id="tbc_productImage" editable="false" minWidth="5.666664123535156" prefWidth="184.3333282470703" reorderable="false" resizable="false" sortable="false" text="Imagem" />
-               <TableColumn fx:id="tbc_productName" minWidth="5.666664123535156" prefWidth="330.33331298828125" text="Produto" reorderable="false"/>
-               <TableColumn fx:id="tbc_productPrice" minWidth="0.0" prefWidth="183.0" text="Preço (R$)" reorderable="false"/>
-<!--                  <TableColumn fx:id="tbc_productListActions" editable="false" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="507.0" reorderable="false" resizable="false" sortable="false" text="Ações" />-->
+               <TableColumn fx:id="colProductId" prefWidth="111.0" reorderable="false" text="Id" />
+               <TableColumn fx:id="colProductImage" editable="false" minWidth="5.666664123535156" prefWidth="184.3333282470703" reorderable="false" resizable="false" sortable="false" text="Imagem" />
+               <TableColumn fx:id="colProductName" minWidth="5.666664123535156" prefWidth="330.33331298828125" reorderable="false" text="Produto" />
+               <TableColumn fx:id="colProductPrice" minWidth="0.0" prefWidth="183.0" reorderable="false" text="Preço (R$)" />
+                  <TableColumn fx:id="colProductActions" editable="false" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="250.0" reorderable="false" resizable="false" sortable="false" text="Ações" />
               </columns>
             </TableView>
+            <Pagination maxHeight="-Infinity" maxPageIndicatorCount="3" minHeight="-Infinity" prefHeight="60.0" prefWidth="1286.0" />
          </children>
       </VBox>
    </children>

@@ -10,7 +10,9 @@ import javafx.scene.Scene;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 
 public class App extends Application {
     public static Stage mainStage;
@@ -19,6 +21,32 @@ public class App extends Application {
     public void start(Stage stage) throws IOException {
         mainStage = stage;
         DbConnection.loadConfig("production");
+
+//        ImageDao imageDao = new ImageDao();
+//        imageDao.addToProduct(new Image() {{
+//            File file = new File("/home/vitorpg/Downloads/image-test/casual-shirt.jpeg");
+//            setData(Files.readAllBytes(file.toPath()));
+//            setFormat(Files.probeContentType(file.toPath()).split("/")[1]);
+//        }}, 1L);
+//
+//        imageDao.addToProduct(new Image() {{
+//            File file = new File("/home/vitorpg/Downloads/image-test/formal-pants.jpeg");
+//            setData(Files.readAllBytes(file.toPath()));
+//            setFormat(Files.probeContentType(file.toPath()).split("/")[1]);
+//        }}, 2L);
+//
+//        imageDao.addToProduct(new Image() {{
+//            File file = new File("/home/vitorpg/Downloads/image-test/sports-jacket.jpg");
+//            setData(Files.readAllBytes(file.toPath()));
+//            setFormat(Files.probeContentType(file.toPath()).split("/")[1]);
+//        }}, 3L);
+//
+//        imageDao.addToProduct(new Image() {{
+//            File file = new File("/home/vitorpg/Downloads/image-test/leather-shoes.jpeg");
+//            setData(Files.readAllBytes(file.toPath()));
+//            setFormat(Files.probeContentType(file.toPath()).split("/")[1]);
+//        }}, 4L);
+
 
         Font.loadFont(getClass().getResourceAsStream("/com/vitorpg/clothingstore/fonts/Inter-SemiBold.ttf"), 16);
         Font.loadFont(getClass().getResourceAsStream("/com/vitorpg/clothingstore/fonts/Khand-Regular.ttf"), 16);

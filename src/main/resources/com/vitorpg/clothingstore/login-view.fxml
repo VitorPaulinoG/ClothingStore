@@ -110,6 +110,7 @@
                                 <String fx:value="min-h-70" />
                                 <String fx:value="btn-primary" />
                                 <String fx:value="bg-radius-8" />
+                                <String fx:value="cursor-hand" />
                                 <String fx:value="ubuntu-font-medium" />
                                 <String fx:value="fs-24" />
                                 <String fx:value="txt-white" />
