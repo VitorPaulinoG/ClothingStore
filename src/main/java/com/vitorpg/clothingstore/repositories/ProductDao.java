@@ -77,6 +77,20 @@ public class ProductDao extends BaseDao<Product> implements Dao<Product>, Pagina
         );
     }
 
+    public Long getMaxCount () {
+        String query =
+                """
+                select COUNT(*) as maxCount
+                from tb_Product
+                """;
+        return super.queryScalar(
+                query,
+                result -> buildEntity(result),
+                "maxCount",
+                Long.class
+        );
+    }
+
     private Product buildEntity (ResultSet result) {
         try {
             Product product = new Product();

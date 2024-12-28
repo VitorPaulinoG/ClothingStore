@@ -35,9 +35,6 @@ public class DbConnection {
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(url, user, password);
-            if (conn != null) {
-                System.out.println("Connected to database #1");
-            }
         } catch (SQLException e) {
             System.out.println("Error when connecting...: " + e);
         } catch (Exception e) {

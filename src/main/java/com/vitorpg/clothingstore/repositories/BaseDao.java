@@ -9,6 +9,27 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 
 public abstract class BaseDao<T> {
+    protected <U> U queryScalar (String sql, Function<ResultSet, T> entityBuilder, String scalarName, Class<U> returnType) {
+        return queryScalar(sql, entityBuilder, statement -> {}, scalarName, returnType);
+    }
+    protected <U> U queryScalar (String sql, Function<ResultSet, T> entityBuilder, Consumer<PreparedStatement> statementBuilder, String scalarName, Class<U> returnType) {
+        U scalarValue = null;
+
+        try (Connection conn = DbConnection.getConnection()){
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statementBuilder.accept(statement);
+
+            ResultSet result = statement.executeQuery();
+            if (result.next()) {
+                scalarValue = returnType.cast (result.getObject(scalarName));
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        return scalarValue;
+    }
+
     protected T queryOne (String sql, Function<ResultSet, T> entityBuilder, Consumer<PreparedStatement> statementBuilder) {
         T entity = null;
 

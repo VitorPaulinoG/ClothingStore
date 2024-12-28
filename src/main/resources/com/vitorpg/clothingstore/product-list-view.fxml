@@ -187,7 +187,7 @@
             <String fx:value="px-16" />
          </styleClass>
          <children>
-            <TableView fx:id="tb_productList" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="350.0" styleClass="product-table-view" VBox.vgrow="ALWAYS">
+            <TableView fx:id="tbProductList" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="350.0" styleClass="product-table-view" VBox.vgrow="ALWAYS">
               <columns>
                <TableColumn fx:id="colProductId" minWidth="50.0" prefWidth="111.0" reorderable="false" text="Id" />
                <TableColumn fx:id="colProductImage" editable="false" minWidth="5.666664123535156" prefWidth="184.3333282470703" reorderable="false" resizable="false" sortable="false" text="Imagem" />
@@ -196,7 +196,11 @@
                   <TableColumn fx:id="colProductActions" editable="false" maxWidth="1.7976931348623157E308" minWidth="200.0" prefWidth="250.0" reorderable="false" resizable="false" sortable="false" text="Ações" />
               </columns>
             </TableView>
-            <Pagination maxHeight="-Infinity" maxPageIndicatorCount="3" minHeight="-Infinity" prefHeight="60.0" prefWidth="1286.0" />
+            <Pagination fx:id="pagProductList" maxHeight="1.7976931348623157E308" maxPageIndicatorCount="3" minHeight="-Infinity" prefHeight="262.0" prefWidth="1286.0">
+               <styleClass>
+                  <String fx:value="khand-medium-font" />
+                  <String fx:value="fs-24" />
+               </styleClass></Pagination>
          </children>
       </VBox>
    </children>

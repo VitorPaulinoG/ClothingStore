@@ -46,6 +46,70 @@ public class App extends Application {
 //            setData(Files.readAllBytes(file.toPath()));
 //            setFormat(Files.probeContentType(file.toPath()).split("/")[1]);
 //        }}, 4L);
+//
+//        imageDao.addToProduct(new Image() {{
+//            File file = new File("/home/vitorpg/Downloads/image-test/sueter-business-casual.jpeg");
+//            setData(Files.readAllBytes(file.toPath()));
+//            setFormat(Files.probeContentType(file.toPath()).split("/")[1]);
+//        }}, 5L);
+//
+//        imageDao.addToProduct(new Image() {{
+//            File file = new File("/home/vitorpg/Downloads/image-test/bermuda-athleisure.jpg");
+//            setData(Files.readAllBytes(file.toPath()));
+//            setFormat(Files.probeContentType(file.toPath()).split("/")[1]);
+//        }}, 6L);
+//
+//        imageDao.addToProduct(new Image() {{
+//            File file = new File("/home/vitorpg/Downloads/image-test/casaco-streetwear.png");
+//            setData(Files.readAllBytes(file.toPath()));
+//            setFormat(Files.probeContentType(file.toPath()).split("/")[1]);
+//        }}, 7L);
+//
+//        imageDao.addToProduct(new Image() {{
+//            File file = new File("/home/vitorpg/Downloads/image-test/chapeu-chic.png");
+//            setData(Files.readAllBytes(file.toPath()));
+//            setFormat(Files.probeContentType(file.toPath()).split("/")[1]);
+//        }}, 8L);
+//
+//        imageDao.addToProduct(new Image() {{
+//            File file = new File("/home/vitorpg/Downloads/image-test/suéter-lã.jpeg");
+//            setData(Files.readAllBytes(file.toPath()));
+//            setFormat(Files.probeContentType(file.toPath()).split("/")[1]);
+//        }}, 9L);
+//
+//        imageDao.addToProduct(new Image() {{
+//            File file = new File("/home/vitorpg/Downloads/image-test/blusa-seda.jpg");
+//            setData(Files.readAllBytes(file.toPath()));
+//            setFormat(Files.probeContentType(file.toPath()).split("/")[1]);
+//        }}, 10L);
+//
+//        imageDao.addToProduct(new Image() {{
+//            File file = new File("/home/vitorpg/Downloads/image-test/jaqueta-nylon.jpeg");
+//            setData(Files.readAllBytes(file.toPath()));
+//            setFormat(Files.probeContentType(file.toPath()).split("/")[1]);
+//        }}, 11L);
+//
+//        imageDao.addToProduct(new Image() {{
+//            File file = new File("/home/vitorpg/Downloads/image-test/moletom-fleece.jpeg");
+//            setData(Files.readAllBytes(file.toPath()));
+//            setFormat(Files.probeContentType(file.toPath()).split("/")[1]);
+//        }}, 12L);
+//
+//        imageDao.addToProduct(new Image() {{
+//            File file = new File("/home/vitorpg/Downloads/image-test/calça-cargo-verde.jpg");
+//            setData(Files.readAllBytes(file.toPath()));
+//            setFormat(Files.probeContentType(file.toPath()).split("/")[1]);
+//        }}, 13L);
+//
+//        imageDao.addToProduct(new Image() {{
+//            File file = new File("/home/vitorpg/Downloads/image-test/saia-amarela.jpeg");
+//            setData(Files.readAllBytes(file.toPath()));
+//            setFormat(Files.probeContentType(file.toPath()).split("/")[1]);
+//        }}, 14L);
+
+
+
+
 
 
         Font.loadFont(getClass().getResourceAsStream("/com/vitorpg/clothingstore/fonts/Inter-SemiBold.ttf"), 16);

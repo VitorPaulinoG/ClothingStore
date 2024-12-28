@@ -128,8 +128,17 @@ class ProductDaoTest {
     }
 
     @Test
-    @DisplayName("find products paginate ")
+    @DisplayName("get total count of products")
     @Order(5)
+    void getMaxCount_Success () {
+        ProductDao productDao = new ProductDao(new ImageDao());
+        Long maxCount = productDao.getMaxCount();
+        assertTrue(maxCount > 0);
+    }
+
+    @Test
+    @DisplayName("find products paginate ")
+    @Order(6)
     void findPaginated_Success() {
         for (int i = 0; i < 10; i++) {
             save("product 0" + i);
@@ -144,10 +153,9 @@ class ProductDaoTest {
         assertTrue(products.stream().allMatch(x -> x != null));
     }
 
-
     @Test
     @DisplayName("update product")
-    @Order(6)
+    @Order(7)
     void update_Success() {
         ProductDao productDao = new ProductDao(new ImageDao());
         Product product = productDao.findById(1L);
@@ -157,7 +165,7 @@ class ProductDaoTest {
 
     @Test
     @DisplayName("not update non-existent product")
-    @Order(7)
+    @Order(8)
     void update_Error() {
         ProductDao productDao = new ProductDao(new ImageDao());
         Product product = productDao.findById(1L);
@@ -167,7 +175,7 @@ class ProductDaoTest {
 
     @Test
     @DisplayName("adjust product amount")
-    @Order(8)
+    @Order(9)
     void adjustAmount_Success() {
         ProductDao productDao = new ProductDao(new ImageDao());
         assertTrue(productDao.adjustAmount(1L, 30L));
@@ -175,7 +183,7 @@ class ProductDaoTest {
 
     @Test
     @DisplayName("delete product")
-    @Order(9)
+    @Order(10)
     void delete_Success() {
         ProductDao productDao = new ProductDao(new ImageDao());
         assertTrue(productDao.delete(1L));
@@ -183,7 +191,7 @@ class ProductDaoTest {
 
     @Test
     @DisplayName("not delete non-existent product")
-    @Order(10)
+    @Order(11)
     void delete_Error() {
         ProductDao productDao = new ProductDao(new ImageDao());
         assertFalse(productDao.delete(400L));

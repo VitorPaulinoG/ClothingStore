@@ -14,11 +14,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Paint;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.TextAlignment;
 import javafx.util.Callback;
-import javafx.util.StringConverter;
 
 import java.util.ArrayList;
 
@@ -32,9 +31,11 @@ public class ProductListController {
 
     private Long pageMaxCount = 10L;
     private Long pageOffset = 0L;
+    private int productsTotalCount;
+    private int pageCount;
 
     @FXML
-    private TableView<Product> tb_productList;
+    private TableView<Product> tbProductList;
 
     @FXML
     private TableColumn<Product, Long> colProductId;
@@ -63,6 +64,9 @@ public class ProductListController {
     @FXML
     private ChoiceBox<Material> cbMaterial;
 
+    @FXML
+    private Pagination pagProductList;
+
 
     @FXML
     private TableColumn<Product, Void> colProductActions;
@@ -70,18 +74,19 @@ public class ProductListController {
     private double productImageWidth = 154;
     private double productImageHeight = 136;
 
-    private ObservableList<Product> observableList;
+    private ObservableList<Product> obsProductList;
 
     @FXML
     public void initialize () {
-        observableList = FXCollections
+        obsProductList = FXCollections
                 .observableArrayList(productService.findPaginated(pageMaxCount, pageOffset));
-        observableList.add(new Product() {{
-            setId(5L);
-            setName("sadasd");
-            setPrice(3443.3);
-            setImages(new ArrayList<>());
-        }});
+
+//        obsProductList.add(new Product() {{
+//            setId(5L);
+//            setName("sadasd");
+//            setPrice(3443.3);
+//            setImages(new ArrayList<>());
+//        }});
 
         cbGender.setItems(FXCollections
                 .observableArrayList(Gender.values()));
@@ -179,8 +184,8 @@ public class ProductListController {
             }
         });
 
-        tb_productList.addEventFilter(javafx.scene.input.ScrollEvent.SCROLL, event -> {
-            ScrollPane paneSubScene = (ScrollPane) tb_productList.getScene().lookup("#paneSubScene");
+        tbProductList.addEventFilter(javafx.scene.input.ScrollEvent.SCROLL, event -> {
+            ScrollPane paneSubScene = (ScrollPane) tbProductList.getScene().lookup("#paneSubScene");
 
             if (paneSubScene != null) {
                 double deltaY = event.getDeltaY();
@@ -190,15 +195,33 @@ public class ProductListController {
         });
 
 
-        tb_productList.setFixedCellSize(156);
-        tb_productList.prefHeightProperty().bind(tb_productList.fixedCellSizeProperty().multiply(Math.min(observableList.size() + 5, pageMaxCount)));
-        tb_productList.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-        tb_productList.setMinHeight(0);
-        tb_productList.setItems(observableList);
 
+        tbProductList.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
+        tbProductList.setItems(obsProductList);
+
+        productsTotalCount = (int) (long) productService.getMaxCount();
+        pageCount = (int) Math.ceil((double) productsTotalCount / pageMaxCount);
+
+        pagProductList.setPageCount(pageCount);
+        pagProductList.setCurrentPageIndex((int) (long) pageOffset);
+        pagProductList.setPageFactory(pageNumber -> {
+            pageOffset = ((long) pageNumber) * pageMaxCount;
+            loadProducts();
+            return new VBox();
+        });
     }
 
+    public void loadProducts () {
+        obsProductList = FXCollections
+                .observableArrayList(productService.findPaginated(pageMaxCount, pageOffset));
 
+        tbProductList.setItems(obsProductList);
+        tbProductList.setFixedCellSize(156);
+        tbProductList.prefHeightProperty().bind(tbProductList.fixedCellSizeProperty()
+                .multiply(Math.min(obsProductList.size() + 5, pageMaxCount + 1)));
+        tbProductList.setMinHeight(0);
+    }
 
     public Image getFirstImage(Product product) {
         return product.getImages().getFirst();

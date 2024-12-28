@@ -11,6 +11,11 @@ public class ProductService extends GenericEntityService<Product, ProductDao> {
     public ProductService() {
         super(new ProductDao(new ImageDao()));
     }
+
+    public Long getMaxCount () {
+        return dao.getMaxCount();
+    }
+
     public List<Product> findPaginated (Long maxCount, Long offset) {
         return this.dao.findPaginated(maxCount, offset);
     }
