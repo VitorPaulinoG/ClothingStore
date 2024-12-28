@@ -90,7 +90,7 @@
                      <children>
                         <FlowPane alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefWidth="200.0" rowValignment="TOP" HBox.hgrow="ALWAYS">
                            <children>
-                              <ChoiceBox maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="52.0" prefWidth="204.0" value="Categoria">
+                              <ChoiceBox fx:id="cbCategory" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="52.0" prefWidth="204.0" value="Categoria">
                                  <styleClass>
                                     <String fx:value="khand-medium-font" />
                                     <String fx:value="fs-24" />
@@ -105,7 +105,7 @@
                                     </FXCollections>
                                  </items>
                               </ChoiceBox>
-                              <ChoiceBox maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="52.0" prefWidth="204.0" value="Gênero">
+                              <ChoiceBox fx:id="cbGender" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="52.0" prefWidth="204.0" value="Gênero">
                                  <styleClass>
                                     <String fx:value="khand-medium-font" />
                                     <String fx:value="fs-24" />
@@ -120,7 +120,7 @@
                                     </FXCollections>
                                  </items>
                               </ChoiceBox>
-                              <ChoiceBox maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="52.0" prefWidth="204.0" value="Tamanho">
+                              <ChoiceBox fx:id="cbSize" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="52.0" prefWidth="204.0" value="Tamanho">
                                  <styleClass>
                                     <String fx:value="khand-medium-font" />
                                     <String fx:value="fs-24" />
@@ -135,7 +135,7 @@
                                     </FXCollections>
                                  </items>
                               </ChoiceBox>
-                              <ChoiceBox maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="52.0" prefWidth="204.0" value="Cor">
+                              <ChoiceBox fx:id="cbColor" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="52.0" prefWidth="204.0" value="Cor">
                                  <styleClass>
                                     <String fx:value="khand-medium-font" />
                                     <String fx:value="fs-24" />
@@ -150,7 +150,7 @@
                                     </FXCollections>
                                  </items>
                               </ChoiceBox>
-                              <ChoiceBox maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="52.0" prefWidth="204.0" value="Material">
+                              <ChoiceBox fx:id="cbMaterial" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="52.0" prefWidth="204.0" value="Material">
                                  <styleClass>
                                     <String fx:value="khand-medium-font" />
                                     <String fx:value="fs-24" />

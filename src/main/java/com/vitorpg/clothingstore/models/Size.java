@@ -40,4 +40,9 @@ public class Size {
     public void setSizeType(SizeType sizeType) {
         this.sizeType = sizeType;
     }
+
+    @Override
+    public String toString() {
+        return this.value;
+    }
 }

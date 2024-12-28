@@ -40,4 +40,9 @@ public class Category {
     public void setSizes(List<Size> sizes) {
         this.sizes = sizes;
     }
+
+    @Override
+    public String toString() {
+        return this.name;
+    }
 }

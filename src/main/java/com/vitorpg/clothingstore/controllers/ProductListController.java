@@ -1,8 +1,8 @@
 package com.vitorpg.clothingstore.controllers;
 
-import com.vitorpg.clothingstore.models.Image;
-import com.vitorpg.clothingstore.models.Product;
-import com.vitorpg.clothingstore.services.ProductService;
+import com.vitorpg.clothingstore.models.*;
+import com.vitorpg.clothingstore.models.enums.Gender;
+import com.vitorpg.clothingstore.services.*;
 import com.vitorpg.clothingstore.utils.ImageUtils;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
@@ -18,12 +18,17 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.TextAlignment;
 import javafx.util.Callback;
+import javafx.util.StringConverter;
 
 import java.util.ArrayList;
 
 
 public class ProductListController {
     private ProductService productService = new ProductService();
+    private CategoryService categoryService = new CategoryService();
+    private SizeService sizeService = new SizeService();
+    private ColorService colorService = new ColorService();
+    private MaterialService materialService = new MaterialService();
 
     private Long pageMaxCount = 10L;
     private Long pageOffset = 0L;
@@ -44,6 +49,22 @@ public class ProductListController {
     private TableColumn<Product, Double> colProductPrice;
 
     @FXML
+    private ChoiceBox<Category> cbCategory;
+
+    @FXML
+    private ChoiceBox<Gender> cbGender;
+
+    @FXML
+    private ChoiceBox<Size> cbSize;
+
+    @FXML
+    private ChoiceBox<Color> cbColor;
+
+    @FXML
+    private ChoiceBox<Material> cbMaterial;
+
+
+    @FXML
     private TableColumn<Product, Void> colProductActions;
 
     private double productImageWidth = 154;
@@ -61,6 +82,18 @@ public class ProductListController {
             setPrice(3443.3);
             setImages(new ArrayList<>());
         }});
+
+        cbGender.setItems(FXCollections
+                .observableArrayList(Gender.values()));
+        cbCategory.setItems(FXCollections
+                .observableArrayList(categoryService.findAll()));
+        cbMaterial.setItems(FXCollections
+                .observableArrayList(materialService.findAll()));
+        cbColor.setItems(FXCollections
+                .observableArrayList(colorService.findAll()));
+        cbSize.setItems(FXCollections
+                .observableArrayList(sizeService.findAll()));
+
 
         colProductId.setCellValueFactory(new PropertyValueFactory<Product, Long>("id"));
         colProductImage.setCellValueFactory(
