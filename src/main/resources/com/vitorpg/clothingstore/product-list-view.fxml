@@ -12,11 +12,12 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.SVGPath?>
 
-<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="1024.0" prefWidth="1338.0" stylesheets="@css/main-styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.vitorpg.clothingstore.controllers.ProductListController">
+<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="350.0" prefHeight="1024.0" prefWidth="1338.0" stylesheets="@css/main-styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.vitorpg.clothingstore.controllers.ProductListController">
    <styleClass>
       <String fx:value="bg-light" />
       <String fx:value="p-10-10-32-24" />
@@ -26,13 +27,14 @@
       <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="61.0" styleClass="gap-10">
          <children>
             <SVGPath content="M10.3478 17.4663L8.04201 18.7438C7.65312 18.966 7.24118 19.0263 6.80618 18.9246C6.3709 18.8227 6.06062 18.5866 5.87534 18.2163L2.84784 12.9663C2.62562 12.5774 2.56534 12.2163 2.66701 11.883C2.76895 11.5496 3.00507 11.2719 3.37534 11.0496L12.9033 5.52173H15.6533C15.9402 5.52173 16.1694 5.60742 16.3408 5.77881C16.5121 5.94992 16.5978 6.17909 16.5978 6.46631V7.16048C16.5978 8.16992 16.9288 9.00562 17.5908 9.66756C18.2527 10.3295 19.0884 10.6605 20.0978 10.6605C21.107 10.6605 21.938 10.3295 22.5908 9.66756C23.2435 9.00562 23.5699 8.16992 23.5699 7.16048V6.46631C23.5699 6.17909 23.6556 5.94992 23.827 5.77881C23.9981 5.60742 24.2273 5.52173 24.5145 5.52173H27.2645L36.792 11.0496C37.1626 11.2719 37.3941 11.5496 37.4866 11.883C37.5791 12.2163 37.5235 12.5774 37.3199 12.9663L34.2645 18.2163C34.0792 18.5866 33.739 18.8249 33.2437 18.9313C32.7481 19.038 32.3291 18.9894 31.9866 18.7855L29.7087 17.4246V33.883C29.7087 34.3366 29.5444 34.7231 29.2158 35.0426C28.8871 35.362 28.4959 35.5217 28.042 35.5217H11.9866C11.533 35.5217 11.1465 35.362 10.827 35.0426C10.5076 34.7231 10.3478 34.3366 10.3478 33.883V17.4663ZM13.1253 12.7717V32.7438H26.9312V12.7717L32.4866 15.8551L34.3199 12.7163L26.7366 8.35506H26.2366C25.9496 9.82728 25.2483 11.0426 24.1324 12.0009C23.0166 12.9592 21.6717 13.4384 20.0978 13.4384C18.5237 13.4384 17.1741 12.9592 16.0491 12.0009C14.9241 11.0426 14.2181 9.82728 13.9312 8.35506H13.4312L5.84784 12.7163L7.68118 15.8551L13.1253 12.7717Z" styleClass="fill-secundary" />
-            <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Produtos" HBox.hgrow="ALWAYS">
+            <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Produtos">
                <styleClass>
                   <String fx:value="fs-40" />
                   <String fx:value="khand-medium-font" />
                   <String fx:value="txt-secundary" />
                </styleClass>
             </Label>
+            <Region minWidth="5.0" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
             <Button alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="56.0" prefWidth="180.0" text="Adicionar" textAlignment="CENTER">
                <styleClass>
                   <String fx:value="bg-transparent" />
@@ -46,9 +48,9 @@
             </Button>
          </children>
       </HBox>
-      <HBox minHeight="-Infinity" prefHeight="159.0" styleClass="b-0">
+      <HBox maxHeight="1.7976931348623157E308" prefHeight="159.0" styleClass="b-0">
          <children>
-            <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" HBox.hgrow="ALWAYS">
+            <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" HBox.hgrow="ALWAYS">
                <styleClass>
                   <String fx:value="p-16" />
                   <String fx:value="gap-10" />
@@ -82,7 +84,7 @@
                         </StackPane>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefHeight="72.0">
+                  <HBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefHeight="72.0">
                      <styleClass>
                         <String fx:value="py-10" />
                         <String fx:value="gap-10" />
@@ -177,7 +179,7 @@
             </VBox>
          </children>
       </HBox>
-      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" VBox.vgrow="ALWAYS">
+      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="350.0" VBox.vgrow="ALWAYS">
          <styleClass>
             <String fx:value="b-0" />
             <String fx:value="bg-white" />
@@ -185,13 +187,13 @@
             <String fx:value="px-16" />
          </styleClass>
          <children>
-            <TableView fx:id="tb_productList" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" styleClass="product-table-view" VBox.vgrow="ALWAYS">
+            <TableView fx:id="tb_productList" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="350.0" styleClass="product-table-view" VBox.vgrow="ALWAYS">
               <columns>
-               <TableColumn fx:id="colProductId" prefWidth="111.0" reorderable="false" text="Id" />
+               <TableColumn fx:id="colProductId" minWidth="50.0" prefWidth="111.0" reorderable="false" text="Id" />
                <TableColumn fx:id="colProductImage" editable="false" minWidth="5.666664123535156" prefWidth="184.3333282470703" reorderable="false" resizable="false" sortable="false" text="Imagem" />
-               <TableColumn fx:id="colProductName" minWidth="5.666664123535156" prefWidth="330.33331298828125" reorderable="false" text="Produto" />
-               <TableColumn fx:id="colProductPrice" minWidth="0.0" prefWidth="183.0" reorderable="false" text="Preço (R$)" />
-                  <TableColumn fx:id="colProductActions" editable="false" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="250.0" reorderable="false" resizable="false" sortable="false" text="Ações" />
+               <TableColumn fx:id="colProductName" minWidth="150.0" prefWidth="330.33331298828125" reorderable="false" text="Produto" />
+               <TableColumn fx:id="colProductPrice" minWidth="100.0" prefWidth="183.0" reorderable="false" text="Preço (R$)" />
+                  <TableColumn fx:id="colProductActions" editable="false" maxWidth="1.7976931348623157E308" minWidth="200.0" prefWidth="250.0" reorderable="false" resizable="false" sortable="false" text="Ações" />
               </columns>
             </TableView>
             <Pagination maxHeight="-Infinity" maxPageIndicatorCount="3" minHeight="-Infinity" prefHeight="60.0" prefWidth="1286.0" />

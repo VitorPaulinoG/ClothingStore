@@ -192,9 +192,8 @@ public class ProductListController {
 
         tb_productList.setFixedCellSize(156);
         tb_productList.prefHeightProperty().bind(tb_productList.fixedCellSizeProperty().multiply(Math.min(observableList.size() + 5, pageMaxCount)));
-
+        tb_productList.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         tb_productList.setMinHeight(0);
-//        tb_productList.setMaxHeight();
         tb_productList.setItems(observableList);
 
     }
