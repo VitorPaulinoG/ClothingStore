@@ -82,6 +82,7 @@
 .pagination .left-arrow::before {
     content: "";
 }
+
 .pagination .left-arrow-button {
     -fx-min-width: 62;
     -fx-pref-width: 62;
@@ -113,6 +114,10 @@
     -fx-stroke: -fx-white-color;
     -fx-fill: -fx-white-color;
 
+}
+
+.p-10-16-16-16 {
+    -fx-padding: 10 16 16 16;
 }
 
 .pagination .right-arrow-button:hover {
@@ -149,6 +154,136 @@
     -fx-fill: -fx-white-color;
 }
 
+.gap-1 {
+    -fx-spacing: 3px;
+}
+
+.date-picker {
+    -fx-border-width: 2;
+    -fx-border-color: -fx-gray-color;
+    -fx-background-color: -fx-white-color;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+}
+
+.date-picker-display-node  {
+    -fx-padding: 0 0 0 10;
+}
+
+.date-picker .arrow-button {
+    -fx-background-color: transparent;
+    -fx-pref-width: 32;
+    -fx-max-width: 32;
+    -fx-min-width: 32;
+}
+
+.date-picker .arrow-button .arrow {
+    -fx-shape: "M8.34823 37.1018C7.59823 37.1018 6.94767 36.8264 6.39656 36.2755C5.84573 35.7244 5.57031 35.0739 5.57031 34.3239V9.32385C5.57031 8.57385 5.84573 7.92343 6.39656 7.3726C6.94767 6.82177 7.59823 6.54635 8.34823 6.54635H10.7091V3.76843H13.6257V6.54635H27.5149V3.76843H30.4316V6.54635H32.7924C33.5424 6.54635 34.193 6.82177 34.7441 7.3726C35.2949 7.92343 35.5703 8.57385 35.5703 9.32385V34.3239C35.5703 35.0739 35.2949 35.7244 34.7441 36.2755C34.193 36.8264 33.5424 37.1018 32.7924 37.1018H8.34823ZM8.34823 34.3239H32.7924V16.8239H8.34823V34.3239ZM8.34823 14.0463H32.7924V9.32385H8.34823V14.0463ZM20.5703 23.7684C20.0981 23.7684 19.7023 23.6087 19.3828 23.2893C19.0634 22.9698 18.9036 22.574 18.9036 22.1018C18.9036 21.6295 19.0634 21.2337 19.3828 20.9143C19.7023 20.5948 20.0981 20.4351 20.5703 20.4351C21.0425 20.4351 21.4384 20.5948 21.7578 20.9143C22.0773 21.2337 22.237 21.6295 22.237 22.1018C22.237 22.574 22.0773 22.9698 21.7578 23.2893C21.4384 23.6087 21.0425 23.7684 20.5703 23.7684ZM13.9036 23.7684C13.4314 23.7684 13.0356 23.6087 12.7161 23.2893C12.3967 22.9698 12.237 22.574 12.237 22.1018C12.237 21.6295 12.3967 21.2337 12.7161 20.9143C13.0356 20.5948 13.4314 20.4351 13.9036 20.4351C14.3759 20.4351 14.7717 20.5948 15.0911 20.9143C15.4106 21.2337 15.5703 21.6295 15.5703 22.1018C15.5703 22.574 15.4106 22.9698 15.0911 23.2893C14.7717 23.6087 14.3759 23.7684 13.9036 23.7684ZM27.237 23.7684C26.7648 23.7684 26.3689 23.6087 26.0495 23.2893C25.73 22.9698 25.5703 22.574 25.5703 22.1018C25.5703 21.6295 25.73 21.2337 26.0495 20.9143C26.3689 20.5948 26.7648 20.4351 27.237 20.4351C27.7092 20.4351 28.105 20.5948 28.4245 20.9143C28.7439 21.2337 28.9036 21.6295 28.9036 22.1018C28.9036 22.574 28.7439 22.9698 28.4245 23.2893C28.105 23.6087 27.7092 23.7684 27.237 23.7684ZM20.5703 30.4351C20.0981 30.4351 19.7023 30.2754 19.3828 29.9559C19.0634 29.6365 18.9036 29.2407 18.9036 28.7684C18.9036 28.2962 19.0634 27.9004 19.3828 27.5809C19.7023 27.2615 20.0981 27.1018 20.5703 27.1018C21.0425 27.1018 21.4384 27.2615 21.7578 27.5809C22.0773 27.9004 22.237 28.2962 22.237 28.7684C22.237 29.2407 22.0773 29.6365 21.7578 29.9559C21.4384 30.2754 21.0425 30.4351 20.5703 30.4351ZM13.9036 30.4351C13.4314 30.4351 13.0356 30.2754 12.7161 29.9559C12.3967 29.6365 12.237 29.2407 12.237 28.7684C12.237 28.2962 12.3967 27.9004 12.7161 27.5809C13.0356 27.2615 13.4314 27.1018 13.9036 27.1018C14.3759 27.1018 14.7717 27.2615 15.0911 27.5809C15.4106 27.9004 15.5703 28.2962 15.5703 28.7684C15.5703 29.2407 15.4106 29.6365 15.0911 29.9559C14.7717 30.2754 14.3759 30.4351 13.9036 30.4351ZM27.237 30.4351C26.7648 30.4351 26.3689 30.2754 26.0495 29.9559C25.73 29.6365 25.5703 29.2407 25.5703 28.7684C25.5703 28.2962 25.73 27.9004 26.0495 27.5809C26.3689 27.2615 26.7648 27.1018 27.237 27.1018C27.7092 27.1018 28.105 27.2615 28.4245 27.5809C28.7439 27.9004 28.9036 28.2962 28.9036 28.7684C28.9036 29.2407 28.7439 29.6365 28.4245 29.9559C28.105 30.2754 27.7092 30.4351 27.237 30.4351Z";  
+    -fx-stroke: -fx-gray-color;
+    -fx-fill: -fx-gray-color;
+    -fx-background-color: -fx-gray-color;
+}
+
+.date-picker-popup {
+    -fx-border-width: 2;
+    -fx-border-color: -fx-gray-color;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 0;
+}
+
+.date-picker-popup .month-year-pane {
+    -fx-background-color: -fx-gray-color;
+    -fx-background-radius: 5 5 0 0;
+    -fx-text-fill: -fx-white-color;
+    -fx-fill: -fx-white-color;
+}
+
+.date-picker-popup .month-year-pane .label{
+    -fx-text-fill: -fx-white-color;
+    -fx-fill: -fx-white-color;
+}
+
+.date-picker-popup .calendar-grid {
+    -fx-background-radius: 5;
+    -fx-background-color: transparent;
+    -fx-border-radius: 5;
+    -fx-border-width: 0;
+    -fx-border-color: transparent;
+    -fx-padding: 5;
+    -fx-hgap: 3px;
+    -fx-vgap: 3px;
+}
+
+.date-picker-popup .calendar-grid * {
+    -fx-pref-width: 60px;
+    -fx-min-width: 60px;
+    -fx-max-width: 60px;
+}
+
+.date-picker .cell:hover {
+    -fx-background-color: -fx-primary-color;
+    -fx-text-fill: -fx-white-color;
+    -fx-fill: -fx-white-color;
+}
+
+.date-picker .selected {
+    -fx-background-color: -fx-white-color, -fx-primary-color, -fx-white-color;
+    -fx-background-insets: 1, 2, 4;
+    -fx-text-fill: -fx-primary-color;
+}
+
+.date-picker .today {
+    -fx-background-color: -fx-white-color, -fx-gray-color, -fx-white-color;
+    -fx-background-insets: 1, 2, 4;
+}
+
+.date-picker-popup .day-cell {
+    -fx-border-radius: 4;
+    -fx-background-radius: 4;
+}
+
+.date-picker-popup > * > .spinner > .button {
+    -fx-pref-width: 40px;    
+    -fx-max-width: 40px;    
+    -fx-min-width: 40px;    
+    -fx-pref-height: 40px;    
+    -fx-max-height: 40px;    
+    -fx-min-height: 40px;
+    -fx-border-radius: 8px;    
+    -fx-background-radius: 8px; 
+}
+
+.date-picker-popup > * > .spinner > .button:hover,
+.date-picker-popup > * > .spinner > .button:focused{
+    -fx-background-color: -fx-white-color;
+}
+
+.date-picker-popup > * > .spinner > .button:hover .left-arrow,
+.date-picker-popup > * > .spinner > .button:focused .left-arrow,
+.date-picker-popup > * > .spinner > .button:hover .right-arrow,
+.date-picker-popup > * > .spinner > .button:focused .right-arrow {
+    -fx-fill: -fx-gray-color;
+    -fx-background-color: -fx-gray-color;
+    -fx-background-insets: 0;
+    -fx-stroke: -fx-gray-color;
+    -fx-effect: none;
+}
+
+.date-picker-popup > * > .spinner > .button > .left-arrow,
+.date-picker-popup > * > .spinner > .button > .right-arrow {
+    -fx-fill: -fx-white-color;
+    -fx-background-color: -fx-white-color;
+    -fx-background-insets: 0;
+    -fx-stroke: -fx-white-color;
+    -fx-effect: none;
+}
+
+.basic-text-field:focused {
+    -fx-stroke: -fx-gray-color;
+    -fx-fill: transparent;
+    -fx-background-color: transparent;
+}
 
 .no-stroke {
     -fx-stroke-width: 0;
@@ -167,8 +302,36 @@
     -fx-stroke-width: 2;
 }
 
+.hgap-10 {
+    -fx-hgap: 10;
+}
+
+.vgap-10 {
+    -fx-vgap: 10;
+}
+
 .b-3 {
     -fx-border-width: 3;
+}
+
+.btn-outline {
+    -fx-text-fill: -fx-primary-color;
+    -fx-border-width: 3;
+    -fx-background-color: -fx-white-color;
+    -fx-background-radius: 28;
+    -fx-border-radius: 28;
+    -fx-border-color: -fx-primary-color;
+    -fx-background-insets: 1;
+}
+
+.btn-outline:hover {
+    -fx-text-fill: -fx-white-color;
+    -fx-border-width: 3;
+    -fx-background-color: -fx-primary-color;
+    -fx-background-radius: 28;
+    -fx-border-radius: 28;
+    -fx-border-color: -fx-primary-color;
+    -fx-background-insets: 1;
 }
 
 .btn-group-outline {
@@ -229,6 +392,15 @@
     -fx-stroke: -fx-secundary-color;
 }
 
+.fill-white {
+    -fx-fill: -fx-white-color;
+}
+
+.stroke-white {
+    -fx-stroke: -fx-white-color;
+}
+
+
 .fill-secundary {
     -fx-fill: -fx-secundary-color;
 }
@@ -253,12 +425,52 @@
     -fx-font-family: 'Ubuntu Medium';
 }
 
+.radio-button {
+    -fx-padding: 0px;
+}
+.radio-button .radio {
+    -fx-background-color: transparent;
+    -fx-border-color: -fx-gray-color; 
+    -fx-border-width: 2px; 
+    -fx-border-radius: 16;
+    -fx-min-width: 32px;
+    -fx-max-width: 32px;
+    -fx-pref-width: 32px;
+    -fx-alignment: center;
+    -fx-padding: 0px;
+    
+    -fx-min-height: 32px;
+    -fx-max-height: 32px;
+    -fx-pref-height: 32px;
+}
+
+.radio-button:selected .radio .dot {
+    -fx-padding: 0px;
+    -fx-alignment: center;
+    -fx-background-color: -fx-primary-color;
+    -fx-pref-width: 16px;
+    -fx-max-width: 16px;
+    -fx-min-width: 16px;
+    -fx-pref-height: 16px;
+    -fx-max-height: 16px;
+    -fx-min-height: 16px;
+    -fx-translate-y: -1;
+}
+
+.fs-14 {
+    -fx-font-size: 14px;
+}
+
 .fs-40 {
     -fx-font-size: 40px;
 }
 
 .fs-24 {
     -fx-font-size: 24px;
+}
+
+.fs-32 {
+    -fx-font-size: 32px;
 }
 
 .fs-36 {
@@ -284,12 +496,26 @@
 .p-10-10-32-24 {
     -fx-padding: 32 10 24 10;
 }
+
+.b-2 {
+    -fx-border-width: 2;
+}
+
 .b-0 {
     -fx-border-width: 0;
 }
 .p-logo {
     -fx-padding: 30 10 10 10;
 }
+
+.bg-rounded-bottom-4 {
+    -fx-background-radius: 0 0 4 4;
+}
+
+.bg-rounded-top-4 {
+    -fx-background-radius: 4 4 0 0;
+}
+
 .bg-rounded-bottom-12 {
     -fx-background-radius: 0 0 12 12;
 }
@@ -307,6 +533,10 @@
 
 .gap-0 {
     -fx-spacing: 0px;
+}
+
+.gap-20 {
+    -fx-spacing: 20px;
 }
 
 
@@ -380,6 +610,65 @@
 }
 
 
+.combo-box {
+    -fx-background-color: transparent;
+    -fx-border-color: -fx-gray-color;
+    -fx-border-width: 2;
+    -fx-border-radius: 8;
+    -fx-padding: 0;
+    -fx-background-radius: 8;
+}
+
+.combo-box .arrow-button {
+    -fx-background-color: transparent;
+    -fx-mark-color: -fx-gray-color;
+}
+
+.combo-box .arrow {
+    -fx-shape: "M20.0699 25.0217L11.7366 16.7163H28.4032L20.0699 25.0217Z";
+    -fx-mark-color: -fx-gray-color;
+    -fx-stroke: -fx-gray-color;
+    -fx-fill: -fx-gray-color;
+}
+
+.combo-box .text-field {
+    -fx-padding: 0 0 0 10;
+    -fx-background-color: transparent;
+    -fx-text-fill: -fx-gray-color;
+}
+
+.combo-box .list-view {
+    -fx-border-color: -fx-gray-color;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-background-color: -fx-white-color;
+    -fx-min-width: 204;
+    -fx-max-width: 204;
+    -fx-pref-width: 204;
+}
+
+.combo-box .list-cell {
+    -fx-padding: 5 0 5 10;
+    -fx-background-color: -fx-white-color;
+    -fx-text-fill: -fx-gray-color;
+}
+
+.combo-box .list-cell:hover {
+    -fx-background-color: -fx-gray-color;
+    -fx-text-fill: -fx-white-color;
+}
+
+.combo-box .list-cell:focused {
+    -fx-background-color: -fx-gray-color;
+    -fx-text-fill: -fx-white-color;
+}
+
+.combo-box-popup .list-view {
+    -fx-background-color: transparent;
+}
+
+
 .filter-flow-pane {
     -fx-hgap: 10;
     -fx-vgap: 10
@@ -423,8 +712,17 @@
     -fx-spacing: 80;
 }
 
+.rounded-8 {
+    -fx-border-radius: 8px;
+}
+
 .rounded-12 {
     -fx-border-radius: 12px;
+}
+
+
+.bg-rounded-8 {
+    -fx-background-radius: 8px;
 }
 
 .bg-rounded-12 {
@@ -615,6 +913,10 @@
 
 .txt-white {
     -fx-text-fill: -fx-white-color;
+}
+
+.txt-dark {
+    -fx-text-fill: -fx-dark-color;
 }
 
 .txt-primary {

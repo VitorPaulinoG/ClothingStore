@@ -1,6 +1,7 @@
 package com.vitorpg.clothingstore.controllers;
 
 import com.vitorpg.clothingstore.App;
+import com.vitorpg.clothingstore.events.ChangeSubSceneEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -8,8 +9,10 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
+import java.util.EventListener;
 
 public class StoreRootController {
+
     @FXML
     private Button btnOverview;
     @FXML
@@ -24,20 +27,26 @@ public class StoreRootController {
 
     @FXML
     public void initialize() {
-        btnOverview.setOnAction(e -> {
+        paneSubScene.addEventHandler(ChangeSubSceneEvent.SUBSCENE_CHANGED, event -> {
+            loadSubScene(event.getSceneFxmlName());
+        });
+
+        btnOverview.setOnAction(event -> {
             setCurrentPage(btnOverview);
             loadSubScene("overview-view");
         });
 
-        btnProducts.setOnAction(e -> {
+        btnProducts.setOnAction(event -> {
             setCurrentPage(btnProducts);
             loadSubScene("product-list-view");
         });
-        btnSale.setOnAction(e -> {
+        btnSale.setOnAction(event -> {
             setCurrentPage(btnSale);
 //            loadSubScene("");
         });
         btnOverview.fire();
+
+
     }
 
     private void setCurrentPage(Button button) {
@@ -47,6 +56,8 @@ public class StoreRootController {
 
         button.getStyleClass().add("nav-button-current");
         currentPageButton = button;
+
+
     }
 
     private void loadSubScene(String sceneFxmlName) {

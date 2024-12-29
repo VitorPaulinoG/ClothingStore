@@ -1,5 +1,6 @@
 package com.vitorpg.clothingstore.controllers;
 
+import com.vitorpg.clothingstore.events.ChangeSubSceneEvent;
 import com.vitorpg.clothingstore.models.*;
 import com.vitorpg.clothingstore.models.enums.Gender;
 import com.vitorpg.clothingstore.services.*;
@@ -7,6 +8,7 @@ import com.vitorpg.clothingstore.utils.ImageUtils;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -18,8 +20,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.TextAlignment;
 import javafx.util.Callback;
-
-import java.util.ArrayList;
 
 
 public class ProductListController {
@@ -33,6 +33,9 @@ public class ProductListController {
     private Long pageOffset = 0L;
     private int productsTotalCount;
     private int pageCount;
+
+    @FXML
+    private Button btnAddProduct;
 
     @FXML
     private TableView<Product> tbProductList;
@@ -67,7 +70,6 @@ public class ProductListController {
     @FXML
     private Pagination pagProductList;
 
-
     @FXML
     private TableColumn<Product, Void> colProductActions;
 
@@ -78,15 +80,9 @@ public class ProductListController {
 
     @FXML
     public void initialize () {
+
         obsProductList = FXCollections
                 .observableArrayList(productService.findPaginated(pageMaxCount, pageOffset));
-
-//        obsProductList.add(new Product() {{
-//            setId(5L);
-//            setName("sadasd");
-//            setPrice(3443.3);
-//            setImages(new ArrayList<>());
-//        }});
 
         cbGender.setItems(FXCollections
                 .observableArrayList(Gender.values()));
@@ -185,18 +181,16 @@ public class ProductListController {
         });
 
         tbProductList.addEventFilter(javafx.scene.input.ScrollEvent.SCROLL, event -> {
-            ScrollPane paneSubScene = (ScrollPane) tbProductList.getScene().lookup("#paneSubScene");
+            ScrollPane parentScene = (ScrollPane) tbProductList.getScene().lookup("#paneSubScene");
 
-            if (paneSubScene != null) {
+            if (parentScene != null) {
                 double deltaY = event.getDeltaY();
-                paneSubScene.setVvalue(paneSubScene.getVvalue() - deltaY / paneSubScene.getHeight());
+                parentScene.setVvalue(parentScene.getVvalue() - deltaY / parentScene.getHeight());
                 event.consume();
             }
         });
 
-
-
-        tbProductList.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        tbProductList.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_LAST_COLUMN);
 
         tbProductList.setItems(obsProductList);
 
@@ -225,5 +219,10 @@ public class ProductListController {
 
     public Image getFirstImage(Product product) {
         return product.getImages().getFirst();
+    }
+
+    @FXML
+    public void goToAddProductScene (ActionEvent event) {
+        btnAddProduct.fireEvent(new ChangeSubSceneEvent(ChangeSubSceneEvent.SUBSCENE_CHANGED, "add-product-view"));
     }
 }

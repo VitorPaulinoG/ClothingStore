@@ -35,15 +35,13 @@
                </styleClass>
             </Label>
             <Region minWidth="5.0" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-            <Button alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="56.0" prefWidth="180.0" text="Adicionar" textAlignment="CENTER">
+            <Button fx:id="btnAddProduct" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="56.0" prefWidth="180.0"
+                    text="Adicionar" textAlignment="CENTER" onAction="#goToAddProductScene">
                <styleClass>
-                  <String fx:value="bg-transparent" />
-                  <String fx:value="b-primary" />
-                  <String fx:value="rounded-28" />
-                  <String fx:value="b-3" />
                   <String fx:value="fs-24" />
                   <String fx:value="khand-medium-font" />
-                  <String fx:value="txt-primary" />
+                  <String fx:value="p-0" />
+                  <String fx:value="btn-outline" />
                </styleClass>
             </Button>
          </children>
@@ -189,11 +187,11 @@
          <children>
             <TableView fx:id="tbProductList" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="350.0" styleClass="product-table-view" VBox.vgrow="ALWAYS">
               <columns>
-               <TableColumn fx:id="colProductId" minWidth="50.0" prefWidth="111.0" reorderable="false" text="Id" />
-               <TableColumn fx:id="colProductImage" editable="false" minWidth="5.666664123535156" prefWidth="184.3333282470703" reorderable="false" resizable="false" sortable="false" text="Imagem" />
+               <TableColumn fx:id="colProductId" minWidth="50.0" prefWidth="76.0" reorderable="false" resizable="false" text="Id" />
+               <TableColumn fx:id="colProductImage" editable="false" minWidth="5.666664123535156" prefWidth="220.0" reorderable="false" resizable="false" sortable="false" text="Imagem" />
                <TableColumn fx:id="colProductName" minWidth="150.0" prefWidth="330.33331298828125" reorderable="false" text="Produto" />
-               <TableColumn fx:id="colProductPrice" minWidth="100.0" prefWidth="183.0" reorderable="false" text="Preço (R$)" />
-                  <TableColumn fx:id="colProductActions" editable="false" maxWidth="1.7976931348623157E308" minWidth="200.0" prefWidth="250.0" reorderable="false" resizable="false" sortable="false" text="Ações" />
+               <TableColumn fx:id="colProductPrice" minWidth="100.0" prefWidth="134.0" reorderable="false" resizable="true" text="Preço (R$)" />
+                  <TableColumn fx:id="colProductActions" editable="false" maxWidth="1.7976931348623157E308" minWidth="200.0" prefWidth="299.0" reorderable="false" resizable="false" sortable="false" text="Ações" />
               </columns>
             </TableView>
             <Pagination fx:id="pagProductList" maxHeight="1.7976931348623157E308" maxPageIndicatorCount="3" minHeight="-Infinity" prefHeight="262.0" prefWidth="1286.0">
