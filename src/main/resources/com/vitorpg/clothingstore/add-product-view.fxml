@@ -7,7 +7,9 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
@@ -39,7 +41,7 @@
             <String fx:value="p-0" />
          </styleClass>
          <children>
-            <VBox prefHeight="684.0" prefWidth="872.0" styleClass="gap-20">
+            <VBox prefHeight="684.0" prefWidth="872.0" styleClass="gap-20" HBox.hgrow="ALWAYS">
                <children>
                   <VBox prefHeight="376.0" prefWidth="100.0">
                      <styleClass>
@@ -65,7 +67,7 @@
                                     <String fx:value="txt-dark" />
                                  </styleClass>
                               </Label>
-                              <TextField fx:id="txtName" focusTraversable="false" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="48.0" promptText="ex: Calça Jeans">
+                              <TextField fx:id="txtProductName" focusTraversable="false" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="48.0" promptText="ex: Calça Jeans">
                                  <styleClass>
                                     <String fx:value="khand-font" />
                                     <String fx:value="b-2" />
@@ -90,9 +92,9 @@
                                           <String fx:value="txt-dark" />
                                        </styleClass>
                                     </Label>
-                                    <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" styleClass="gap-10">
+                                    <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" styleClass="gap-5">
                                        <children>
-                                          <ComboBox editable="true" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="48.0" prefWidth="325.0">
+                                          <ComboBox fx:id="cmbCategory" editable="true" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="48.0" prefWidth="325.0">
                                              <styleClass>
                                                 <String fx:value="khand-font" />
                                                 <String fx:value="fs-24" />
@@ -106,11 +108,11 @@
                                                 </FXCollections>
                                              </items>
                                           </ComboBox>
-                                          <StackPane>
+                                          <StackPane styleClass="btn-primary-container">
                                              <children>
-                                                <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0">
+                                                <Button fx:id="btnAddCategory" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0">
                                                    <styleClass>
-                                                      <String fx:value="bg-primary" />
+                                                      <String fx:value="btn-primary" />
                                                       <String fx:value="bg-rounded-8" />
                                                    </styleClass>
                                                 </Button>
@@ -126,52 +128,7 @@
                                     </HBox>
                                  </children>
                               </VBox>
-                              <VBox prefHeight="88.0" prefWidth="199.0">
-                                 <children>
-                                    <Label text="Cor">
-                                       <styleClass>
-                                          <String fx:value="khand-font" />
-                                          <String fx:value="fs-24" />
-                                          <String fx:value="txt-dark" />
-                                       </styleClass>
-                                    </Label>
-                                    <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" styleClass="gap-10">
-                                       <children>
-                                          <ComboBox editable="true" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="48.0" prefWidth="325.0">
-                                             <styleClass>
-                                                <String fx:value="khand-font" />
-                                                <String fx:value="fs-24" />
-                                                <String fx:value="p-0" />
-                                             </styleClass>
-                                             <items>
-                                                <FXCollections fx:factory="observableArrayList">
-                                                   <String fx:value="Item 1" />
-                                                   <String fx:value="Item 2" />
-                                                   <String fx:value="Item 3" />
-                                                </FXCollections>
-                                             </items>
-                                          </ComboBox>
-                                          <StackPane>
-                                             <children>
-                                                <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0">
-                                                   <styleClass>
-                                                      <String fx:value="bg-primary" />
-                                                      <String fx:value="bg-rounded-8" />
-                                                   </styleClass>
-                                                </Button>
-                                                <SVGPath content="M11.0698 13.0217H5.06982V11.0217H11.0698V5.02173H13.0698V11.0217H19.0698V13.0217H13.0698V19.0217H11.0698V13.0217Z" fill="WHITE">
-                                                   <styleClass>
-                                                      <String fx:value="stroke-white" />
-                                                      <String fx:value="fill-white" />
-                                                   </styleClass>
-                                                </SVGPath>
-                                             </children>
-                                          </StackPane>
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </VBox>
-                              <VBox maxWidth="1.7976931348623157E308" prefHeight="88.0" prefWidth="296.0">
+                              <VBox maxWidth="1.7976931348623157E308" prefHeight="88.0" prefWidth="228.0">
                                  <children>
                                     <Label text="Material">
                                        <styleClass>
@@ -180,9 +137,9 @@
                                           <String fx:value="txt-dark" />
                                        </styleClass>
                                     </Label>
-                                    <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" styleClass="gap-10">
+                                    <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" styleClass="gap-5">
                                        <children>
-                                          <ComboBox editable="true" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="48.0" prefWidth="325.0">
+                                          <ComboBox fx:id="cmbMaterial" editable="true" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="48.0" prefWidth="325.0">
                                              <styleClass>
                                                 <String fx:value="khand-font" />
                                                 <String fx:value="fs-24" />
@@ -196,11 +153,101 @@
                                                 </FXCollections>
                                              </items>
                                           </ComboBox>
-                                          <StackPane>
+                                          <StackPane styleClass="btn-primary-container">
                                              <children>
                                                 <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0">
                                                    <styleClass>
-                                                      <String fx:value="bg-primary" />
+                                                      <String fx:value="btn-primary" />
+                                                      <String fx:value="bg-rounded-8" />
+                                                   </styleClass>
+                                                </Button>
+                                                <SVGPath fx:id="btnAddMaterial" content="M11.0698 13.0217H5.06982V11.0217H11.0698V5.02173H13.0698V11.0217H19.0698V13.0217H13.0698V19.0217H11.0698V13.0217Z" fill="WHITE">
+                                                   <styleClass>
+                                                      <String fx:value="stroke-white" />
+                                                      <String fx:value="fill-white" />
+                                                   </styleClass>
+                                                </SVGPath>
+                                             </children>
+                                          </StackPane>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                              <VBox maxWidth="1.7976931348623157E308" prefHeight="116.0" prefWidth="267.0">
+                                 <children>
+                                    <Label text="Estilo">
+                                       <styleClass>
+                                          <String fx:value="khand-font" />
+                                          <String fx:value="fs-24" />
+                                          <String fx:value="txt-dark" />
+                                       </styleClass>
+                                    </Label>
+                                    <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" styleClass="gap-5">
+                                       <children>
+                                          <ComboBox fx:id="cmbStyle" editable="true" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="48.0" prefWidth="325.0">
+                                             <styleClass>
+                                                <String fx:value="khand-font" />
+                                                <String fx:value="fs-24" />
+                                                <String fx:value="p-0" />
+                                             </styleClass>
+                                             <items>
+                                                <FXCollections fx:factory="observableArrayList">
+                                                   <String fx:value="Item 1" />
+                                                   <String fx:value="Item 2" />
+                                                   <String fx:value="Item 3" />
+                                                </FXCollections>
+                                             </items>
+                                          </ComboBox>
+                                          <StackPane styleClass="btn-primary-container">
+                                             <children>
+                                                <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0">
+                                                   <styleClass>
+                                                      <String fx:value="btn-primary" />
+                                                      <String fx:value="bg-rounded-8" />
+                                                   </styleClass>
+                                                </Button>
+                                                <SVGPath fx:id="btnAddStyle" content="M11.0698 13.0217H5.06982V11.0217H11.0698V5.02173H13.0698V11.0217H19.0698V13.0217H13.0698V19.0217H11.0698V13.0217Z" fill="WHITE">
+                                                   <styleClass>
+                                                      <String fx:value="stroke-white" />
+                                                      <String fx:value="fill-white" />
+                                                   </styleClass>
+                                                </SVGPath>
+                                             </children>
+                                          </StackPane>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="116.0" prefWidth="181.0">
+                                 <children>
+                                    <Label text="Cor">
+                                       <styleClass>
+                                          <String fx:value="khand-font" />
+                                          <String fx:value="fs-24" />
+                                          <String fx:value="txt-dark" />
+                                       </styleClass>
+                                    </Label>
+                                    <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" styleClass="gap-5">
+                                       <children>
+                                          <ComboBox fx:id="cmbColor" editable="true" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="48.0" prefWidth="325.0">
+                                             <styleClass>
+                                                <String fx:value="khand-font" />
+                                                <String fx:value="fs-24" />
+                                                <String fx:value="p-0" />
+                                             </styleClass>
+                                             <items>
+                                                <FXCollections fx:factory="observableArrayList">
+                                                   <String fx:value="Item 1" />
+                                                   <String fx:value="Item 2" />
+                                                   <String fx:value="Item 3" />
+                                                </FXCollections>
+                                             </items>
+                                          </ComboBox>
+                                          <StackPane styleClass="btn-primary-container">
+                                             <children>
+                                                <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0">
+                                                   <styleClass>
+                                                      <String fx:value="btn-primary" />
                                                       <String fx:value="bg-rounded-8" />
                                                    </styleClass>
                                                 </Button>
@@ -216,28 +263,7 @@
                                     </HBox>
                                  </children>
                               </VBox>
-                              <VBox alignment="CENTER_LEFT" prefHeight="101.0" prefWidth="335.0">
-                                 <children>
-                                    <Label text="Tamanhos">
-                                       <styleClass>
-                                          <String fx:value="khand-font" />
-                                          <String fx:value="fs-24" />
-                                          <String fx:value="txt-dark" />
-                                       </styleClass>
-                                    </Label>
-                                    <Label text="Escolha um Tamanho">
-                                       <styleClass>
-                                          <String fx:value="khand-font" />
-                                          <String fx:value="fs-14" />
-                                          <String fx:value="txt-gray" />
-                                       </styleClass>
-                                    </Label>
-                                    <HBox fx:id="hboxChooseSize" alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="52.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-
-                                    </HBox>
-                                 </children>
-                              </VBox>
-                              <VBox alignment="CENTER_LEFT" prefHeight="116.0" prefWidth="491.0">
+                              <VBox alignment="CENTER_LEFT" prefHeight="116.0" prefWidth="300.0">
                                  <children>
                                     <Label text="Gênero">
                                        <styleClass>
@@ -265,6 +291,27 @@
                                           <String fx:value="gap-10" />
                                           <String fx:value="txt-dark" />
                                        </styleClass>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER_LEFT" prefHeight="101.0" prefWidth="335.0">
+                                 <children>
+                                    <Label text="Tamanhos">
+                                       <styleClass>
+                                          <String fx:value="khand-font" />
+                                          <String fx:value="fs-24" />
+                                          <String fx:value="txt-dark" />
+                                       </styleClass>
+                                    </Label>
+                                    <Label text="Escolha um Tamanho">
+                                       <styleClass>
+                                          <String fx:value="khand-font" />
+                                          <String fx:value="fs-14" />
+                                          <String fx:value="txt-gray" />
+                                       </styleClass>
+                                    </Label>
+                                    <HBox fx:id="hboxSizes" alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="52.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+
                                     </HBox>
                                  </children>
                               </VBox>
@@ -306,7 +353,7 @@
                                           <String fx:value="txt-dark" />
                                        </styleClass>
                                     </Label>
-                                    <TextField focusTraversable="false" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="48.0">
+                                    <TextField fx:id="txtProductCost" focusTraversable="false" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="48.0">
                                        <styleClass>
                                           <String fx:value="khand-font" />
                                           <String fx:value="b-2" />
@@ -329,7 +376,7 @@
                                           <String fx:value="txt-dark" />
                                        </styleClass>
                                     </Label>
-                                    <TextField focusTraversable="false" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="48.0">
+                                    <TextField fx:id="txtProductPrice" focusTraversable="false" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="48.0">
                                        <styleClass>
                                           <String fx:value="khand-font" />
                                           <String fx:value="b-2" />
@@ -343,7 +390,7 @@
                                     </TextField>
                                  </children>
                               </VBox>
-                              <VBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="88.0" prefWidth="236.0">
+                              <VBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="88.0" prefWidth="236.0" styleClass="spinner-container">
                                  <children>
                                     <Label text="Quantidade em Estoque">
                                        <styleClass>
@@ -352,58 +399,11 @@
                                           <String fx:value="txt-dark" />
                                        </styleClass>
                                     </Label>
-                                    <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="48.0" prefWidth="200.0" styleClass="gap-10">
-                                       <children>
-                                          <TextField focusTraversable="false" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="48.0" HBox.hgrow="ALWAYS">
-                                             <styleClass>
-                                                <String fx:value="khand-font" />
-                                                <String fx:value="b-2" />
-                                                <String fx:value="fs-24" />
-                                                <String fx:value="prompt-txt-gray" />
-                                                <String fx:value="rounded-8" />
-                                                <String fx:value="basic-text-field" />
-                                                <String fx:value="bg-rounded-8" />
-                                                <String fx:value="b-gray" />
-                                             </styleClass>
-                                          </TextField>
-                                          <VBox prefHeight="200.0" styleClass="gap-1">
-                                             <children>
-                                                <StackPane maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="29.0" VBox.vgrow="ALWAYS">
-                                                   <children>
-                                                      <Button maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="24.0">
-                                                         <styleClass>
-                                                            <String fx:value="bg-primary" />
-                                                            <String fx:value="bg-rounded-top-4" />
-                                                         </styleClass>
-                                                      </Button>
-                                                      <SVGPath content="M11.0698 13.0217H5.06982V11.0217H11.0698V5.02173H13.0698V11.0217H19.0698V13.0217H13.0698V19.0217H11.0698V13.0217Z" fill="WHITE">
-                                                         <styleClass>
-                                                            <String fx:value="stroke-white" />
-                                                            <String fx:value="fill-white" />
-                                                         </styleClass>
-                                                      </SVGPath>
-                                                   </children>
-                                                </StackPane>
-                                                <StackPane maxHeight="1.7976931348623157E308" maxWidth="-Infinity" prefWidth="29.0" VBox.vgrow="ALWAYS">
-                                                   <children>
-                                                      <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false">
-                                                         <styleClass>
-                                                            <String fx:value="bg-primary" />
-                                                            <String fx:value="bg-rounded-bottom-4" />
-                                                         </styleClass>
-                                                      </Button>
-                                                      <SVGPath content="M5.56982 13.0217V11.0217H19.5698V13.0217H5.56982Z" fill="WHITE">
-                                                         <styleClass>
-                                                            <String fx:value="stroke-white" />
-                                                            <String fx:value="fill-white" />
-                                                         </styleClass>
-                                                      </SVGPath>
-                                                   </children>
-                                                </StackPane>
-                                             </children>
-                                          </VBox>
-                                       </children>
-                                    </HBox>
+                                    <Spinner fx:id="spnAmountInStock" editable="true" prefHeight="48.0" prefWidth="241.0">
+                                       <styleClass>
+                                          <String fx:value="khand-font" />
+                                          <String fx:value="number-spinner" />
+                                       </styleClass></Spinner>
                                  </children>
                               </VBox>
                               <VBox prefHeight="88.0" prefWidth="393.0">
@@ -415,9 +415,9 @@
                                           <String fx:value="txt-dark" />
                                        </styleClass>
                                     </Label>
-                                    <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" styleClass="gap-10">
+                                    <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" styleClass="gap-5">
                                        <children>
-                                          <ComboBox editable="true" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="48.0" prefWidth="325.0">
+                                          <ComboBox fx:id="cmbSupplier" editable="true" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="48.0" prefWidth="325.0" HBox.hgrow="ALWAYS">
                                              <styleClass>
                                                 <String fx:value="khand-font" />
                                                 <String fx:value="fs-24" />
@@ -431,11 +431,11 @@
                                                 </FXCollections>
                                              </items>
                                           </ComboBox>
-                                          <StackPane>
+                                          <StackPane styleClass="btn-primary-container">
                                              <children>
                                                 <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0">
                                                    <styleClass>
-                                                      <String fx:value="bg-primary" />
+                                                      <String fx:value="btn-primary" />
                                                       <String fx:value="bg-rounded-8" />
                                                    </styleClass>
                                                 </Button>
@@ -460,7 +460,7 @@
                                           <String fx:value="txt-dark" />
                                        </styleClass>
                                     </Label>
-                                    <DatePicker maxWidth="1.7976931348623157E308" prefHeight="48.0">
+                                    <DatePicker fx:id="dtSupplyDate" maxWidth="1.7976931348623157E308" prefHeight="48.0">
                                        <styleClass>
                                           <String fx:value="khand-font" />
                                           <String fx:value="fs-24" />
@@ -473,11 +473,39 @@
                   </VBox>
                </children>
             </VBox>
-            <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+            <VBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="426.0">
                <styleClass>
                   <String fx:value="bg-white" />
                   <String fx:value="bg-radius-8" />
+                  <String fx:value="gap-10" />
+                  <String fx:value="p-10-16-16-16" />
                </styleClass>
+               <children>
+                  <Label maxWidth="1.7976931348623157E308" text="Imagens">
+                     <styleClass>
+                        <String fx:value="khand-medium-font" />
+                        <String fx:value="fs-32" />
+                        <String fx:value="txt-dark" />
+                     </styleClass>
+                  </Label>
+                  <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="394.0" styleClass="bg-light">
+                     <children>
+                        <ImageView fitHeight="250.0" fitWidth="394.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER" />
+                     </children>
+                  </StackPane>
+                  <FlowPane prefHeight="133.0" prefWidth="394.0">
+                     <children>
+                        <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="80.0" styleClass="bg-light" />
+                        <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="80.0" styleClass="bg-light" />
+                        <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="80.0" styleClass="bg-light" />
+                        <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="80.0" styleClass="bg-light" />
+                     </children>
+                     <styleClass>
+                        <String fx:value="hgap-24" />
+                        <String fx:value="vgap-10" />
+                     </styleClass>
+                  </FlowPane>
+               </children>
             </VBox>
          </children>
       </HBox>
