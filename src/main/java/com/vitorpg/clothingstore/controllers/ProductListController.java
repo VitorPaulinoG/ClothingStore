@@ -76,12 +76,12 @@ public class ProductListController {
     private double productImageWidth = 154;
     private double productImageHeight = 136;
 
-    private ObservableList<Product> obsProductList;
+    private ObservableList<Product> productObservableList;
 
     @FXML
     public void initialize () {
 
-        obsProductList = FXCollections
+        productObservableList = FXCollections
                 .observableArrayList(productService.findPaginated(pageMaxCount, pageOffset));
 
         cbGender.setItems(FXCollections
@@ -192,7 +192,7 @@ public class ProductListController {
 
         tbProductList.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_LAST_COLUMN);
 
-        tbProductList.setItems(obsProductList);
+        tbProductList.setItems(productObservableList);
 
         productsTotalCount = (int) (long) productService.getMaxCount();
         pageCount = (int) Math.ceil((double) productsTotalCount / pageMaxCount);
@@ -207,13 +207,13 @@ public class ProductListController {
     }
 
     public void loadProducts () {
-        obsProductList = FXCollections
+        productObservableList = FXCollections
                 .observableArrayList(productService.findPaginated(pageMaxCount, pageOffset));
 
-        tbProductList.setItems(obsProductList);
+        tbProductList.setItems(productObservableList);
         tbProductList.setFixedCellSize(156);
         tbProductList.prefHeightProperty().bind(tbProductList.fixedCellSizeProperty()
-                .multiply(Math.min(obsProductList.size() + 5, pageMaxCount + 1)));
+                .multiply(Math.min(productObservableList.size() + 5, pageMaxCount + 1)));
         tbProductList.setMinHeight(0);
     }
 

@@ -39,6 +39,29 @@ public class SizeDao extends BaseDao<Size> implements FinderDao<Size>, UpdaterDa
         );
     }
 
+    public List<Size> findAllByCategory(Long categoryId) {
+        String query =
+                """
+                select s.* 
+                from tb_size s
+                join tb_categorySize cs
+                on cs.sizeId = s.id
+                where cs.categoryId = ?
+                """;
+
+        return super.queryMany(
+                query,
+                result -> buildEntity(result),
+                statement -> {
+                    try {
+                         statement.setLong(1, categoryId);
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+        );
+    }
+
     private Size buildEntity (ResultSet result) {
         try {
             Size size = new Size();

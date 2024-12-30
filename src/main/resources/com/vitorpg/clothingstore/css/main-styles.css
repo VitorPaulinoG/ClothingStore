@@ -620,12 +620,41 @@
     -fx-spacing: 20px;
 }
 
+.toggle-btn-primary {
+    -fx-background-color: -fx-light-color;
+}
+
+.toggle-btn-primary:hover {
+    -fx-background-color: -fx-primary-color;
+}
+
+.toggle-btn-primary:selected {
+    -fx-background-color: -fx-primary-color;
+}
+
+.toggle-btn-primary .text{
+    -fx-text-fill: -fx-gray-color;
+    -fx-fill: -fx-gray-color;
+}
+
+.toggle-btn-primary:hover .text{
+    -fx-text-fill: -fx-white-color;
+    -fx-fill: -fx-white-color;
+}
+
+
+
 .btn-primary {
     -fx-background-color: -fx-primary-color;
 }
 
 .btn-primary:hover {
     -fx-background-color: -fx-primary-light-color;
+}
+
+.btn-primary .text{
+    -fx-text-fill: -fx-white-color;
+    -fx-fill: -fx-white-color;
 }
 
 .btn-primary-container:hover .btn-primary {

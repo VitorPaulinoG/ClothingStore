@@ -20,6 +20,10 @@ public class SizeService {
         return size;
     }
 
+    public List<Size> findAllByCategory(Long categoryId) {
+        return this.dao.findAllByCategory(categoryId);
+    }
+
     public List<Size> findAll() {
         return this.dao.findAll();
     }

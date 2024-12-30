@@ -155,13 +155,13 @@
                                           </ComboBox>
                                           <StackPane styleClass="btn-primary-container">
                                              <children>
-                                                <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0">
+                                                <Button fx:id="btnAddMaterial" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0">
                                                    <styleClass>
                                                       <String fx:value="btn-primary" />
                                                       <String fx:value="bg-rounded-8" />
                                                    </styleClass>
                                                 </Button>
-                                                <SVGPath fx:id="btnAddMaterial" content="M11.0698 13.0217H5.06982V11.0217H11.0698V5.02173H13.0698V11.0217H19.0698V13.0217H13.0698V19.0217H11.0698V13.0217Z" fill="WHITE">
+                                                <SVGPath content="M11.0698 13.0217H5.06982V11.0217H11.0698V5.02173H13.0698V11.0217H19.0698V13.0217H13.0698V19.0217H11.0698V13.0217Z" fill="WHITE">
                                                    <styleClass>
                                                       <String fx:value="stroke-white" />
                                                       <String fx:value="fill-white" />
@@ -200,13 +200,13 @@
                                           </ComboBox>
                                           <StackPane styleClass="btn-primary-container">
                                              <children>
-                                                <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0">
+                                                <Button fx:id="btnAddStyle" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0">
                                                    <styleClass>
                                                       <String fx:value="btn-primary" />
                                                       <String fx:value="bg-rounded-8" />
                                                    </styleClass>
                                                 </Button>
-                                                <SVGPath fx:id="btnAddStyle" content="M11.0698 13.0217H5.06982V11.0217H11.0698V5.02173H13.0698V11.0217H19.0698V13.0217H13.0698V19.0217H11.0698V13.0217Z" fill="WHITE">
+                                                <SVGPath content="M11.0698 13.0217H5.06982V11.0217H11.0698V5.02173H13.0698V11.0217H19.0698V13.0217H13.0698V19.0217H11.0698V13.0217Z" fill="WHITE">
                                                    <styleClass>
                                                       <String fx:value="stroke-white" />
                                                       <String fx:value="fill-white" />
@@ -245,7 +245,7 @@
                                           </ComboBox>
                                           <StackPane styleClass="btn-primary-container">
                                              <children>
-                                                <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0">
+                                                <Button fx:id="btnAddColor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0">
                                                    <styleClass>
                                                       <String fx:value="btn-primary" />
                                                       <String fx:value="bg-rounded-8" />
@@ -279,11 +279,11 @@
                                           <String fx:value="txt-gray" />
                                        </styleClass>
                                     </Label>
-                                    <HBox fx:id="hboxChooseGender" alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="52.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                    <HBox fx:id="hboxGenders" alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="52.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                                        <children>
-                                          <RadioButton mnemonicParsing="false" text="Masculino" />
-                                          <RadioButton mnemonicParsing="false" text="Feminino" />
-                                          <RadioButton mnemonicParsing="false" text="Unissex" />
+                                          <RadioButton fx:id="radGenderMale" mnemonicParsing="false" text="Masculino" />
+                                          <RadioButton fx:id="radGenderFemale" mnemonicParsing="false" text="Feminino" />
+                                          <RadioButton fx:id="radGenderUnissex" mnemonicParsing="false" text="Unissex" />
                                        </children>
                                        <styleClass>
                                           <String fx:value="khand-font" />
@@ -433,7 +433,7 @@
                                           </ComboBox>
                                           <StackPane styleClass="btn-primary-container">
                                              <children>
-                                                <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0">
+                                                <Button fx:id="btnAddSupplier" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="48.0" prefWidth="48.0">
                                                    <styleClass>
                                                       <String fx:value="btn-primary" />
                                                       <String fx:value="bg-rounded-8" />
