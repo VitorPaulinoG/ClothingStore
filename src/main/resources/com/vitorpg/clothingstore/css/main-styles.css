@@ -184,6 +184,12 @@
     -fx-background-color: -fx-gray-color;
 }
 
+.date-picker .text-field {
+    -fx-border-color: transparent;
+    -fx-background-color: transparent;
+    -fx-text-fill: -fx-gray-color;
+}
+
 .date-picker-popup {
     -fx-border-width: 2;
     -fx-border-color: -fx-gray-color;
@@ -366,6 +372,11 @@
     -fx-fill: -fx-gray-color;
 }
 
+.fill-primary {
+    -fx-fill: -fx-primary-color;
+}
+
+
 .m-10 {
     -fx-start-margin: 10;
 }
@@ -388,6 +399,10 @@
 
 .hgap-24 {
     -fx-hgap: 24;
+}
+
+.b-dash {
+    -fx-border-style: segments(8, 6) inside line-join round line-cap round;
 }
 
 
@@ -642,6 +657,11 @@
     -fx-fill: -fx-white-color;
 }
 
+.toggle-btn-primary:selected .text{
+    -fx-text-fill: -fx-white-color;
+    -fx-fill: -fx-white-color;
+}
+
 
 
 .btn-primary {
@@ -668,7 +688,7 @@
 .choice-box {
     -fx-background-color: transparent;
     -fx-border-color: -fx-gray-color;
-    -fx-border-width: 3;
+    -fx-border-width: 2;
     -fx-border-radius: 8;
     -fx-padding: 0;
     -fx-background-radius: 8;
@@ -722,7 +742,7 @@
     -fx-pref-width: 204; 
     
     -fx-border-color: -fx-gray-color;  
-    -fx-border-width: 3px;     
+    -fx-border-width: 2px;     
     -fx-border-radius: 5px;     
     -fx-background-radius: 5px;
 }
@@ -945,11 +965,6 @@
     -fx-border-color: transparent;
     -fx-border-width: 0;
 }
-
-/* .table-row-cell {
-    -fx-background-color: -fx-white-color;
-    -fx-text-fill: -fx-gray-color;
-} */
 
 .table-row-cell {
     -fx-border-color: -fx-gray-color;

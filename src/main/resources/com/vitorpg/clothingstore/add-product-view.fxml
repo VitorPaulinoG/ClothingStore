@@ -77,13 +77,14 @@
                                     <String fx:value="bg-rounded-8" />
                                     <String fx:value="b-gray" />
                                     <String fx:value="basic-text-field" />
+                                    <String fx:value="txt-gray" />
                                  </styleClass>
                               </TextField>
                            </children>
                         </VBox>
-                        <FlowPane prefHeight="200.0" prefWidth="200.0">
+                        <FlowPane fx:id="flowProductProps" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0">
                            <children>
-                              <VBox prefHeight="88.0" prefWidth="325.0">
+                              <VBox maxWidth="1.7976931348623157E308" minWidth="250.0" prefHeight="88.0" prefWidth="325.0">
                                  <children>
                                     <Label text="Categoria">
                                        <styleClass>
@@ -92,9 +93,9 @@
                                           <String fx:value="txt-dark" />
                                        </styleClass>
                                     </Label>
-                                    <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" styleClass="gap-5">
+                                    <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="200.0" styleClass="gap-5">
                                        <children>
-                                          <ComboBox fx:id="cmbCategory" editable="true" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="48.0" prefWidth="325.0">
+                                          <ComboBox fx:id="cmbCategory" editable="true" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="48.0" prefWidth="325.0" HBox.hgrow="ALWAYS">
                                              <styleClass>
                                                 <String fx:value="khand-font" />
                                                 <String fx:value="fs-24" />
@@ -128,7 +129,7 @@
                                     </HBox>
                                  </children>
                               </VBox>
-                              <VBox maxWidth="1.7976931348623157E308" prefHeight="88.0" prefWidth="228.0">
+                              <VBox maxWidth="1.7976931348623157E308" minWidth="250.0" prefHeight="88.0" prefWidth="228.0">
                                  <children>
                                     <Label text="Material">
                                        <styleClass>
@@ -137,9 +138,9 @@
                                           <String fx:value="txt-dark" />
                                        </styleClass>
                                     </Label>
-                                    <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" styleClass="gap-5">
+                                    <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="200.0" styleClass="gap-5">
                                        <children>
-                                          <ComboBox fx:id="cmbMaterial" editable="true" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="48.0" prefWidth="325.0">
+                                          <ComboBox fx:id="cmbMaterial" editable="true" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="48.0" prefWidth="325.0" HBox.hgrow="ALWAYS">
                                              <styleClass>
                                                 <String fx:value="khand-font" />
                                                 <String fx:value="fs-24" />
@@ -173,7 +174,7 @@
                                     </HBox>
                                  </children>
                               </VBox>
-                              <VBox maxWidth="1.7976931348623157E308" prefHeight="116.0" prefWidth="267.0">
+                              <VBox maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minWidth="250.0" prefWidth="267.0">
                                  <children>
                                     <Label text="Estilo">
                                        <styleClass>
@@ -182,9 +183,9 @@
                                           <String fx:value="txt-dark" />
                                        </styleClass>
                                     </Label>
-                                    <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" styleClass="gap-5">
+                                    <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefWidth="200.0" styleClass="gap-5">
                                        <children>
-                                          <ComboBox fx:id="cmbStyle" editable="true" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="48.0" prefWidth="325.0">
+                                          <ComboBox fx:id="cmbStyle" editable="true" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="48.0" prefWidth="325.0" HBox.hgrow="ALWAYS">
                                              <styleClass>
                                                 <String fx:value="khand-font" />
                                                 <String fx:value="fs-24" />
@@ -218,7 +219,7 @@
                                     </HBox>
                                  </children>
                               </VBox>
-                              <VBox prefHeight="116.0" prefWidth="181.0">
+                              <VBox maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minWidth="250.0" prefWidth="181.0">
                                  <children>
                                     <Label text="Cor">
                                        <styleClass>
@@ -227,9 +228,9 @@
                                           <String fx:value="txt-dark" />
                                        </styleClass>
                                     </Label>
-                                    <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" styleClass="gap-5">
+                                    <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefWidth="200.0" styleClass="gap-5">
                                        <children>
-                                          <ComboBox fx:id="cmbColor" editable="true" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="48.0" prefWidth="325.0">
+                                          <ComboBox fx:id="cmbColor" editable="true" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="48.0" prefWidth="325.0" HBox.hgrow="ALWAYS">
                                              <styleClass>
                                                 <String fx:value="khand-font" />
                                                 <String fx:value="fs-24" />
@@ -260,6 +261,37 @@
                                              </children>
                                           </StackPane>
                                        </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                           <styleClass>
+                              <String fx:value="hgap-10" />
+                              <String fx:value="vgap-10" />
+                           </styleClass>
+                        </FlowPane>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <VBox alignment="CENTER_LEFT" prefHeight="101.0" prefWidth="335.0">
+                                 <children>
+                                    <Label text="Tamanhos">
+                                       <styleClass>
+                                          <String fx:value="khand-font" />
+                                          <String fx:value="fs-24" />
+                                          <String fx:value="txt-dark" />
+                                       </styleClass>
+                                    </Label>
+                                    <Label text="Escolha um Tamanho">
+                                       <styleClass>
+                                          <String fx:value="khand-font" />
+                                          <String fx:value="fs-14" />
+                                          <String fx:value="txt-gray" />
+                                       </styleClass>
+                                    </Label>
+                                    <HBox fx:id="hboxSizes" alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="52.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                       <styleClass>
+                                          <String fx:value="gap-5" />
+                                       </styleClass>
                                     </HBox>
                                  </children>
                               </VBox>
@@ -294,36 +326,11 @@
                                     </HBox>
                                  </children>
                               </VBox>
-                              <VBox alignment="CENTER_LEFT" prefHeight="101.0" prefWidth="335.0">
-                                 <children>
-                                    <Label text="Tamanhos">
-                                       <styleClass>
-                                          <String fx:value="khand-font" />
-                                          <String fx:value="fs-24" />
-                                          <String fx:value="txt-dark" />
-                                       </styleClass>
-                                    </Label>
-                                    <Label text="Escolha um Tamanho">
-                                       <styleClass>
-                                          <String fx:value="khand-font" />
-                                          <String fx:value="fs-14" />
-                                          <String fx:value="txt-gray" />
-                                       </styleClass>
-                                    </Label>
-                                    <HBox fx:id="hboxSizes" alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="52.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-
-                                    </HBox>
-                                 </children>
-                              </VBox>
                            </children>
-                           <styleClass>
-                              <String fx:value="hgap-10" />
-                              <String fx:value="vgap-10" />
-                           </styleClass>
-                        </FlowPane>
+                        </HBox>
                      </children>
                   </VBox>
-                  <VBox prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+                  <VBox maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                      <styleClass>
                         <String fx:value="bg-white" />
                         <String fx:value="bg-radius-8" />
@@ -338,13 +345,13 @@
                               <String fx:value="txt-dark" />
                            </styleClass>
                         </Label>
-                        <FlowPane prefHeight="200.0" prefWidth="200.0">
+                        <FlowPane fx:id="flowPriceAndStock" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0">
                            <styleClass>
                               <String fx:value="hgap-10" />
                               <String fx:value="vgap-10" />
                            </styleClass>
                            <children>
-                              <VBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="88.0" prefWidth="292.0">
+                              <VBox maxWidth="1.7976931348623157E308" minWidth="250.0" prefHeight="88.0" prefWidth="292.0">
                                  <children>
                                     <Label text="Custo do Produto (R$)">
                                        <styleClass>
@@ -353,7 +360,7 @@
                                           <String fx:value="txt-dark" />
                                        </styleClass>
                                     </Label>
-                                    <TextField fx:id="txtProductCost" focusTraversable="false" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="48.0">
+                                    <TextField fx:id="txtProductCost" focusTraversable="false" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="250.0" prefHeight="48.0">
                                        <styleClass>
                                           <String fx:value="khand-font" />
                                           <String fx:value="b-2" />
@@ -363,11 +370,12 @@
                                           <String fx:value="bg-rounded-8" />
                                           <String fx:value="basic-text-field" />
                                           <String fx:value="b-gray" />
+                                          <String fx:value="txt-gray" />
                                        </styleClass>
                                     </TextField>
                                  </children>
                               </VBox>
-                              <VBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="88.0" prefWidth="292.0">
+                              <VBox maxWidth="1.7976931348623157E308" minWidth="250.0" prefHeight="88.0" prefWidth="292.0">
                                  <children>
                                     <Label text="Preço do Produto (R$)">
                                        <styleClass>
@@ -376,7 +384,7 @@
                                           <String fx:value="txt-dark" />
                                        </styleClass>
                                     </Label>
-                                    <TextField fx:id="txtProductPrice" focusTraversable="false" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="48.0">
+                                    <TextField fx:id="txtProductPrice" focusTraversable="false" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="250.0" prefHeight="48.0">
                                        <styleClass>
                                           <String fx:value="khand-font" />
                                           <String fx:value="b-2" />
@@ -386,11 +394,12 @@
                                           <String fx:value="basic-text-field" />
                                           <String fx:value="bg-rounded-8" />
                                           <String fx:value="b-gray" />
+                                          <String fx:value="txt-gray" />
                                        </styleClass>
                                     </TextField>
                                  </children>
                               </VBox>
-                              <VBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="88.0" prefWidth="236.0" styleClass="spinner-container">
+                              <VBox maxWidth="1.7976931348623157E308" minWidth="250.0" prefHeight="88.0" prefWidth="236.0" styleClass="spinner-container">
                                  <children>
                                     <Label text="Quantidade em Estoque">
                                        <styleClass>
@@ -399,14 +408,14 @@
                                           <String fx:value="txt-dark" />
                                        </styleClass>
                                     </Label>
-                                    <Spinner fx:id="spnAmountInStock" editable="true" prefHeight="48.0" prefWidth="241.0">
+                                    <Spinner fx:id="spnAmountInStock" editable="true" maxWidth="1.7976931348623157E308" minWidth="200.0" prefHeight="48.0" prefWidth="241.0">
                                        <styleClass>
                                           <String fx:value="khand-font" />
                                           <String fx:value="number-spinner" />
                                        </styleClass></Spinner>
                                  </children>
                               </VBox>
-                              <VBox prefHeight="88.0" prefWidth="393.0">
+                              <VBox maxWidth="1.7976931348623157E308" minWidth="250.0" prefHeight="88.0" prefWidth="393.0">
                                  <children>
                                     <Label text="Fornecedor">
                                        <styleClass>
@@ -415,7 +424,7 @@
                                           <String fx:value="txt-dark" />
                                        </styleClass>
                                     </Label>
-                                    <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" styleClass="gap-5">
+                                    <HBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" minWidth="250.0" prefHeight="100.0" prefWidth="200.0" styleClass="gap-5">
                                        <children>
                                           <ComboBox fx:id="cmbSupplier" editable="true" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="48.0" prefWidth="325.0" HBox.hgrow="ALWAYS">
                                              <styleClass>
@@ -451,7 +460,7 @@
                                     </HBox>
                                  </children>
                               </VBox>
-                              <VBox maxWidth="-Infinity" minWidth="-Infinity" prefHeight="88.0" prefWidth="218.0">
+                              <VBox maxWidth="1.7976931348623157E308" minWidth="250.0" prefHeight="88.0" prefWidth="218.0">
                                  <children>
                                     <Label text="Data de Aquisição">
                                        <styleClass>
@@ -460,10 +469,11 @@
                                           <String fx:value="txt-dark" />
                                        </styleClass>
                                     </Label>
-                                    <DatePicker fx:id="dtSupplyDate" maxWidth="1.7976931348623157E308" prefHeight="48.0">
+                                    <DatePicker fx:id="dtSupplyDate" maxWidth="1.7976931348623157E308" minWidth="250.0" prefHeight="48.0">
                                        <styleClass>
                                           <String fx:value="khand-font" />
                                           <String fx:value="fs-24" />
+                                          <String fx:value="txt-gray" />
                                        </styleClass></DatePicker>
                                  </children>
                               </VBox>
@@ -488,17 +498,29 @@
                         <String fx:value="txt-dark" />
                      </styleClass>
                   </Label>
-                  <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="394.0" styleClass="bg-light">
+                  <StackPane fx:id="spImageDisplay" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="394.0">
                      <children>
-                        <ImageView fitHeight="250.0" fitWidth="394.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER" />
+                        <ImageView fx:id="imgImageDisplay" fitHeight="250.0" fitWidth="394.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER" />
                      </children>
+                     <styleClass>
+                        <String fx:value="bg-light" />
+                        <String fx:value="bg-rounded-8" />
+                     </styleClass>
                   </StackPane>
-                  <FlowPane prefHeight="133.0" prefWidth="394.0">
+                  <FlowPane fx:id="flowImageList" prefHeight="133.0" prefWidth="394.0">
                      <children>
-                        <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="80.0" styleClass="bg-light" />
-                        <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="80.0" styleClass="bg-light" />
-                        <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="80.0" styleClass="bg-light" />
-                        <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="80.0" styleClass="bg-light" />
+                        <StackPane fx:id="spAddImage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" prefWidth="80.0">
+                           <styleClass>
+                              <String fx:value="bg-light" />
+                              <String fx:value="b-dash" />
+                              <String fx:value="b-2" />
+                              <String fx:value="bg-rounded-8" />
+                              <String fx:value="rounded-8" />
+                              <String fx:value="b-gray" />
+                           </styleClass>
+                           <children>
+                              <SVGPath content="M18.7646 28.3551H21.5421V21.5218H28.4033V18.7439H21.5421V11.6884H18.7646V18.7439H11.7367V21.5218H18.7646V28.3551ZM20.0775 36.6884C17.7767 36.6884 15.6146 36.2509 13.5912 35.3759C11.5679 34.5009 9.80152 33.3089 8.29207 31.7997C6.7829 30.2902 5.59082 28.5232 4.71582 26.4984C3.84082 24.4737 3.40332 22.3102 3.40332 20.008C3.40332 17.7058 3.84082 15.5422 4.71582 13.5172C5.59082 11.4925 6.7829 9.7301 8.29207 8.2301C9.80152 6.7301 11.5686 5.5426 13.5933 4.6676C15.618 3.7926 17.7815 3.3551 20.0837 3.3551C22.386 3.3551 24.5496 3.7926 26.5746 4.6676C28.5993 5.5426 30.3617 6.7301 31.8617 8.2301C33.3617 9.7301 34.5492 11.494 35.4242 13.5218C36.2992 15.5495 36.7367 17.7137 36.7367 20.0143C36.7367 22.3151 36.2992 24.4772 35.4242 26.5005C34.5492 28.5239 33.3617 30.2884 31.8617 31.7943C30.3617 33.3001 28.5978 34.4923 26.57 35.3709C24.5422 36.2493 22.378 36.6884 20.0775 36.6884Z" styleClass="fill-gray" />
+                           </children></StackPane>
                      </children>
                      <styleClass>
                         <String fx:value="hgap-24" />
@@ -507,6 +529,18 @@
                   </FlowPane>
                </children>
             </VBox>
+         </children>
+      </HBox>
+      <HBox alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Button fx:id="btnAddNewProduct" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="47.0" prefWidth="235.0" text="Adicionar Produto" textAlignment="CENTER">
+               <styleClass>
+                  <String fx:value="fs-24" />
+                  <String fx:value="khand-medium-font" />
+                  <String fx:value="p-0" />
+                  <String fx:value="btn-outline" />
+               </styleClass>
+            </Button>
          </children>
       </HBox>
    </children>
