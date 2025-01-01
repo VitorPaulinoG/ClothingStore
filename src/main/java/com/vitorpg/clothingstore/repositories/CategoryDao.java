@@ -1,6 +1,7 @@
 package com.vitorpg.clothingstore.repositories;
 
 import com.vitorpg.clothingstore.models.Category;
+import com.vitorpg.clothingstore.models.enums.SizeType;
 import com.vitorpg.clothingstore.repositories.interfaces.Dao;
 
 import java.sql.PreparedStatement;
@@ -41,6 +42,7 @@ public class CategoryDao extends BaseDao<Category> implements Dao<Category> {
             Category category = new Category();
             category.setId(result.getLong("id"));
             category.setName(result.getString("name"));
+            category.setSizeType(SizeType.valueOf(result.getString("sizeType")));
             return category;
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -51,6 +53,7 @@ public class CategoryDao extends BaseDao<Category> implements Dao<Category> {
     private void buildStatement(PreparedStatement statement, Category category) {
         try {
             statement.setString(1, category.getName());
+            statement.setString(2, category.getSizeType().name());
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -58,7 +61,7 @@ public class CategoryDao extends BaseDao<Category> implements Dao<Category> {
 
     @Override
     public boolean save(Category category) {
-        String sql = "insert into tb_category (name) values (?)";
+        String sql = "insert into tb_category (name, sizeType) values (?, ?)";
 
         return super.execute(
             sql,
@@ -71,7 +74,7 @@ public class CategoryDao extends BaseDao<Category> implements Dao<Category> {
         String sql =
                 """
                 update tb_category
-                set name = ?
+                set name = ?, sizeType = ?
                 where id = ?
                 """;
 
@@ -80,7 +83,7 @@ public class CategoryDao extends BaseDao<Category> implements Dao<Category> {
             statement -> {
                 try {
                     buildStatement(statement, category);
-                    statement.setLong(2 , id);
+                    statement.setLong(3 , id);
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 }

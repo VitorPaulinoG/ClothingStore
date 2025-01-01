@@ -2,6 +2,7 @@ package com.vitorpg.clothingstore.services;
 
 import com.vitorpg.clothingstore.interfaces.EntityNotFoundException;
 import com.vitorpg.clothingstore.models.Size;
+import com.vitorpg.clothingstore.models.enums.SizeType;
 import com.vitorpg.clothingstore.repositories.SizeDao;
 
 import java.util.List;
@@ -20,20 +21,16 @@ public class SizeService {
         return size;
     }
 
-    public List<Size> findAllByCategory(Long categoryId) {
-        return this.dao.findAllByCategory(categoryId);
+    public List<Size> findAllBySizeType(SizeType sizeType) {
+        return this.dao.findAllBySizeType(sizeType);
     }
 
     public List<Size> findAll() {
         return this.dao.findAll();
     }
 
-    public void addIntoCategory(Long sizeId, Long categoryId) {
-        this.dao.addIntoCategory(sizeId, categoryId);
-    }
-
     public void save(Size size, Long categoryId) {
-        this.dao.save(size, categoryId);
+        this.dao.save(size);
     }
 
     public void update(Long id, Size size) {
@@ -42,9 +39,5 @@ public class SizeService {
 
     public void delete(Long id) {
         this.dao.delete(id);
-    }
-
-    public void removeFromCategory(Long sizeId, Long categoryId) {
-        this.dao.removeFromCategory(sizeId, categoryId);
     }
 }

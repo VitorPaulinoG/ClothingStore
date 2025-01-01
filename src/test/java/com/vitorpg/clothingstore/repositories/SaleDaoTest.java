@@ -30,7 +30,7 @@ class SaleDaoTest {
         size.setValue("48");
         size.setSizeType(SizeType.NUMBER);
         SizeDao sizeDao = new SizeDao();
-        sizeDao.save(size, 1L);
+        sizeDao.save(size);
 
         Style style = new Style();
         style.setName("Moda Praia");

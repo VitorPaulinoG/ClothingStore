@@ -46,15 +46,15 @@ INSERT INTO tb_Supplier (name) VALUES
 ('Fornecedor D');
 
 -- Inserção na tabela tb_Category
-INSERT INTO tb_Category (name) VALUES
-('Camisas'),
-('Calças'),
-('Jaquetas'),
-('Sapatos'),
-('Suéteres'),
-('Bermudas'),
-('Casacos'),
-('Chapéus');
+INSERT INTO tb_Category (name, sizeType) VALUES
+('Camisas', 'LETTER'),
+('Calças', 'NUMBER'),
+('Jaquetas', 'LETTER'),
+('Sapatos', 'LETTER'),
+('Suéteres', 'LETTER'),
+('Bermudas', 'NUMBER'),
+('Casacos', 'LETTER'),
+('Chapéus', 'LETTER');
 
 -- Inserção na tabela tb_Size
 INSERT INTO tb_Size (value, sizeType) VALUES
@@ -66,17 +66,6 @@ INSERT INTO tb_Size (value, sizeType) VALUES
 ('46', 'NUMBER'),
 ('48', 'NUMBER'),
 ('44', 'NUMBER');
-
--- Relacionamento entre Categoria e Tamanho
-INSERT INTO tb_CategorySize (categoryId, sizeId) VALUES
-(1, 1),
-(1, 2),
-(2, 3),
-(4, 4),
-(5, 1),
-(6, 2),
-(7, 3),
-(8, 4);
 
 -- Inserção na tabela tb_Product
 INSERT INTO tb_Product (name, gender, amount, price, categoryId, styleId, sizeId, colorId, materialId) VALUES

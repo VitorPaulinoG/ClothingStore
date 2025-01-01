@@ -1,20 +1,22 @@
 package com.vitorpg.clothingstore.models;
 
+import com.vitorpg.clothingstore.models.enums.SizeType;
+
 import java.util.List;
 
 public class Category {
     private Long id;
     private String name;
-    private List<Size> sizes;
+
+    private SizeType sizeType;
 
     public Category() {
 
     }
 
-    public Category(Long id, String name, List<Size> sizes) {
+    public Category(Long id, String name) {
         this.id = id;
         this.name = name;
-        this.sizes = sizes;
     }
 
     public Long getId() {
@@ -33,13 +35,14 @@ public class Category {
         this.name = name;
     }
 
-    public List<Size> getSizes() {
-        return sizes;
+    public SizeType getSizeType() {
+        return sizeType;
     }
 
-    public void setSizes(List<Size> sizes) {
-        this.sizes = sizes;
+    public void setSizeType(SizeType sizeType) {
+        this.sizeType = sizeType;
     }
+
 
     @Override
     public String toString() {

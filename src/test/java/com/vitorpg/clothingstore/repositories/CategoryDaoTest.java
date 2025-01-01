@@ -1,6 +1,7 @@
 package com.vitorpg.clothingstore.repositories;
 
 import com.vitorpg.clothingstore.models.Category;
+import com.vitorpg.clothingstore.models.enums.SizeType;
 import org.checkerframework.checker.units.qual.C;
 import org.junit.jupiter.api.*;
 
@@ -33,6 +34,7 @@ class CategoryDaoTest {
     void save_Success() {
         Category category = new Category();
         category.setName("Calças");
+        category.setSizeType(SizeType.NUMBER);
         CategoryDao categoryDao = new CategoryDao();
         assertTrue(categoryDao.save(category));
     }

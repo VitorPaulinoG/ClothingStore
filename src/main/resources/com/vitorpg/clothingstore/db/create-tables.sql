@@ -33,6 +33,7 @@ CREATE TABLE tb_Supplier (
 CREATE TABLE tb_Category (
 	id BIGSERIAL, 
 	name VARCHAR(500) NOT NULL,
+	sizeType VARCHAR(500) NOT NULL,
 	CONSTRAINT PK_Category PRIMARY KEY (id)
 );
 
@@ -41,16 +42,6 @@ CREATE TABLE tb_Size (
 	value VARCHAR(500) NOT NULL,
 	sizeType VARCHAR(500) NOT NULL,
 	CONSTRAINT PK_Size PRIMARY KEY (id)
-);
-
-CREATE TABLE tb_CategorySize (
-	categoryId BIGINT NOT NULL, 
-	sizeId BIGINT NOT NULL, 
-	CONSTRAINT PK_CategorySize PRIMARY KEY (categoryId, sizeId),
-	CONSTRAINT FK_CategorySize_Category FOREIGN KEY (categoryId)
-		REFERENCES tb_Category(id) ON DELETE CASCADE,
-	CONSTRAINT FK_CategorySize_Size FOREIGN KEY (sizeId)
-		REFERENCES tb_Size(id) ON DELETE CASCADE
 );
 
 CREATE TABLE tb_Product (

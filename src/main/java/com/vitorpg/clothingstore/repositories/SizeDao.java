@@ -39,14 +39,12 @@ public class SizeDao extends BaseDao<Size> implements FinderDao<Size>, UpdaterDa
         );
     }
 
-    public List<Size> findAllByCategory(Long categoryId) {
+    public List<Size> findAllBySizeType(SizeType sizeType) {
         String query =
                 """
-                select s.* 
-                from tb_size s
-                join tb_categorySize cs
-                on cs.sizeId = s.id
-                where cs.categoryId = ?
+                select *
+                from tb_size
+                where sizeType = ?
                 """;
 
         return super.queryMany(
@@ -54,7 +52,7 @@ public class SizeDao extends BaseDao<Size> implements FinderDao<Size>, UpdaterDa
                 result -> buildEntity(result),
                 statement -> {
                     try {
-                         statement.setLong(1, categoryId);
+                         statement.setString(1, sizeType.name());
                     } catch (SQLException ex) {
                         ex.printStackTrace();
                     }
@@ -84,43 +82,16 @@ public class SizeDao extends BaseDao<Size> implements FinderDao<Size>, UpdaterDa
         }
     }
 
-    public boolean addIntoCategory(Long sizeId, Long categoryId) {
-        String sql = "insert into tb_categorySize (categoryId, sizeId) values (?, ?)";
-
-        return super.execute(
-                sql,
-                statement -> {
-                    try {
-                        statement.setLong(1, categoryId);
-                        statement.setLong(2, sizeId);
-                    } catch (SQLException ex) {
-                        ex.printStackTrace();
-                    }
-                }
-        );
-    }
-
-    public boolean save(Size size, Long categoryId) {
+    public boolean save(Size size) {
         String sql =
                 """
-                with newSize as (
-                    insert into tb_size (value, sizeType)
-                    values (?, ?)
-                    returning id
-                )
-                insert into tb_categorySize (categoryId, sizeId)
-                select ?, id
-                from newSize
+                insert into tb_Size (value, sizeType)
+                values (?, ?)
                 """;
         return super.execute(
             sql,
             statement -> {
-                try {
-                    buildStatement(statement, size);
-                    statement.setLong(3, categoryId);
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                }
+                buildStatement(statement, size);
             }
         );
     }
@@ -156,22 +127,6 @@ public class SizeDao extends BaseDao<Size> implements FinderDao<Size>, UpdaterDa
             statement -> {
                 try {
                     statement.setLong(1, id);
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                }
-            }
-        );
-    }
-
-    public boolean removeFromCategory(Long sizeId, Long categoryId) {
-        String sql = "delete from tb_categorySize where sizeId = ? and categoryId = ?";
-
-        return super.execute(
-            sql,
-            statement -> {
-                try {
-                    statement.setLong(1, sizeId);
-                    statement.setLong(2, categoryId);
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 }
