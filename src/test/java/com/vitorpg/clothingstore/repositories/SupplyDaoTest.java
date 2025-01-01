@@ -24,6 +24,7 @@ class SupplyDaoTest {
         CategoryDao categoryDao = new CategoryDao();
         categoryDao.save(new Category() {{
             setName("Calções");
+            setSizeType(SizeType.NUMBER);
         }});
 
         Size size = new Size();
@@ -80,7 +81,6 @@ class SupplyDaoTest {
     void save_Success() {
         Supply supply = new Supply();
         supply.setPrice(25.0);
-        supply.setDeliveryPrice(5.50);
         supply.setDate(LocalDate.now());
         supply.setProduct(new Product() {{ setId(1L);}});
         supply.setSupplier(new Supplier() {{ setId(1L);}});
@@ -98,7 +98,6 @@ class SupplyDaoTest {
         assertNotNull(supply);
         assertNotNull(supply.getId());
         assertNotNull(supply.getPrice());
-        assertNotNull(supply.getDeliveryPrice());
         assertNotNull(supply.getDate());
         assertNotNull(supply.getProduct());
         assertNotNull(supply.getSupplier());
@@ -131,7 +130,6 @@ class SupplyDaoTest {
     void update_Success() {
         SupplyDao supplyDao = new SupplyDao();
         Supply supply = supplyDao.findById(1L);
-        supply.setDeliveryPrice(7.5);
         assertTrue(supplyDao.update(1L, supply));
     }
 
@@ -141,7 +139,6 @@ class SupplyDaoTest {
     void update_Error() {
         SupplyDao supplyDao = new SupplyDao();
         Supply supply = supplyDao.findById(1L);
-        supply.setDeliveryPrice(7.5);
         assertFalse(supplyDao.update(400L, supply));
     }
 

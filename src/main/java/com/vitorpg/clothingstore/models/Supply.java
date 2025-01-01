@@ -9,20 +9,18 @@ public class Supply {
     private String status;
     private LocalDate date;
     private Double price;
-    private Double deliveryPrice;
 
     public Supply () {
 
     }
 
-    public Supply(Long id, Product product, Supplier supplier, String status, LocalDate date, Double price, Double deliveryPrice) {
+    public Supply(Long id, Product product, Supplier supplier, String status, LocalDate date, Double price) {
         this.id = id;
         this.product = product;
         this.supplier = supplier;
         this.status = status;
         this.date = date;
         this.price = price;
-        this.deliveryPrice = deliveryPrice;
     }
 
     public Long getId() {
@@ -73,11 +71,4 @@ public class Supply {
         this.price = price;
     }
 
-    public Double getDeliveryPrice() {
-        return deliveryPrice;
-    }
-
-    public void setDeliveryPrice(Double deliveryPrice) {
-        this.deliveryPrice = deliveryPrice;
-    }
 }

@@ -40,7 +40,6 @@ public class SupplyDao extends BaseDao<Supply> implements Dao<Supply> {
         try {
             Supply supply = new Supply();
             supply.setId(result.getLong("id"));
-            supply.setDeliveryPrice(result.getDouble("deliveryPrice"));
             supply.setPrice(result.getDouble("price"));
             supply.setProduct(
                 new Product() {{
@@ -64,12 +63,11 @@ public class SupplyDao extends BaseDao<Supply> implements Dao<Supply> {
 
     private void buildStatement(PreparedStatement statement, Supply supply){
         try {
-            statement.setDouble(1, supply.getDeliveryPrice());
-            statement.setDouble(2, supply.getPrice());
-            statement.setLong(3, supply.getProduct().getId());
-            statement.setLong(4, supply.getSupplier().getId());
-            statement.setDate(5, Date.valueOf(supply.getDate()));
-            statement.setString(6, supply.getStatus());
+            statement.setDouble(1, supply.getPrice());
+            statement.setLong(2, supply.getProduct().getId());
+            statement.setLong(3, supply.getSupplier().getId());
+            statement.setDate(4, Date.valueOf(supply.getDate()));
+            statement.setString(5, supply.getStatus());
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -79,8 +77,8 @@ public class SupplyDao extends BaseDao<Supply> implements Dao<Supply> {
     public boolean save(Supply supply) {
         String sql =
             """
-            insert into tb_supply (deliveryPrice, price, productId, supplierId, date, status)
-            values (?, ?, ?, ?, ?, ?)
+            insert into tb_supply (price, productId, supplierId, date, status)
+            values (?, ?, ?, ?, ?)
             """;
 
         return super.execute(
@@ -94,7 +92,7 @@ public class SupplyDao extends BaseDao<Supply> implements Dao<Supply> {
         String sql =
             """
             update tb_supply
-            set deliveryPrice = ?, price = ?, productId = ?, supplierId = ?, date = ?, status = ?
+            set price = ?, productId = ?, supplierId = ?, date = ?, status = ?
             where id = ?
             """;
 
@@ -103,7 +101,7 @@ public class SupplyDao extends BaseDao<Supply> implements Dao<Supply> {
             statement -> {
                 try {
                     buildStatement(statement, supply);
-                    statement.setLong(7, id);
+                    statement.setLong(6, id);
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 }
