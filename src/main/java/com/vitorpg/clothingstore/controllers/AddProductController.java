@@ -1,11 +1,14 @@
 package com.vitorpg.clothingstore.controllers;
 
 import com.vitorpg.clothingstore.models.*;
+import com.vitorpg.clothingstore.models.enums.Gender;
+import com.vitorpg.clothingstore.models.enums.SizeType;
 import com.vitorpg.clothingstore.repositories.interfaces.Dao;
 import com.vitorpg.clothingstore.services.*;
 import javafx.beans.binding.Bindings;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -25,9 +28,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.function.Consumer;
-import java.util.function.Function;
 
 
 public class AddProductController {
@@ -46,6 +47,9 @@ public class AddProductController {
 
     private SupplierService supplierService = new SupplierService();
 
+    private SupplyService supplyService = new SupplyService();
+
+    private ImageService imageService = new ImageService();
     private int imageListCount = 0;
 
     private StackPane spSelectedImage;
@@ -102,13 +106,16 @@ public class AddProductController {
     private DatePicker dtSupplyDate;
 
     @FXML
+    private ToggleGroup genderRadioToggleGroup;
+
+    @FXML
     private RadioButton radGenderMale;
 
     @FXML
     private RadioButton radGenderFemale;
 
     @FXML
-    private RadioButton radGenderUnissex;
+    private RadioButton radGenderUnisex;
 
     @FXML
     private FlowPane flowPriceAndStock;
@@ -128,11 +135,15 @@ public class AddProductController {
     @FXML
     private ImageView imgImageDisplay;
 
+    @FXML
+    private Button btnAddNewProduct;
+
     private ObservableList<Category> categoryObservableList;
     private ObservableList<Material> materialObservableList;
     private ObservableList<Style> styleObservableList;
     private ObservableList<Color> colorObservableList;
     private ObservableList<Supplier> supplierObservableList;
+    private ToggleGroup sizeToggleGroup;
 
     @FXML
     public void initialize () {
@@ -176,7 +187,7 @@ public class AddProductController {
         cmbCategory.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if(newValue != null) {
                 hboxSizes.getChildren().clear();
-                loadSizeBottons(newValue.getId());
+                loadSizeBottons(newValue.getSizeType());
             }
         });
 
@@ -195,15 +206,78 @@ public class AddProductController {
             }
         });
 
-        cmbCategory.setOnAction(event -> {
-            Category selected = cmbCategory.getSelectionModel().getSelectedItem();
-            loadSizeBottons(selected.getId());
+        cmbColor.setConverter(new StringConverter<Color>() {
+            @Override
+            public String toString(Color color) {
+                return color == null ? "" : color.getName();
+            }
+
+            @Override
+            public Color fromString(String string) {
+                return cmbColor.getItems().stream()
+                        .filter(color -> color.getName().equals(string))
+                        .findFirst()
+                        .orElse(null);
+            }
         });
 
-        ToggleGroup genderRadioToggleGroup = new ToggleGroup();
+        cmbStyle.setConverter(new StringConverter<Style>() {
+            @Override
+            public String toString(Style style) {
+                return style == null ? "" : style.getName();
+            }
+
+            @Override
+            public Style fromString(String string) {
+                return cmbStyle.getItems().stream()
+                        .filter(style -> style.getName().equals(string))
+                        .findFirst()
+                        .orElse(null);
+            }
+        });
+
+        cmbMaterial.setConverter(new StringConverter<Material>() {
+            @Override
+            public String toString(Material material) {
+                return material == null ? "" : material.getName();
+            }
+
+            @Override
+            public Material fromString(String string) {
+                return cmbMaterial.getItems().stream()
+                        .filter(material -> material.getName().equals(string))
+                        .findFirst()
+                        .orElse(null);
+            }
+        });
+
+        cmbSupplier.setConverter(new StringConverter<Supplier>() {
+            @Override
+            public String toString(Supplier supplier) {
+                return supplier == null ? "" : supplier.getName();
+            }
+
+            @Override
+            public Supplier fromString(String string) {
+                return cmbSupplier.getItems().stream()
+                        .filter(supplier -> supplier.getName().equals(string))
+                        .findFirst()
+                        .orElse(null);
+            }
+        });
+
+        cmbCategory.setOnAction(event -> {
+            Category selected = cmbCategory.getSelectionModel().getSelectedItem();
+            loadSizeBottons(selected.getSizeType());
+        });
+
+        genderRadioToggleGroup = new ToggleGroup();
         radGenderMale.setToggleGroup(genderRadioToggleGroup);
+        radGenderMale.setUserData(Gender.MALE);
         radGenderFemale.setToggleGroup(genderRadioToggleGroup);
-        radGenderUnissex.setToggleGroup(genderRadioToggleGroup);
+        radGenderFemale.setUserData(Gender.FEMALE);
+        radGenderUnisex.setToggleGroup(genderRadioToggleGroup);
+        radGenderUnisex.setUserData(Gender.UNISEX);
 
         txtProductPrice.end();
         txtProductPrice.setTextFormatter(new TextFormatter<>(change -> {
@@ -341,6 +415,10 @@ public class AddProductController {
                 imageAdded.setMinHeight(80);
                 imageAdded.getStyleClass().addAll("bg-rounded-8", "bg-light");
                 imageAdded.setAlignment(Pos.CENTER);
+                imageAdded.setUserData(new Image() {{
+                    setData(Files.readAllBytes(selectedFile.toPath()));
+                    setFormat(Files.probeContentType(selectedFile.toPath()).split("/")[1]);
+                }});
 
                 Rectangle clip = new Rectangle(80 - 4, 80 - 4);
                 clip.setArcWidth(12);
@@ -369,10 +447,10 @@ public class AddProductController {
         });
     }
 
-    private void loadSizeBottons (Long id) {
-        ArrayList<Size> sizes = new ArrayList<>(sizeService.findAllByCategory(id));
+    private void loadSizeBottons (SizeType sizeType) {
+        ArrayList<Size> sizes = new ArrayList<>(sizeService.findAllBySizeType(sizeType));
 
-        ToggleGroup sizeToggleGroup = new ToggleGroup();
+        sizeToggleGroup = new ToggleGroup();
         for (Size size : sizes) {
             ToggleButton toggleButton = new ToggleButton();
             toggleButton.setText(size.getValue());
@@ -382,6 +460,7 @@ public class AddProductController {
             toggleButton.setMinHeight(52.0);
             toggleButton.setPrefHeight(52.0);
             toggleButton.setMaxHeight(52.0);
+            toggleButton.setUserData(size);
 
             toggleButton.getStyleClass().addAll("toggle-btn-primary", "bg-rounded-8", "khand-font", "txt-white", "fs-24");
             toggleButton.setToggleGroup(sizeToggleGroup);
@@ -407,5 +486,67 @@ public class AddProductController {
 
     }
 
+    private void showAlert(Alert.AlertType alertType, String headerText, String contentText) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle("Caixa de Mensagem");
+        alert.setHeaderText(headerText);
+        alert.setContentText(contentText);
+        alert.showAndWait();
+    }
 
+    @FXML
+    public void saveProduct(ActionEvent event) {
+        try {
+            var productName = txtProductName.getText();
+            var category = cmbCategory.getSelectionModel().getSelectedItem();
+            var material = cmbMaterial.getSelectionModel().getSelectedItem();
+            var style = cmbStyle.getSelectionModel().getSelectedItem();
+            var color = cmbColor.getSelectionModel().getSelectedItem();
+            var size = (Size) sizeToggleGroup.getSelectedToggle().getUserData();
+            var gender = (Gender) ((RadioButton) genderRadioToggleGroup.getSelectedToggle()).getUserData();
+            var productCost = Double.parseDouble(txtProductCost.getText());
+            var productPrice = Double.parseDouble(txtProductPrice.getText());
+            var amountInStock = spnAmountInStock.getValue();
+            var supplier = cmbSupplier.getSelectionModel().getSelectedItem();
+            var supplyDate = dtSupplyDate.getValue();
+            var images = flowImageList.getChildren().stream().map(x -> (Image)x.getUserData()).toList();
+
+            if(productName.isBlank() || productName.isEmpty() || category == null || material == null || style == null ||
+                color == null || size == null || gender == null || productCost < 0 || productPrice < 0 || supplier == null ||
+                supplyDate == null) {
+                showAlert(Alert.AlertType.WARNING, "Campos Ausentes", "Preencha todos os campos antes!");
+                return;
+            }
+
+            Product product = new Product();
+            product.setName(productName);
+            product.setCategory(category);
+            product.setMaterial(material);
+            product.setStyle(style);
+            product.setColor(color);
+            product.setSize(size);
+            product.setGender(gender);
+            product.setPrice(productPrice);
+            product.setAmount((long)amountInStock);
+            productService.save(product);
+            Product savedProduct = productService.findFirst(product);
+
+            Supply supply = new Supply();
+            supply.setStatus("Entregue");
+            supply.setPrice(productCost);
+            supply.setDate(supplyDate);
+            supply.setProduct(savedProduct);
+            supply.setSupplier(supplier);
+            supplyService.save(supply);
+
+            images.forEach(x -> imageService.addToProduct(x, savedProduct.getId()));
+
+            showAlert(Alert.AlertType.INFORMATION, "Produto Adicionado", "O produto " + savedProduct.getName() +
+                    " foi adicionado com sucesso!");
+        } catch (Exception ex) {
+            showAlert(Alert.AlertType.WARNING, "Campos Ausentes", "Preencha todos os campos!");
+        }
+
+
+    }
 }

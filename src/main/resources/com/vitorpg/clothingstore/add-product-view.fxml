@@ -315,7 +315,7 @@
                                        <children>
                                           <RadioButton fx:id="radGenderMale" mnemonicParsing="false" text="Masculino" />
                                           <RadioButton fx:id="radGenderFemale" mnemonicParsing="false" text="Feminino" />
-                                          <RadioButton fx:id="radGenderUnissex" mnemonicParsing="false" text="Unissex" />
+                                          <RadioButton fx:id="radGenderUnisex" mnemonicParsing="false" text="Unissex" />
                                        </children>
                                        <styleClass>
                                           <String fx:value="khand-font" />
@@ -533,7 +533,7 @@
       </HBox>
       <HBox alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Button fx:id="btnAddNewProduct" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" prefHeight="47.0" prefWidth="235.0" text="Adicionar Produto" textAlignment="CENTER">
+            <Button fx:id="btnAddNewProduct" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#saveProduct" prefHeight="47.0" prefWidth="235.0" text="Adicionar Produto" textAlignment="CENTER">
                <styleClass>
                   <String fx:value="fs-24" />
                   <String fx:value="khand-medium-font" />

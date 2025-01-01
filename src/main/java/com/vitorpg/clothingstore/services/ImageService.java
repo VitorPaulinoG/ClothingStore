@@ -14,8 +14,8 @@ import java.util.List;
 
 public class ImageService {
     private final ImageDao dao;
-    public ImageService (ImageDao dao) {
-        this.dao = dao;
+    public ImageService () {
+        this.dao = new ImageDao();
     }
 
     public Image findById (Long id) {

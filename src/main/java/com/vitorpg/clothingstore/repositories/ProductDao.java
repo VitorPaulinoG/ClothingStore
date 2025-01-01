@@ -53,6 +53,21 @@ public class ProductDao extends BaseDao<Product> implements Dao<Product>, Pagina
         );
     }
 
+    public Product findFirst (Product product) {
+        String query =
+                """
+                select *
+                from tb_product
+                where name = ? and gender = ? and amount = ? and price = ? and categoryId = ? and
+                    styleId = ? and sizeId = ? and colorId = ? and materialId = ?
+                """;
+        return super.queryOne(
+                query,
+                result -> buildEntity(result),
+                statement -> buildStatement(statement, product)
+        );
+    }
+
     @Override
     public List<Product> findPaginated(Long maxCount, Long offset) {
         String query =
