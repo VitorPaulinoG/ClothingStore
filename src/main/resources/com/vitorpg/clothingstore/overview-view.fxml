@@ -2,14 +2,11 @@
 
 <?import java.lang.String?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Line?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.shape.SVGPath?>
 
 <VBox prefHeight="1024.0" prefWidth="1338.0" stylesheets="@css/main-styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.vitorpg.clothingstore.controllers.OverviewController">
@@ -19,15 +16,10 @@
       <String fx:value="bg-light" />
    </styleClass>
    <children>
-      <StackPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="280.0" prefWidth="200.0">
+      <StackPane fx:id="spHeader" alignment="TOP_LEFT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="280.0" prefWidth="200.0">
          <children>
-            <ImageView fitHeight="280.0" fitWidth="1324.0" pickOnBounds="true" preserveRatio="true" scaleX="7.2" scaleY="7.2" translateY="-200.0" StackPane.alignment="BOTTOM_CENTER">
-               <image>
-                  <Image url="@images/jason-leung-UMncYEfO9-U-unsplash.jpg" />
-               </image>
-            </ImageView>
 
-            <VBox alignment="BOTTOM_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefWidth="1259.0" styleClass="p-10">
+            <VBox alignment="BOTTOM_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefWidth="1259.0" styleClass="p-10">
                <children>
                   <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="164.0">
                      <styleClass>
@@ -152,9 +144,6 @@
                </children>
             </VBox>
          </children>
-         <clip>
-            <Rectangle arcHeight="16" arcWidth="16" height="280.0" width="1318.0" />
-         </clip>
       </StackPane>
    </children>
 </VBox>
