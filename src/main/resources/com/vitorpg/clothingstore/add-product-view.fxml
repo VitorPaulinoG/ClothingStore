@@ -270,9 +270,9 @@
                               <String fx:value="vgap-10" />
                            </styleClass>
                         </FlowPane>
-                        <HBox prefHeight="100.0" prefWidth="200.0">
+                        <HBox prefHeight="100.0" prefWidth="200.0" styleClass="gap-10">
                            <children>
-                              <VBox alignment="CENTER_LEFT" prefHeight="101.0" prefWidth="335.0">
+                              <VBox alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" prefHeight="101.0">
                                  <children>
                                     <Label text="Tamanhos">
                                        <styleClass>
@@ -288,7 +288,7 @@
                                           <String fx:value="txt-gray" />
                                        </styleClass>
                                     </Label>
-                                    <HBox fx:id="hboxSizes" alignment="CENTER_LEFT" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="52.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                    <HBox fx:id="hboxSizes" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="52.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                                        <styleClass>
                                           <String fx:value="gap-5" />
                                        </styleClass>

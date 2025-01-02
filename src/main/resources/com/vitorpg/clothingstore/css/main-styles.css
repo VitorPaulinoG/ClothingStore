@@ -557,6 +557,10 @@
     -fx-font-size: 14px;
 }
 
+.fs-18 {
+    -fx-font-size: 18px;
+}
+
 .fs-40 {
     -fx-font-size: 40px;
 }
@@ -662,7 +666,23 @@
     -fx-fill: -fx-white-color;
 }
 
+.alert {
+    -fx-font-family: 'Khand';
+    -fx-font-size: 18;
+}
 
+.alert .button {
+    -fx-background-color: -fx-primary-color;
+}
+
+.alert .button:hover {
+    -fx-background-color: -fx-primary-light-color;
+}
+
+.alert .button .text {
+    -fx-text-fill: -fx-white-color;
+    -fx-fill: -fx-white-color;
+}
 
 .btn-primary {
     -fx-background-color: -fx-primary-color;

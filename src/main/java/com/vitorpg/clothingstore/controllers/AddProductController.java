@@ -1,5 +1,6 @@
 package com.vitorpg.clothingstore.controllers;
 
+import com.vitorpg.clothingstore.events.ChangeSubSceneEvent;
 import com.vitorpg.clothingstore.models.*;
 import com.vitorpg.clothingstore.models.enums.Gender;
 import com.vitorpg.clothingstore.models.enums.SizeType;
@@ -28,6 +29,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Consumer;
 
 
@@ -308,17 +310,10 @@ public class AddProductController {
 
 
         btnAddCategory.setOnAction(event -> {
-            loadComboBoxMessageBox(cmbCategory, (Void) -> {
-                Category category = new Category();
-                category.setName(cmbCategory.getEditor().getText());
-                categoryService.save(category);
-                categoryObservableList = FXCollections
-                        .observableArrayList(categoryService.findAll());
-                cmbCategory.setItems(this.categoryObservableList);
-            }, "Categoria");
+            confirmAddCategory();
         });
         btnAddColor.setOnAction(event -> {
-            loadComboBoxMessageBox(cmbColor, (Void) -> {
+            loadMessageBox(cmbColor, (Void) -> {
                 Color color = new Color();
                 color.setName(cmbColor.getEditor().getText());
                 colorService.save(color);
@@ -328,7 +323,7 @@ public class AddProductController {
             }, "Cor");
         });
         btnAddStyle.setOnAction(event -> {
-            loadComboBoxMessageBox(cmbStyle, (Void) -> {
+            loadMessageBox(cmbStyle, (Void) -> {
                 Style style = new Style();
                 style.setName(cmbStyle.getEditor().getText());
                 styleService.save(style);
@@ -338,7 +333,7 @@ public class AddProductController {
             }, "Estilo");
         });
         btnAddMaterial.setOnAction(event -> {
-            loadComboBoxMessageBox(cmbMaterial, (Void) -> {
+            loadMessageBox(cmbMaterial, (Void) -> {
                 Material material = new Material();
                 material.setName(cmbMaterial.getEditor().getText());
                 materialService.save(material);
@@ -348,7 +343,7 @@ public class AddProductController {
             }, "Material");
         });
         btnAddSupplier.setOnAction(event -> {
-            loadComboBoxMessageBox(cmbSupplier, (Void) -> {
+            loadMessageBox(cmbSupplier, (Void) -> {
                 Supplier supplier = new Supplier();
                 supplier.setName(cmbSupplier.getEditor().getText());
                 supplierService.save(supplier);
@@ -462,19 +457,21 @@ public class AddProductController {
             toggleButton.setMaxHeight(52.0);
             toggleButton.setUserData(size);
 
-            toggleButton.getStyleClass().addAll("toggle-btn-primary", "bg-rounded-8", "khand-font", "txt-white", "fs-24");
+            toggleButton.getStyleClass().addAll("toggle-btn-primary", "bg-rounded-8", "khand-font", "txt-white", "fs-18", "p-0");
             toggleButton.setToggleGroup(sizeToggleGroup);
             hboxSizes.getChildren().add(toggleButton);
         }
     }
 
-    private <T, U extends Dao<T>> void loadComboBoxMessageBox (ComboBox<T> comboBox, Consumer<Void> confirmAction, String entityName) {
+    private <T, U extends Dao<T>> void loadMessageBox(ComboBox<T> comboBox, Consumer<Void> confirmAction, String entityName) {
         if( comboBox.getEditor().getText().isEmpty() || comboBox.getEditor().getText().isBlank() ||
             comboBox.getItems().stream().anyMatch(x -> x.toString().equals(comboBox.getEditor().getText())))
             return;
 
         String name = comboBox.getEditor().getText().trim();
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        var alertPane = alert.getDialogPane();
+        alertPane.getStylesheets().add("/main-styles.css");
         alert.setTitle("Caixa de Mensagem");
         alert.setHeaderText("Salvar " + entityName);
         alert.setContentText("Você tem certeza de que deseja salvar o(a) " + entityName.toLowerCase() + " \"" + name + "\"?");
@@ -484,6 +481,53 @@ public class AddProductController {
             }
         });
 
+    }
+
+    private <T, U extends Dao<T>, V> void confirmAddCategory () {
+        if(cmbCategory.getEditor().getText().isEmpty() || cmbCategory.getEditor().getText().isBlank() ||
+                cmbCategory.getItems().stream().anyMatch(x -> x.toString().equals(cmbCategory.getEditor().getText())))
+            return;
+
+        String name = cmbCategory.getEditor().getText().trim();
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        var alertPane = alert.getDialogPane();
+        alertPane.getStylesheets().add("/main-styles.css");
+        alertPane.setPrefWidth(400);
+        alertPane.setMaxWidth(400);
+        alertPane.setMinWidth(400);
+        alert.setTitle("Caixa de Mensagem");
+        alert.setHeaderText("Salvar Categoria");
+
+        ChoiceBox<SizeType> choiceBox = new ChoiceBox<>();
+        choiceBox.setItems(FXCollections.observableArrayList(SizeType.values()));
+        choiceBox.setPrefWidth(150);
+        choiceBox.setMaxWidth(150);
+        choiceBox.setMinWidth(150);
+        choiceBox.setPrefHeight(40);
+        choiceBox.setMaxHeight(40);
+        choiceBox.setMinHeight(40);
+        choiceBox.getStyleClass().addAll("fs-18");
+        VBox content = new VBox();
+        content.getChildren().addAll(
+            new Label("Você tem certeza de que deseja salvar a categoria \"" + name + "\"?") {{
+                getStyleClass().addAll("fs-18", "txt-gray");
+                setWrapText(true);
+            }},
+                new Label("Tipo de Tamanho"), choiceBox);
+        alert.getDialogPane().setContent(content);
+
+        alert.showAndWait().ifPresent(response -> {
+            if (response == ButtonType.OK) {
+                Category category = new Category();
+                category.setName(cmbCategory.getEditor().getText());
+                category.setSizeType(choiceBox.getValue());
+                categoryService.save(category);
+                categoryObservableList = FXCollections
+                        .observableArrayList(categoryService.findAll());
+                cmbCategory.setItems(this.categoryObservableList);
+            }
+        });
     }
 
     private void showAlert(Alert.AlertType alertType, String headerText, String contentText) {
@@ -543,10 +587,15 @@ public class AddProductController {
 
             showAlert(Alert.AlertType.INFORMATION, "Produto Adicionado", "O produto " + savedProduct.getName() +
                     " foi adicionado com sucesso!");
+            goToProductList();
         } catch (Exception ex) {
             showAlert(Alert.AlertType.WARNING, "Campos Ausentes", "Preencha todos os campos!");
         }
 
 
+    }
+
+    private void goToProductList () {
+        btnAddNewProduct.fireEvent(new ChangeSubSceneEvent(ChangeSubSceneEvent.SUBSCENE_CHANGED, "product-list-view"));
     }
 }

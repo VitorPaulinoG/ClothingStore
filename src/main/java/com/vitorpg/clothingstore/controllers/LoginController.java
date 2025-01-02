@@ -30,6 +30,8 @@ public class LoginController {
     public void login() {
         if(txtEmail.getText().isEmpty() || txtPassword.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
+            var alertPane = alert.getDialogPane();
+            alertPane.getStylesheets().add("/main-styles.css");
             alert.setTitle("Aviso");
             alert.setHeaderText(null); // Sem título
             alert.setContentText("Preencha todos os campos!");
@@ -48,6 +50,8 @@ public class LoginController {
             mainStage.setScene(storeScene);
         } catch (IOException ex) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
+            var alertPane = alert.getDialogPane();
+            alertPane.getStylesheets().add("/main-styles.css");
             alert.setTitle("Erro Interno");
             alert.setHeaderText(null);
             alert.setContentText("Erro de IO");
@@ -65,6 +69,8 @@ public class LoginController {
             mainStage.setScene(loginScene);
         } catch (IOException ex) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
+            var alertPane = alert.getDialogPane();
+            alertPane.getStylesheets().add("/main-styles.css");
             alert.setTitle("Erro Interno");
             alert.setHeaderText(null);
             alert.setContentText("Erro de IO");

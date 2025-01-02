@@ -36,6 +36,8 @@ public class SigninController {
     public void signIn(){
         if(txtName.getText().isEmpty() || txtEmail.getText().isEmpty() || txtPassword.getText().isEmpty() || txtPassword.getText().isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
+            var alertPane = alert.getDialogPane();
+            alertPane.getStylesheets().add("/main-styles.css");
             alert.setTitle("Aviso");
             alert.setHeaderText(null); // Sem título
             alert.setContentText("Preencha todos os campos!");
@@ -45,6 +47,8 @@ public class SigninController {
 
         if(!txtConfirmPassword.getText().equals(txtPassword.getText())) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
+            var alertPane = alert.getDialogPane();
+            alertPane.getStylesheets().add("/main-styles.css");
             alert.setTitle("Aviso");
             alert.setHeaderText(null); // Sem título
             alert.setContentText("As senhas digitadas não coincidem. Por favor, tente novamente.");
@@ -62,6 +66,8 @@ public class SigninController {
 
         // Remover Isso Abaixo
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        var alertPane = alert.getDialogPane();
+        alertPane.getStylesheets().add("/main-styles.css");
         alert.setTitle("Sucesso");
         alert.setHeaderText(null);
         alert.setContentText(
@@ -83,6 +89,8 @@ public class SigninController {
             mainStage.setScene(loginScene);
         } catch (IOException ex) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
+            var alertPane = alert.getDialogPane();
+            alertPane.getStylesheets().add("/main-styles.css");
             alert.setTitle("Erro Interno");
             alert.setHeaderText(null);
             alert.setContentText("Erro de IO");
