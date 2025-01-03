@@ -30,7 +30,6 @@ class CategoryDaoTest {
     @Test
     @DisplayName("save category")
     @Tag("save")
-    @Order(1)
     void save_Success() {
         Category category = new Category();
         category.setName("Calças");
@@ -41,7 +40,6 @@ class CategoryDaoTest {
 
     @Test
     @DisplayName("find category by id")
-    @Order(2)
     void findById_Success() {
         CategoryDao categoryDao = new CategoryDao();
         Category category = categoryDao.findById(1L);
@@ -52,7 +50,6 @@ class CategoryDaoTest {
 
     @Test
     @DisplayName("not find category by id")
-    @Order(3)
     void findById_Error() {
         CategoryDao categoryDao = new CategoryDao();
         Category category = categoryDao.findById(400L);
@@ -61,7 +58,6 @@ class CategoryDaoTest {
 
     @Test
     @DisplayName("find all categories")
-    @Order(4)
     void findAll_Success() {
         CategoryDao categoryDao = new CategoryDao();
         List<Category> categories = categoryDao.findAll();
@@ -72,7 +68,6 @@ class CategoryDaoTest {
 
     @Test
     @DisplayName("update category")
-    @Order(5)
     void update_Success() {
         CategoryDao categoryDao = new CategoryDao();
         Category category = categoryDao.findById(1L);
@@ -82,7 +77,6 @@ class CategoryDaoTest {
 
     @Test
     @DisplayName("not update non-existent category")
-    @Order(6)
     void update_Error() {
         CategoryDao categoryDao = new CategoryDao();
         assertFalse(categoryDao.update(400L, new Category() {{
@@ -92,7 +86,6 @@ class CategoryDaoTest {
 
     @Test
     @DisplayName("delete category")
-    @Order(7)
     void delete_Success() {
         CategoryDao categoryDao = new CategoryDao();
         assertTrue(categoryDao.delete(1L));
@@ -100,7 +93,6 @@ class CategoryDaoTest {
 
     @Test
     @DisplayName("not delete non-existent category")
-    @Order(8)
     void delete_Error() {
         CategoryDao categoryDao = new CategoryDao();
         assertFalse(categoryDao.delete(400L));

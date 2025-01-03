@@ -87,98 +87,190 @@
                         <String fx:value="gap-10" />
                      </styleClass>
                      <children>
-                        <FlowPane alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefWidth="200.0" rowValignment="TOP" HBox.hgrow="ALWAYS">
+                        <FlowPane fx:id="flowFilters" alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefWidth="200.0" rowValignment="TOP" HBox.hgrow="ALWAYS">
                            <children>
-                              <ChoiceBox fx:id="cbCategory" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="52.0" prefWidth="204.0" value="Categoria">
-                                 <styleClass>
-                                    <String fx:value="khand-medium-font" />
-                                    <String fx:value="fs-24" />
-                                    <String fx:value="txt-gray" />
-                                    <String fx:value="p-0" />
-                                 </styleClass>
-                                 <items>
-                                    <FXCollections fx:factory="observableArrayList">
-                                       <String fx:value="Opção 1" />
-                                       <String fx:value="Opção 2" />
-                                       <String fx:value="Opção 3" />
-                                    </FXCollections>
-                                 </items>
-                              </ChoiceBox>
-                              <ChoiceBox fx:id="cbGender" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="52.0" prefWidth="204.0" value="Gênero">
-                                 <styleClass>
-                                    <String fx:value="khand-medium-font" />
-                                    <String fx:value="fs-24" />
-                                    <String fx:value="txt-gray" />
-                                    <String fx:value="p-0" />
-                                 </styleClass>
-                                 <items>
-                                    <FXCollections fx:factory="observableArrayList">
-                                       <String fx:value="Opção 1" />
-                                       <String fx:value="Opção 2" />
-                                       <String fx:value="Opção 3" />
-                                    </FXCollections>
-                                 </items>
-                              </ChoiceBox>
-                              <ChoiceBox fx:id="cbSize" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="52.0" prefWidth="204.0" value="Tamanho">
-                                 <styleClass>
-                                    <String fx:value="khand-medium-font" />
-                                    <String fx:value="fs-24" />
-                                    <String fx:value="txt-gray" />
-                                    <String fx:value="p-0" />
-                                 </styleClass>
-                                 <items>
-                                    <FXCollections fx:factory="observableArrayList">
-                                       <String fx:value="Opção 1" />
-                                       <String fx:value="Opção 2" />
-                                       <String fx:value="Opção 3" />
-                                    </FXCollections>
-                                 </items>
-                              </ChoiceBox>
-                              <ChoiceBox fx:id="cbColor" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="52.0" prefWidth="204.0" value="Cor">
-                                 <styleClass>
-                                    <String fx:value="khand-medium-font" />
-                                    <String fx:value="fs-24" />
-                                    <String fx:value="txt-gray" />
-                                    <String fx:value="p-0" />
-                                 </styleClass>
-                                 <items>
-                                    <FXCollections fx:factory="observableArrayList">
-                                       <String fx:value="Opção 1" />
-                                       <String fx:value="Opção 2" />
-                                       <String fx:value="Opção 3" />
-                                    </FXCollections>
-                                 </items>
-                              </ChoiceBox>
-                              <ChoiceBox fx:id="cbMaterial" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="52.0" prefWidth="204.0" value="Material">
-                                 <styleClass>
-                                    <String fx:value="khand-medium-font" />
-                                    <String fx:value="fs-24" />
-                                    <String fx:value="txt-gray" />
-                                    <String fx:value="p-0" />
-                                 </styleClass>
-                                 <items>
-                                    <FXCollections fx:factory="observableArrayList">
-                                       <String fx:value="Opção 1" />
-                                       <String fx:value="Opção 2" />
-                                       <String fx:value="Opção 3" />
-                                    </FXCollections>
-                                 </items>
-                              </ChoiceBox>
-                              <ChoiceBox fx:id="cbSize1" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="52.0" prefWidth="204.0" value="Tamanho">
-                                 <styleClass>
-                                    <String fx:value="khand-medium-font" />
-                                    <String fx:value="fs-24" />
-                                    <String fx:value="txt-gray" />
-                                    <String fx:value="p-0" />
-                                 </styleClass>
-                                 <items>
-                                    <FXCollections fx:factory="observableArrayList">
-                                       <String fx:value="Opção 1" />
-                                       <String fx:value="Opção 2" />
-                                       <String fx:value="Opção 3" />
-                                    </FXCollections>
-                                 </items>
-                              </ChoiceBox>
+                              <VBox>
+                                 <children>
+                                    <Label text="Categoria">
+                                       <styleClass>
+                                          <String fx:value="txt-gray" />
+                                          <String fx:value="khand-font" />
+                                          <String fx:value="fs-18" />
+                                       </styleClass>
+                                    </Label>
+                                    <ChoiceBox fx:id="cbCategory" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="52.0" prefWidth="204.0">
+                                       <styleClass>
+                                          <String fx:value="khand-medium-font" />
+                                          <String fx:value="fs-24" />
+                                          <String fx:value="txt-gray" />
+                                          <String fx:value="p-0" />
+                                       </styleClass>
+                                       <items>
+                                          <FXCollections fx:factory="observableArrayList">
+                                             <String fx:value="Opção 1" />
+                                             <String fx:value="Opção 2" />
+                                             <String fx:value="Opção 3" />
+                                          </FXCollections>
+                                       </items>
+                                    </ChoiceBox>
+                                 </children>
+                              </VBox>
+                              <VBox>
+                                 <children>
+                                    <Label text="Gênero">
+                                       <styleClass>
+                                          <String fx:value="txt-gray" />
+                                          <String fx:value="khand-font" />
+                                          <String fx:value="fs-18" />
+                                       </styleClass>
+                                    </Label>
+                                    <ChoiceBox fx:id="cbGender" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="52.0" prefWidth="204.0">
+                                       <styleClass>
+                                          <String fx:value="khand-medium-font" />
+                                          <String fx:value="fs-24" />
+                                          <String fx:value="txt-gray" />
+                                          <String fx:value="p-0" />
+                                       </styleClass>
+                                       <items>
+                                          <FXCollections fx:factory="observableArrayList">
+                                             <String fx:value="Opção 1" />
+                                             <String fx:value="Opção 2" />
+                                             <String fx:value="Opção 3" />
+                                          </FXCollections>
+                                       </items>
+                                    </ChoiceBox>
+                                 </children>
+                              </VBox>
+                              <VBox>
+                                 <children>
+                                    <Label text="Tamanho">
+                                       <styleClass>
+                                          <String fx:value="txt-gray" />
+                                          <String fx:value="khand-font" />
+                                          <String fx:value="fs-18" />
+                                       </styleClass>
+                                    </Label>
+                                    <ChoiceBox fx:id="cbSize" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="52.0" prefWidth="204.0">
+                                       <styleClass>
+                                          <String fx:value="khand-medium-font" />
+                                          <String fx:value="fs-24" />
+                                          <String fx:value="txt-gray" />
+                                          <String fx:value="p-0" />
+                                       </styleClass>
+                                       <items>
+                                          <FXCollections fx:factory="observableArrayList">
+                                             <String fx:value="Opção 1" />
+                                             <String fx:value="Opção 2" />
+                                             <String fx:value="Opção 3" />
+                                          </FXCollections>
+                                       </items>
+                                    </ChoiceBox>
+                                 </children>
+                              </VBox>
+                              <VBox>
+                                 <children>
+                                    <Label text="Cor">
+                                       <styleClass>
+                                          <String fx:value="txt-gray" />
+                                          <String fx:value="khand-font" />
+                                          <String fx:value="fs-18" />
+                                       </styleClass>
+                                    </Label>
+                                    <ChoiceBox fx:id="cbColor" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="52.0" prefWidth="204.0">
+                                       <styleClass>
+                                          <String fx:value="khand-medium-font" />
+                                          <String fx:value="fs-24" />
+                                          <String fx:value="txt-gray" />
+                                          <String fx:value="p-0" />
+                                       </styleClass>
+                                       <items>
+                                          <FXCollections fx:factory="observableArrayList">
+                                             <String fx:value="Opção 1" />
+                                             <String fx:value="Opção 2" />
+                                             <String fx:value="Opção 3" />
+                                          </FXCollections>
+                                       </items>
+                                    </ChoiceBox>
+                                 </children>
+                              </VBox>
+                              <VBox>
+                                 <children>
+                                    <Label text="Material">
+                                       <styleClass>
+                                          <String fx:value="txt-gray" />
+                                          <String fx:value="khand-font" />
+                                          <String fx:value="fs-18" />
+                                       </styleClass>
+                                    </Label>
+                                    <ChoiceBox fx:id="cbMaterial" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="52.0" prefWidth="204.0">
+                                       <styleClass>
+                                          <String fx:value="khand-medium-font" />
+                                          <String fx:value="fs-24" />
+                                          <String fx:value="txt-gray" />
+                                          <String fx:value="p-0" />
+                                       </styleClass>
+                                       <items>
+                                          <FXCollections fx:factory="observableArrayList">
+                                             <String fx:value="Opção 1" />
+                                             <String fx:value="Opção 2" />
+                                             <String fx:value="Opção 3" />
+                                          </FXCollections>
+                                       </items>
+                                    </ChoiceBox>
+                                 </children>
+                              </VBox>
+                              <VBox>
+                                 <children>
+                                    <Label text="Estilo">
+                                       <styleClass>
+                                          <String fx:value="txt-gray" />
+                                          <String fx:value="khand-font" />
+                                          <String fx:value="fs-18" />
+                                       </styleClass>
+                                    </Label>
+                                    <ChoiceBox fx:id="cbStyle" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="52.0" prefWidth="204.0">
+                                       <styleClass>
+                                          <String fx:value="khand-medium-font" />
+                                          <String fx:value="fs-24" />
+                                          <String fx:value="txt-gray" />
+                                          <String fx:value="p-0" />
+                                       </styleClass>
+                                       <items>
+                                          <FXCollections fx:factory="observableArrayList">
+                                             <String fx:value="Opção 1" />
+                                             <String fx:value="Opção 2" />
+                                             <String fx:value="Opção 3" />
+                                          </FXCollections>
+                                       </items>
+                                    </ChoiceBox>
+                                 </children>
+                              </VBox>
+                              <VBox>
+                                 <children>
+                                    <Label text="Status">
+                                       <styleClass>
+                                          <String fx:value="txt-gray" />
+                                          <String fx:value="khand-font" />
+                                          <String fx:value="fs-18" />
+                                       </styleClass>
+                                    </Label>
+                                    <ChoiceBox fx:id="cbStatus" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="52.0" prefWidth="204.0">
+                                       <styleClass>
+                                          <String fx:value="khand-medium-font" />
+                                          <String fx:value="fs-24" />
+                                          <String fx:value="txt-gray" />
+                                          <String fx:value="p-0" />
+                                       </styleClass>
+                                       <items>
+                                          <FXCollections fx:factory="observableArrayList">
+                                             <String fx:value="Opção 1" />
+                                             <String fx:value="Opção 2" />
+                                             <String fx:value="Opção 3" />
+                                          </FXCollections>
+                                       </items>
+                                    </ChoiceBox>
+                                 </children>
+                              </VBox>
                            </children>
                            <styleClass>
                               <String fx:value="gap-10" />

@@ -37,7 +37,6 @@ class SizeDaoTest {
     @Test
     @DisplayName("save size")
     @Tag("save")
-    @Order(1)
     void save_Success() {
         Size size = new Size();
         size.setValue("48");
@@ -48,7 +47,6 @@ class SizeDaoTest {
 
     @Test
     @DisplayName("find size by id")
-    @Order(2)
     void findById_Success() {
         SizeDao sizeDao = new SizeDao();
         Size size = sizeDao.findById(1L);
@@ -60,7 +58,6 @@ class SizeDaoTest {
 
     @Test
     @DisplayName("not find size by id")
-    @Order(3)
     void findById_Error() {
         SizeDao sizeDao = new SizeDao();
         Size size = sizeDao.findById(400L);
@@ -69,7 +66,6 @@ class SizeDaoTest {
 
     @Test
     @DisplayName("find all sizes")
-    @Order(4)
     void findAll_Success() {
         SizeDao sizeDao = new SizeDao();
         List<Size> sizes = sizeDao.findAll();
@@ -80,7 +76,6 @@ class SizeDaoTest {
 
     @Test
     @DisplayName("find by size type")
-    @Order(5)
     void findAllBySizeType_Success() {
         SizeDao sizeDao = new SizeDao();
         List<Size> sizes = sizeDao.findAllBySizeType(SizeType.NUMBER);
@@ -91,7 +86,6 @@ class SizeDaoTest {
 
     @Test
     @DisplayName("update size")
-    @Order(6)
     void update_Success() {
         SizeDao sizeDao = new SizeDao();
         Size size = sizeDao.findById(1L);
@@ -101,7 +95,6 @@ class SizeDaoTest {
 
     @Test
     @DisplayName("not update non-existent size")
-    @Order(7)
     void update_Error() {
         SizeDao sizeDao = new SizeDao();
         assertFalse(sizeDao.update(400L, new Size() {{
@@ -111,7 +104,6 @@ class SizeDaoTest {
 
     @Test
     @DisplayName("delete size")
-    @Order(8)
     void delete_Success() {
         SizeDao sizeDao = new SizeDao();
         assertTrue(sizeDao.delete(1L));
@@ -119,7 +111,6 @@ class SizeDaoTest {
 
     @Test
     @DisplayName("not delete non-existent size")
-    @Order(9)
     void delete_Error() {
         SizeDao sizeDao = new SizeDao();
         assertFalse(sizeDao.delete(400L));

@@ -77,7 +77,6 @@ class SupplyDaoTest {
     @Test
     @DisplayName("save supply")
     @Tag("save")
-    @Order(1)
     void save_Success() {
         Supply supply = new Supply();
         supply.setPrice(25.0);
@@ -91,7 +90,6 @@ class SupplyDaoTest {
 
     @Test
     @DisplayName("find supply by id")
-    @Order(2)
     void findById_Success() {
         SupplyDao supplyDao = new SupplyDao();
         Supply supply = supplyDao.findById(1L);
@@ -106,7 +104,6 @@ class SupplyDaoTest {
 
     @Test
     @DisplayName("not find supply by id")
-    @Order(3)
     void findById_Error() {
         SupplyDao supplyDao = new SupplyDao();
         Supply supply = supplyDao.findById(400L);
@@ -115,7 +112,6 @@ class SupplyDaoTest {
 
     @Test
     @DisplayName("find all supplies")
-    @Order(4)
     void findAll_Success() {
         SupplyDao supplyDao = new SupplyDao();
         List<Supply> supplies = supplyDao.findAll();
@@ -126,7 +122,6 @@ class SupplyDaoTest {
 
     @Test
     @DisplayName("update supply")
-    @Order(5)
     void update_Success() {
         SupplyDao supplyDao = new SupplyDao();
         Supply supply = supplyDao.findById(1L);
@@ -135,7 +130,6 @@ class SupplyDaoTest {
 
     @Test
     @DisplayName("not update non-existent supply")
-    @Order(6)
     void update_Error() {
         SupplyDao supplyDao = new SupplyDao();
         Supply supply = supplyDao.findById(1L);
@@ -144,7 +138,6 @@ class SupplyDaoTest {
 
     @Test
     @DisplayName("delete supply")
-    @Order(7)
     void delete_Success() {
         SupplyDao supplyDao = new SupplyDao();
         assertTrue(supplyDao.delete(1L));
@@ -152,7 +145,6 @@ class SupplyDaoTest {
 
     @Test
     @DisplayName("not delete non-existent supply")
-    @Order(8)
     void delete_Error() {
         SupplyDao supplyDao = new SupplyDao();
         assertFalse(supplyDao.delete(400L));

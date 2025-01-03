@@ -1,13 +1,16 @@
 package com.vitorpg.clothingstore.repositories;
 
+import com.vitorpg.clothingstore.dtos.ProductFilter;
 import com.vitorpg.clothingstore.models.*;
 import com.vitorpg.clothingstore.models.enums.Gender;
+import com.vitorpg.clothingstore.models.enums.ProductStatus;
 import com.vitorpg.clothingstore.repositories.interfaces.Dao;
 import com.vitorpg.clothingstore.repositories.interfaces.PaginatedDao;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDao extends BaseDao<Product> implements Dao<Product>, PaginatedDao<Product> {
@@ -53,6 +56,27 @@ public class ProductDao extends BaseDao<Product> implements Dao<Product>, Pagina
         );
     }
 
+    public List<Product> findAllByStatus(ProductStatus status) {
+        String query =
+                """
+                select *
+                from tb_product
+                where status = ?
+                """;
+
+        return super.queryMany(
+                query,
+                result -> buildEntity(result),
+                statement -> {
+                    try {
+                        statement.setString(1, status.name() );
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+        );
+    }
+
     public Product findFirst (Product product) {
         String query =
                 """
@@ -92,7 +116,68 @@ public class ProductDao extends BaseDao<Product> implements Dao<Product>, Pagina
         );
     }
 
-    public Long getMaxCount () {
+    public List<Product> findPaginatedFiltered(Long maxCount, Long offset, ProductFilter productFilter) {
+        List<Object> properties = new ArrayList<>();
+        String query =
+                """
+                select *
+                from tb_product
+                where 1=1
+                """;
+        if (productFilter.getName().isPresent()) {
+            query += " and name like ?";
+            properties.add(productFilter.getName());
+        }
+        if (productFilter.getCategory().isPresent()) {
+            query += " and categoryId = ?";
+            properties.add(productFilter.getCategory().get().getId());
+        }
+        if (productFilter.getMaterial().isPresent()) {
+            query += " and materialId = ?";
+            properties.add(productFilter.getMaterial().get().getId());
+        }
+        if (productFilter.getSize().isPresent()) {
+            query += " and sizeId = ?";
+            properties.add(productFilter.getSize().get().getId());
+        }
+        if (productFilter.getGender().isPresent()) {
+            query += " and gender = ?";
+            properties.add(productFilter.getGender().get().name());
+        }
+        if (productFilter.getColor().isPresent()) {
+            query += " and colorId = ?";
+            properties.add(productFilter.getColor().get().getId());
+        }
+        if (productFilter.getStyle().isPresent()) {
+            query += " and styleId = ?";
+            properties.add(productFilter.getStyle().get().getId());
+        }
+        if (productFilter.getStatus().isPresent()) {
+            query += " and status = ?";
+            properties.add(productFilter.getStatus().get().name());
+        }
+
+        query += "limit ? offset ? ";
+        return super.queryMany(
+                query,
+                result -> buildEntity(result),
+                statement -> {
+                    try {
+                        int i = 1;
+                        for (var item : properties) {
+                            statement.setObject(i, item);
+                            i++;
+                        }
+                        statement.setLong(i, maxCount);
+                        statement.setLong(i + 1, offset);
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+        );
+    }
+
+    public Long getTotalCount() {
         String query =
                 """
                 select COUNT(*) as maxCount
@@ -100,7 +185,65 @@ public class ProductDao extends BaseDao<Product> implements Dao<Product>, Pagina
                 """;
         return super.queryScalar(
                 query,
-                result -> buildEntity(result),
+                "maxCount",
+                Long.class
+        );
+    }
+
+    public Long getTotalCountFiltered (ProductFilter productFilter) {
+        List<Object> properties = new ArrayList<>();
+        String query =
+                """
+                select COUNT(*) as maxCount
+                from tb_Product
+                where 1=1
+                """;
+        if (productFilter.getName().isPresent()) {
+            query += " and name like ?";
+            properties.add(productFilter.getName() + "%");
+        }
+        if (productFilter.getCategory().isPresent()) {
+            query += " and categoryId = ?";
+            properties.add(productFilter.getCategory().get().getId());
+        }
+        if (productFilter.getMaterial().isPresent()) {
+            query += " and materialId = ?";
+            properties.add(productFilter.getMaterial().get().getId());
+        }
+        if (productFilter.getSize().isPresent()) {
+            query += " and sizeId = ?";
+            properties.add(productFilter.getSize().get().getId());
+        }
+        if (productFilter.getGender().isPresent()) {
+            query += " and gender = ?";
+            properties.add(productFilter.getGender().get().name());
+        }
+        if (productFilter.getColor().isPresent()) {
+            query += " and colorId = ?";
+            properties.add(productFilter.getColor().get().getId());
+        }
+        if (productFilter.getStyle().isPresent()) {
+            query += " and styleId = ?";
+            properties.add(productFilter.getStyle().get().getId());
+        }
+        if (productFilter.getStatus().isPresent()) {
+            query += " and status = ?";
+            properties.add(productFilter.getStatus().get().name());
+        }
+
+        return super.queryScalar(
+                query,
+                statement -> {
+                    try {
+                        int i = 1;
+                        for (var item : properties) {
+                            statement.setObject(i, item);
+                            i++;
+                        }
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+                },
                 "maxCount",
                 Long.class
         );
@@ -139,6 +282,7 @@ public class ProductDao extends BaseDao<Product> implements Dao<Product>, Pagina
                     setId(result.getLong("materialId"));
                 }}
             );
+            product.setStatus(ProductStatus.valueOf(result.getString("status")));
             product.setImages(imageDao.getAllByProductId(product.getId()));
             return product;
         } catch (SQLException ex) {
@@ -235,6 +379,26 @@ public class ProductDao extends BaseDao<Product> implements Dao<Product>, Pagina
                     ex.printStackTrace();
                 }
             }
+        );
+    }
+
+    public boolean remove(Long id) {
+        String sql =
+                """
+                update tb_product
+                set status = ?
+                where id = ?
+                """;
+        return super.execute(
+                sql,
+                statement -> {
+                    try {
+                        statement.setString(1, ProductStatus.REMOVED.name());
+                        statement.setLong(2, id);
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+                }
         );
     }
 }

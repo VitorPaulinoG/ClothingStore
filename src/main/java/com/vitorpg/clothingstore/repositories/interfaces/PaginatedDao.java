@@ -5,5 +5,5 @@ import java.util.List;
 public interface PaginatedDao<T> {
     List<T> findPaginated(Long maxCount, Long offset);
 
-    Long getMaxCount ();
+    Long getTotalCount();
 }

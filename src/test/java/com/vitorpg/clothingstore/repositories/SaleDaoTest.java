@@ -24,6 +24,7 @@ class SaleDaoTest {
         CategoryDao categoryDao = new CategoryDao();
         categoryDao.save(new Category() {{
             setName("Calções");
+            setSizeType(SizeType.NUMBER);
         }});
 
         Size size = new Size();
@@ -77,7 +78,6 @@ class SaleDaoTest {
     @Test
     @DisplayName("save sale")
     @Tag("save")
-    @Order(1)
     void save_Success() {
         Sale sale = new Sale();
         sale.setAmount(2L);
@@ -91,7 +91,6 @@ class SaleDaoTest {
 
     @Test
     @DisplayName("find sale by id")
-    @Order(2)
     void findById_Success() {
         SaleDao saleDao = new SaleDao();
         Sale sale = saleDao.findById(1L);
@@ -106,7 +105,6 @@ class SaleDaoTest {
 
     @Test
     @DisplayName("not find non-existent sale by id")
-    @Order(3)
     void findById_Error() {
         SaleDao saleDao = new SaleDao();
         Sale sale = saleDao.findById(400L);
@@ -115,7 +113,6 @@ class SaleDaoTest {
 
     @Test
     @DisplayName("find all sales")
-    @Order(4)
     void findAll_Success() {
         SaleDao saleDao = new SaleDao();
         List<Sale> sales = saleDao.findAll();
@@ -126,7 +123,6 @@ class SaleDaoTest {
 
     @Test
     @DisplayName("update sale")
-    @Order(5)
     void update_Success() {
         SaleDao saleDao = new SaleDao();
         Sale sale = saleDao.findById(1L);
@@ -136,7 +132,6 @@ class SaleDaoTest {
 
     @Test
     @DisplayName("not update non-existent sale")
-    @Order(6)
     void update_Error() {
         SaleDao saleDao = new SaleDao();
         Sale sale = saleDao.findById(1L);
@@ -146,7 +141,6 @@ class SaleDaoTest {
 
     @Test
     @DisplayName("delete sale")
-    @Order(7)
     void delete_Success() {
         SaleDao saleDao = new SaleDao();
         assertTrue(saleDao.delete(1L));
@@ -154,7 +148,6 @@ class SaleDaoTest {
 
     @Test
     @DisplayName("not delete non-existent sale")
-    @Order(8)
     void delete_Error() {
         SaleDao saleDao = new SaleDao();
         assertFalse(saleDao.delete(400L));

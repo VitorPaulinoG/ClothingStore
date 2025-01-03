@@ -10,5 +10,6 @@ module com.vitorpg.clothingstore {
     opens com.vitorpg.clothingstore.models to javafx.base;
     exports com.vitorpg.clothingstore;
     exports com.vitorpg.clothingstore.controllers;
+    exports com.vitorpg.clothingstore.models;
     opens com.vitorpg.clothingstore.controllers to javafx.fxml;
 }

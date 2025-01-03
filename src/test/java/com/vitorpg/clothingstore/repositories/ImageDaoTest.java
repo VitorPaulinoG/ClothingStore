@@ -29,6 +29,7 @@ class ImageDaoTest {
         CategoryDao categoryDao = new CategoryDao();
         categoryDao.save(new Category() {{
             setName("Calções");
+            setSizeType(SizeType.NUMBER);
         }});
 
         Size size = new Size();
@@ -75,7 +76,6 @@ class ImageDaoTest {
     @Test
     @DisplayName("add image to product")
     @Tag("save")
-    @Order(1)
     void addToProduct_Success() {
         try {
             Image image = new Image();
@@ -92,7 +92,6 @@ class ImageDaoTest {
     }
     @Test
     @DisplayName("find image by id")
-    @Order(2)
     void findById_Success () {
         ImageDao imageDao = new ImageDao();
         Image image = imageDao.findById(1L);
@@ -101,7 +100,6 @@ class ImageDaoTest {
 
     @Test
     @DisplayName("not find non-existent image by id")
-    @Order(3)
     void findById_Error () {
         ImageDao imageDao = new ImageDao();
         Image image = imageDao.findById(400L);
@@ -110,7 +108,6 @@ class ImageDaoTest {
 
     @Test
     @DisplayName("get images of product")
-    @Order(4)
     void getAllByProductId_Success() {
         ImageDao imageDao = new ImageDao();
         List<Image> images = imageDao.getAllByProductId(1L);
@@ -122,7 +119,6 @@ class ImageDaoTest {
 
     @Test
     @DisplayName("update image")
-    @Order(5)
     void update_Success() {
         try {
             File file = new File("src/main/resources/com/vitorpg/clothingstore/images/jason-leung-UMncYEfO9-U-unsplash.jpg");
@@ -140,7 +136,6 @@ class ImageDaoTest {
 
     @Test
     @DisplayName("not update non-existent image")
-    @Order(6)
     void update_Error() {
         try {
             File file = new File("src/main/resources/images/jason-leung-UMncYEfO9-U-unsplash.jpg");
@@ -157,7 +152,6 @@ class ImageDaoTest {
 
     @Test
     @DisplayName("delete image")
-    @Order(7)
     void delete_Success() {
         ImageDao imageDao = new ImageDao();
         assertTrue(imageDao.delete(1L));
@@ -165,7 +159,6 @@ class ImageDaoTest {
 
     @Test
     @DisplayName("not delete non-existent image")
-    @Order(8)
     void delete_Error() {
         ImageDao imageDao = new ImageDao();
         assertFalse(imageDao.delete(400L));

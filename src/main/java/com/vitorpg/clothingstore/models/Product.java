@@ -1,6 +1,7 @@
 package com.vitorpg.clothingstore.models;
 
 import com.vitorpg.clothingstore.models.enums.Gender;
+import com.vitorpg.clothingstore.models.enums.ProductStatus;
 
 import java.util.List;
 
@@ -16,6 +17,7 @@ public class Product {
     private Material material;
     private Long amount;
     private Double price;
+    private ProductStatus status;
 
     public Product() {
 
@@ -122,5 +124,13 @@ public class Product {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public ProductStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(ProductStatus status) {
+        this.status = status;
     }
 }

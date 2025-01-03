@@ -27,7 +27,6 @@ class StyleDaoTest {
     @Test
     @DisplayName("save style")
     @Tag("save")
-    @Order(1)
     void save_Success() {
         Style style = new Style();
         style.setName("Moda Praia");
@@ -37,7 +36,6 @@ class StyleDaoTest {
 
     @Test
     @DisplayName("find style by id")
-    @Order(2)
     void findById_Success() {
         StyleDao styleDao = new StyleDao();
         Style style = styleDao.findById(1L);
@@ -48,7 +46,6 @@ class StyleDaoTest {
 
     @Test
     @DisplayName("not find style by id")
-    @Order(3)
     void findById_Error() {
         StyleDao styleDao = new StyleDao();
         Style style = styleDao.findById(400L);
@@ -57,7 +54,6 @@ class StyleDaoTest {
 
     @Test
     @DisplayName("find all styles")
-    @Order(4)
     void findAll_Success() {
         StyleDao styleDao = new StyleDao();
         List<Style> styles = styleDao.findAll();
@@ -68,7 +64,6 @@ class StyleDaoTest {
 
     @Test
     @DisplayName("update style")
-    @Order(5)
     void update_Success() {
         StyleDao styleDao = new StyleDao();
         Style style = styleDao.findById(1L);
@@ -78,7 +73,6 @@ class StyleDaoTest {
 
     @Test
     @DisplayName("not update non-existent style")
-    @Order(6)
     void update_Error() {
         StyleDao styleDao = new StyleDao();
         assertFalse(styleDao.update(400L, new Style() {{
@@ -88,7 +82,6 @@ class StyleDaoTest {
 
     @Test
     @DisplayName("delete style")
-    @Order(7)
     void delete_Success() {
         StyleDao styleDao = new StyleDao();
         assertTrue(styleDao.delete(1L));
@@ -96,7 +89,6 @@ class StyleDaoTest {
 
     @Test
     @DisplayName("not delete non-existent style")
-    @Order(8)
     void delete_Error() {
         StyleDao styleDao = new StyleDao();
         assertFalse(styleDao.delete(400L));

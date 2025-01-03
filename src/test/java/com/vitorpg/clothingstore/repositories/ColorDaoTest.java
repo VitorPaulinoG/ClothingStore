@@ -28,7 +28,6 @@ class ColorDaoTest {
     @Test
     @DisplayName("save color")
     @Tag("save")
-    @Order(1)
     void save_Success() {
         Color color = new Color();
         color.setName("Laranja");
@@ -39,7 +38,6 @@ class ColorDaoTest {
 
     @Test
     @DisplayName("find color by id")
-    @Order(2)
     void findById_Success() {
         ColorDao colorDao = new ColorDao();
         Color color = colorDao.findById(1L);
@@ -50,7 +48,6 @@ class ColorDaoTest {
 
     @Test
     @DisplayName("not find color by id")
-    @Order(3)
     void findById_Error() {
         ColorDao colorDao = new ColorDao();
         Color color = colorDao.findById(400L);
@@ -59,7 +56,6 @@ class ColorDaoTest {
 
     @Test
     @DisplayName("find all colors")
-    @Order(4)
     void findAll_Success() {
         ColorDao colorDao = new ColorDao();
         List<Color> colors = colorDao.findAll();
@@ -70,7 +66,6 @@ class ColorDaoTest {
 
     @Test
     @DisplayName("update color")
-    @Order(5)
     void update_Success() {
         ColorDao colorDao = new ColorDao();
         Color color = colorDao.findById(1L);
@@ -80,7 +75,6 @@ class ColorDaoTest {
 
     @Test
     @DisplayName("not update non-existent color")
-    @Order(6)
     void update_Error() {
         ColorDao colorDao = new ColorDao();
         assertTrue(colorDao.update(400L, new Color() {{
@@ -90,7 +84,6 @@ class ColorDaoTest {
 
     @Test
     @DisplayName("delete color")
-    @Order(7)
     void delete_Success() {
         ColorDao colorDao = new ColorDao();
         assertTrue(colorDao.delete(1L));
@@ -98,7 +91,6 @@ class ColorDaoTest {
 
     @Test
     @DisplayName("not delete non-existent color")
-    @Order(8)
     void delete_Error() {
         ColorDao colorDao = new ColorDao();
         assertFalse(colorDao.delete(400L));

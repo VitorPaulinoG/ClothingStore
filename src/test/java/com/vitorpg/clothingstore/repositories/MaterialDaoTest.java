@@ -28,7 +28,6 @@ class MaterialDaoTest {
     @Test
     @DisplayName("save material")
     @Tag("save")
-    @Order(1)
     void save_Success() {
         Material material = new Material();
         material.setName("Jeans");
@@ -38,7 +37,6 @@ class MaterialDaoTest {
 
     @Test
     @DisplayName("find material by id")
-    @Order(2)
     void findById_Success() {
         MaterialDao materialDao = new MaterialDao();
         Material material = materialDao.findById(1L);
@@ -49,7 +47,6 @@ class MaterialDaoTest {
 
     @Test
     @DisplayName("not find material by id")
-    @Order(3)
     void findById_Error() {
         MaterialDao materialDao = new MaterialDao();
         Material material = materialDao.findById(400L);
@@ -58,7 +55,6 @@ class MaterialDaoTest {
 
     @Test
     @DisplayName("find all materials")
-    @Order(4)
     void findAll_Success() {
         MaterialDao materialDao = new MaterialDao();
         List<Material> materials = materialDao.findAll();
@@ -69,7 +65,6 @@ class MaterialDaoTest {
 
     @Test
     @DisplayName("update material")
-    @Order(5)
     void update_Success() {
         MaterialDao materialDao = new MaterialDao();
         Material material = materialDao.findById(1L);
@@ -79,7 +74,6 @@ class MaterialDaoTest {
 
     @Test
     @DisplayName("not update non-existent material")
-    @Order(6)
     void update_Error() {
         MaterialDao materialDao = new MaterialDao();
         assertFalse(materialDao.update(400L, new Material() {{
@@ -89,7 +83,6 @@ class MaterialDaoTest {
 
     @Test
     @DisplayName("delete material")
-    @Order(7)
     void delete_Success() {
         MaterialDao materialDao = new MaterialDao();
         assertTrue(materialDao.delete(1L));
@@ -97,7 +90,6 @@ class MaterialDaoTest {
 
     @Test
     @DisplayName("not delete non-existent material")
-    @Order(8)
     void delete_Error() {
         MaterialDao materialDao = new MaterialDao();
         assertFalse(materialDao.delete(400L));

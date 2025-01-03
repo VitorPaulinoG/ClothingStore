@@ -28,7 +28,6 @@ class UserDaoTest {
     @Test
     @Tag("save")
     @DisplayName("save user")
-    @Order(1)
     void save_Success() {
         User user = new User();
         user.setName("Fulano");
@@ -41,7 +40,6 @@ class UserDaoTest {
 
     @Test
     @DisplayName("find user by id")
-    @Order(2)
     void findById_Success() {
         UserDao userDao = new UserDao();
         User user = userDao.findById(1L);
@@ -54,7 +52,6 @@ class UserDaoTest {
 
     @Test
     @DisplayName("not find user by id")
-    @Order(3)
     void findById_Error() {
         UserDao userDao = new UserDao();
         assertNull(userDao.findById(400L));
@@ -62,7 +59,6 @@ class UserDaoTest {
 
     @Test
     @DisplayName("find all users")
-    @Order(4)
     void findAll_Success() {
         UserDao userDao = new UserDao();
         List<User> users = userDao.findAll();
@@ -73,7 +69,6 @@ class UserDaoTest {
 
     @Test
     @DisplayName("find user by email")
-    @Order(5)
     void findFirstByEmail_Success() {
         UserDao userDao = new UserDao();
         User user = userDao.findFirstByEmail("fulano@gmail.com");
@@ -86,7 +81,6 @@ class UserDaoTest {
 
     @Test
     @DisplayName("not find non-existent user with email")
-    @Order(6)
     void findFirstByEmail_Error() {
         UserDao userDao = new UserDao();
         User user = userDao.findFirstByEmail("anonymous@gmail.com");
@@ -95,7 +89,6 @@ class UserDaoTest {
 
     @Test
     @DisplayName("update user")
-    @Order(7)
     void update_Success() {
         UserDao userDao = new UserDao();
         User oldUser = userDao.findById(1L);
@@ -106,7 +99,6 @@ class UserDaoTest {
 
     @Test
     @DisplayName("not update non-existent user")
-    @Order(8)
     void update_Error() {
         UserDao userDao = new UserDao();
         User oldUser = userDao.findById(1L);
@@ -121,7 +113,6 @@ class UserDaoTest {
 
     @Test
     @DisplayName("delete user")
-    @Order(9)
     void delete_Success() {
         UserDao userDao = new UserDao();
         assertTrue(userDao.delete(1L));
@@ -129,7 +120,6 @@ class UserDaoTest {
 
     @Test
     @DisplayName("not delete non-existent user")
-    @Order(10)
     void delete_Error() {
         UserDao userDao = new UserDao();
         assertFalse(userDao.delete(400L));

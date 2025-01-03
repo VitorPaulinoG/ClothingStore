@@ -55,6 +55,7 @@ CREATE TABLE tb_Product (
 	sizeId BIGINT NOT NULL,
 	colorId BIGINT NOT NULL,
 	materialId BIGINT NOT NULL,
+	status VARCHAR(200) NOT NULL DEFAULT ('ACTIVE'),
 	CONSTRAINT PK_Product PRIMARY KEY (id),
 	CONSTRAINT FK_Product_Category FOREIGN KEY (categoryId)
 		REFERENCES tb_Category (id),
@@ -87,7 +88,7 @@ CREATE TABLE tb_Sale (
 	vendorId BIGINT NOT NULL,
 	CONSTRAINT PK_Sale PRIMARY KEY (id),
 	CONSTRAINT FK_Sale_Product FOREIGN KEY (productId)
-		REFERENCES tb_Product (id) ON DELETE RESTRICT,
+		REFERENCES tb_Product (id) ON DELETE CASCADE,
 	CONSTRAINT FK_Sale_User FOREIGN KEY (vendorId)
 		REFERENCES tb_User (id) ON DELETE RESTRICT
 );
@@ -101,7 +102,7 @@ CREATE TABLE tb_Supply (
 	status VARCHAR(400),
 	CONSTRAINT PK_Supply PRIMARY KEY (id),
 	CONSTRAINT FK_Supply_Product FOREIGN KEY (productId)
-		REFERENCES tb_Product (id) ON DELETE RESTRICT,
+		REFERENCES tb_Product (id) ON DELETE CASCADE,
 	CONSTRAINT FK_Supply_Supplier FOREIGN KEY (supplierId)
 		REFERENCES tb_Supplier (id) ON DELETE RESTRICT
 );
