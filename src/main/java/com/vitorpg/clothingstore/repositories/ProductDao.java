@@ -126,7 +126,7 @@ public class ProductDao extends BaseDao<Product> implements Dao<Product>, Pagina
                 """;
         if (productFilter.getName().isPresent()) {
             query += " and name like ?";
-            properties.add(productFilter.getName());
+            properties.add(productFilter.getName().get() + "%");
         }
         if (productFilter.getCategory().isPresent()) {
             query += " and categoryId = ?";
@@ -200,7 +200,7 @@ public class ProductDao extends BaseDao<Product> implements Dao<Product>, Pagina
                 """;
         if (productFilter.getName().isPresent()) {
             query += " and name like ?";
-            properties.add(productFilter.getName() + "%");
+            properties.add(productFilter.getName().get() + "%");
         }
         if (productFilter.getCategory().isPresent()) {
             query += " and categoryId = ?";

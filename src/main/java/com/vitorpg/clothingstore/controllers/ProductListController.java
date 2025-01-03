@@ -17,6 +17,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -105,7 +106,14 @@ public class ProductListController {
 
         productObservableList = FXCollections
                 .observableArrayList(productService.findPaginated(pageMaxCount, pageOffset));
+        txtName.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                refreshFilter();
+                refreshPagination();
+                loadProducts();
+            }
 
+        });
         cbGender.setItems(FXCollections
                 .observableArrayList(Gender.values()));
         cbGender.getItems().add(0, null);
@@ -145,40 +153,58 @@ public class ProductListController {
 
         cbGender.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             refreshFilter();
+            refreshPagination();
             loadProducts();
         });
 
         cbCategory.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             refreshFilter();
+            refreshPagination();
             loadProducts();
         });
 
         cbMaterial.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             refreshFilter();
+            refreshPagination();
             loadProducts();
         });
 
         cbColor.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             refreshFilter();
+            refreshPagination();
             loadProducts();
         });
 
         cbSize.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             refreshFilter();
+            refreshPagination();
             loadProducts();
         });
 
         cbStyle.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             refreshFilter();
+            refreshPagination();
             loadProducts();
         });
 
         cbStatus.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
             refreshFilter();
+            refreshPagination();
             loadProducts();
         });
 
-        colProductId.setCellValueFactory(new PropertyValueFactory<Product, Long>("id"));
+        colProductId.setCellFactory(column -> new TableCell<Product, Long>() {
+            @Override
+            protected void updateItem(Long item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || getTableRow() == null) {
+                    setText(null);
+                } else {
+                    setText(String.valueOf(getIndex() + 1 + pageOffset));
+                }
+            }
+        });
+
         colProductImage.setCellValueFactory(
                 cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getImages().isEmpty() ? null :
                         getFirstImage(cellData.getValue())));
@@ -236,6 +262,7 @@ public class ProductListController {
                             boolean result = showAlert(Alert.AlertType.CONFIRMATION, "Remover Produto", "Você tem certeza de que deseja remover esse produto? ");
                             if (result)
                                 productService.remove(product.getId());
+                            loadProducts();
                         });
                     }
 
@@ -306,9 +333,10 @@ public class ProductListController {
     }
 
     private void refreshFilter () {
-        if(!txtName.getText().isEmpty() && !txtName.getText().isBlank()) {
-            productFilter.setName(Optional.of(txtName.getText().trim()));
-        }
+        if(txtName.getText().isEmpty() && txtName.getText().isBlank())
+            productFilter.setName(Optional.ofNullable(null));
+        else
+            productFilter.setName(Optional.ofNullable(txtName.getText().trim()));
 
         productFilter.setGender(Optional.ofNullable(cbGender.getSelectionModel().getSelectedItem()));
 
