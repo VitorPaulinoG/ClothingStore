@@ -126,7 +126,7 @@ public class ProductDao extends BaseDao<Product> implements Dao<Product>, Pagina
                 """;
         if (productFilter.getName().isPresent()) {
             query += " and name like ?";
-            properties.add(productFilter.getName().get() + "%");
+            properties.add("%" + productFilter.getName().get() + "%");
         }
         if (productFilter.getCategory().isPresent()) {
             query += " and categoryId = ?";
@@ -200,7 +200,7 @@ public class ProductDao extends BaseDao<Product> implements Dao<Product>, Pagina
                 """;
         if (productFilter.getName().isPresent()) {
             query += " and name like ?";
-            properties.add(productFilter.getName().get() + "%");
+            properties.add("%" + productFilter.getName().get() + "%");
         }
         if (productFilter.getCategory().isPresent()) {
             query += " and categoryId = ?";
@@ -302,6 +302,7 @@ public class ProductDao extends BaseDao<Product> implements Dao<Product>, Pagina
             statement.setLong(7, product.getSize().getId());
             statement.setLong(8, product.getColor().getId());
             statement.setLong(9, product.getMaterial().getId());
+            statement.setString(10, product.getStatus().name());
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -312,8 +313,8 @@ public class ProductDao extends BaseDao<Product> implements Dao<Product>, Pagina
     public boolean save(Product product) {
         String sql =
             """
-            insert into tb_product (name, gender, amount, price, categoryId, styleId, sizeId, colorId, materialId)
-            values (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            insert into tb_product (name, gender, amount, price, categoryId, styleId, sizeId, colorId, materialId, status)
+            values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """;
 
         return super.execute(
@@ -328,7 +329,7 @@ public class ProductDao extends BaseDao<Product> implements Dao<Product>, Pagina
                 """
                 update tb_product
                 set name = ?, gender = ?, amount = ?, price = ?, categoryId = ?,
-                styleId = ?, sizeId = ?, colorId = ?, materialId = ?
+                styleId = ?, sizeId = ?, colorId = ?, materialId = ?, status = ?
                 where id = ?
                 """;
 
@@ -337,7 +338,7 @@ public class ProductDao extends BaseDao<Product> implements Dao<Product>, Pagina
             statement -> {
                 try {
                     buildStatement(statement, product);
-                    statement.setLong(10, id);
+                    statement.setLong(11, id);
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 }

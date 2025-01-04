@@ -25,10 +25,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.TextAlignment;
 import javafx.util.Callback;
-import javafx.util.StringConverter;
 
 import java.util.Optional;
-import java.util.function.Function;
 
 
 public class ProductListController {
@@ -141,7 +139,7 @@ public class ProductListController {
         cbStatus.setItems(FXCollections
                 .observableArrayList(ProductStatus.values()));
         cbStatus.getItems().add(0, null);
-        cbStatus.setValue(cbStatus.getItems().get(0));
+        cbStatus.setValue(cbStatus.getItems().get(1));
 
         flowFilters.getChildren().stream().filter(x -> x instanceof VBox)
             .forEach(x -> ((VBox) x).prefWidthProperty().bind(Bindings.createDoubleBinding(() -> {
@@ -152,45 +150,31 @@ public class ProductListController {
 
 
         cbGender.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
-            refreshFilter();
-            refreshPagination();
-            loadProducts();
+            refreshAll();
         });
 
         cbCategory.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
-            refreshFilter();
-            refreshPagination();
-            loadProducts();
+            refreshAll();
         });
 
         cbMaterial.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
-            refreshFilter();
-            refreshPagination();
-            loadProducts();
+            refreshAll();
         });
 
         cbColor.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
-            refreshFilter();
-            refreshPagination();
-            loadProducts();
+            refreshAll();
         });
 
         cbSize.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
-            refreshFilter();
-            refreshPagination();
-            loadProducts();
+            refreshAll();
         });
 
         cbStyle.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
-            refreshFilter();
-            refreshPagination();
-            loadProducts();
+            refreshAll();
         });
 
         cbStatus.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
-            refreshFilter();
-            refreshPagination();
-            loadProducts();
+            refreshAll();
         });
 
         colProductId.setCellFactory(column -> new TableCell<Product, Long>() {
@@ -244,53 +228,7 @@ public class ProductListController {
         colProductName.setCellValueFactory(new PropertyValueFactory<Product, String>("name"));
         colProductPrice.setCellValueFactory(new PropertyValueFactory<Product, Double>("price"));
 
-        colProductActions.setCellFactory(new Callback<TableColumn<Product, Void>, TableCell<Product, Void>>() {
-            @Override
-            public TableCell<Product, Void> call (TableColumn<Product, Void> param) {
-                return new TableCell<Product, Void>() {
-                    private final Button btn_Alter = new Button("Alterar");
-                    private final Button btn_Remove = new Button("Remover");
-
-
-                    {
-                        btn_Alter.setOnAction(event -> {
-                            Product product = getTableView().getItems().get(getIndex());
-                        });
-
-                        btn_Remove.setOnAction(event -> {
-                            Product product = getTableView().getItems().get(getIndex());
-                            boolean result = showAlert(Alert.AlertType.CONFIRMATION, "Remover Produto", "Você tem certeza de que deseja remover esse produto? ");
-                            if (result)
-                                productService.remove(product.getId());
-                            loadProducts();
-                        });
-                    }
-
-                    @Override
-                    protected void updateItem(Void item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (empty) {
-                            setGraphic(null);
-                        } else {
-                            btn_Alter.setTextAlignment(TextAlignment.CENTER);
-                            btn_Alter.setPrefWidth(166.0);
-                            btn_Alter.getStyleClass().addAll("b-primary", "rounded-left-28", "btn-group-outline",
-                                    "btn-group-outline-start", "fs-24", "khand-medium-font");
-
-                            btn_Remove.setTextAlignment(TextAlignment.CENTER);
-                            btn_Remove.setPrefWidth(166.0);
-                            btn_Remove.getStyleClass().addAll("b-primary", "rounded-right-28", "btn-group-outline",
-                                    "btn-group-outline-end", "fs-24", "khand-medium-font");
-                            HBox hBox = new HBox(0);
-                            hBox.setAlignment(Pos.CENTER);
-                            hBox.getChildren().addAll(btn_Alter, btn_Remove);
-
-                            setGraphic(hBox);
-                        }
-                    }
-                };
-            }
-        });
+        setBasicActions ();
 
         tbProductList.addEventFilter(javafx.scene.input.ScrollEvent.SCROLL, event -> {
             ScrollPane parentScene = (ScrollPane) tbProductList.getScene().lookup("#paneSubScene");
@@ -325,6 +263,96 @@ public class ProductListController {
         return result.get() == ButtonType.OK;
     }
 
+    private void setBasicActions () {
+        colProductActions.setCellFactory(new Callback<TableColumn<Product, Void>, TableCell<Product, Void>>() {
+            @Override
+            public TableCell<Product, Void> call (TableColumn<Product, Void> param) {
+                return new TableCell<Product, Void>() {
+                    private final Button btn_Alter = new Button("Alterar");
+                    private final Button btn_Active = new Button("Ativar");
+                    private final Button btn_Remove = new Button("Remover");
+                    private final Button btn_Delete = new Button("Deletar");
+
+
+                    {
+                        btn_Alter.setOnAction(event -> {
+                            Product product = getTableView().getItems().get(getIndex());
+                            AlterProductController alterProductController = new AlterProductController();
+                            alterProductController.setProduct(product);
+                            btn_Alter.fireEvent(new ChangeSubSceneEvent(ChangeSubSceneEvent.SUBSCENE_CHANGED_AND_COMMUNICATION, "alter-product-view", alterProductController));
+                        });
+
+                        btn_Active.setOnAction(event -> {
+                            Product product = getTableView().getItems().get(getIndex());
+                            product.setStatus(ProductStatus.ACTIVE);
+                            productService.update(product.getId(), product);
+                            refreshAll();
+                        });
+
+                        btn_Remove.setOnAction(event -> {
+                            Product product = getTableView().getItems().get(getIndex());
+                            boolean result = showAlert(Alert.AlertType.CONFIRMATION, "Remover Produto", "Você tem certeza de que deseja remover esse produto? ");
+                            if (result)
+                                productService.remove(product.getId());
+                            loadProducts();
+                        });
+
+                        btn_Delete.setOnAction(event -> {
+                            Product product = getTableView().getItems().get(getIndex());
+                            boolean result = showAlert(Alert.AlertType.CONFIRMATION, "Deletar Produto", "Você tem certeza de que deseja deletar permanentemente esse produto? ");
+                            if (result)
+                                productService.delete(product.getId());
+                            loadProducts();
+                        });
+                    }
+
+                    @Override
+                    protected void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            btn_Alter.setTextAlignment(TextAlignment.CENTER);
+                            btn_Alter.setPrefWidth(166.0);
+                            btn_Alter.getStyleClass().addAll("b-primary", "rounded-left-28", "btn-group-outline",
+                                    "btn-group-outline-start", "fs-24", "khand-medium-font");
+
+                            btn_Remove.setTextAlignment(TextAlignment.CENTER);
+                            btn_Remove.setPrefWidth(166.0);
+                            btn_Remove.getStyleClass().addAll("b-primary", "rounded-right-28", "btn-group-outline",
+                                    "btn-group-outline-end", "fs-24", "khand-medium-font");
+
+                            btn_Active.setTextAlignment(TextAlignment.CENTER);
+                            btn_Active.setPrefWidth(166.0);
+                            btn_Active.getStyleClass().addAll("b-primary", "rounded-left-28", "btn-group-outline",
+                                    "btn-group-outline-start", "fs-24", "khand-medium-font");
+
+                            btn_Delete.setTextAlignment(TextAlignment.CENTER);
+                            btn_Delete.setPrefWidth(166.0);
+                            btn_Delete.getStyleClass().addAll("b-primary", "rounded-right-28", "btn-group-outline",
+                                    "btn-group-outline-end", "fs-24", "khand-medium-font");
+
+                            HBox hBox = new HBox(0);
+                            hBox.setAlignment(Pos.CENTER);
+                            if(getTableView().getItems().get(getIndex()).getStatus() == ProductStatus.REMOVED) {
+                                hBox.getChildren().addAll(btn_Active, btn_Delete);
+                            } else {
+                                hBox.getChildren().addAll(btn_Alter, btn_Remove);
+                            }
+
+                            setGraphic(hBox);
+                        }
+                    }
+                };
+            }
+        });
+    }
+
+    private void refreshAll () {
+        refreshFilter();
+        refreshPagination();
+        loadProducts();
+    }
     private void refreshPagination () {
         productsTotalCount = (int) (long) productService.getTotalCountFiltered(productFilter);
         pageCount = (int) Math.ceil((double) productsTotalCount / pageMaxCount);
