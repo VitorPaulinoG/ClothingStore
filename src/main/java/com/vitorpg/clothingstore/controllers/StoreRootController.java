@@ -30,6 +30,9 @@ public class StoreRootController {
         paneSubScene.addEventHandler(ChangeSubSceneEvent.SUBSCENE_CHANGED, event -> {
             loadSubScene(event.getSceneFxmlName());
         });
+        paneSubScene.addEventHandler(ChangeSubSceneEvent.SUBSCENE_CHANGED_AND_COMMUNICATION, event -> {
+            loadSubScene(event.getSceneFxmlName(), event.getController());
+        });
 
         btnOverview.setOnAction(event -> {
             setCurrentPage(btnOverview);
@@ -72,6 +75,22 @@ public class StoreRootController {
             currentPage = sceneFxmlName;
         } catch (IOException ex) {
             System.out.println(ex.getStackTrace());
+        }
+    }
+
+    private void loadSubScene(String sceneFxmlName, Object controller) {
+        if(currentPage != null && currentPage.equals(sceneFxmlName))
+            return;
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(String.format("%s.fxml", sceneFxmlName)));
+            fxmlLoader.setController(controller);
+            Pane pane = fxmlLoader.load();
+            pane.prefWidthProperty().bind(paneSubScene.widthProperty());
+            pane.prefHeightProperty().bind(paneSubScene.heightProperty());
+            paneSubScene.setContent(pane);
+            currentPage = sceneFxmlName;
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
     }
 }

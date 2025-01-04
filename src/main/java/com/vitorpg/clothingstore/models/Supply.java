@@ -6,7 +6,6 @@ public class Supply {
     private Long id;
     private Product product;
     private Supplier supplier;
-    private String status;
     private LocalDate date;
     private Double price;
 
@@ -14,11 +13,10 @@ public class Supply {
 
     }
 
-    public Supply(Long id, Product product, Supplier supplier, String status, LocalDate date, Double price) {
+    public Supply(Long id, Product product, Supplier supplier, LocalDate date, Double price) {
         this.id = id;
         this.product = product;
         this.supplier = supplier;
-        this.status = status;
         this.date = date;
         this.price = price;
     }
@@ -45,14 +43,6 @@ public class Supply {
 
     public void setSupplier(Supplier supplier) {
         this.supplier = supplier;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     public LocalDate getDate() {

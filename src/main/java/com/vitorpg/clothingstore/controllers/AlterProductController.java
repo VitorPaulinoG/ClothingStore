@@ -16,24 +16,28 @@ import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.*;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.SVGPath;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.function.Consumer;
 
 
-public class AddProductController {
+public class AlterProductController {
+
+    public Product product;
+    private Supply supply;
 
     private ProductService productService = new ProductService();
 
@@ -52,7 +56,11 @@ public class AddProductController {
     private SupplyService supplyService = new SupplyService();
 
     private ImageService imageService = new ImageService();
+
     private int imageListCount = 0;
+
+    private List<Long> removedImages = new ArrayList<>();
+    private List<Image> addedImages = new ArrayList<>();
 
     private StackPane spSelectedImage;
 
@@ -138,7 +146,7 @@ public class AddProductController {
     private ImageView imgImageDisplay;
 
     @FXML
-    private Button btnAddNewProduct;
+    private Button btnAlterProduct;
 
     private ObservableList<Category> categoryObservableList;
     private ObservableList<Material> materialObservableList;
@@ -147,8 +155,17 @@ public class AddProductController {
     private ObservableList<Supplier> supplierObservableList;
     private ToggleGroup sizeToggleGroup;
 
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
     @FXML
     public void initialize () {
+        supply = supplyService.findByProductId(product.getId());
         spSelectedImage = new StackPane();
         Rectangle imageDisplayClip = new Rectangle(spImageDisplay.getPrefWidth(), spImageDisplay.getPrefHeight());
         imageDisplayClip.setArcWidth(12);
@@ -167,10 +184,31 @@ public class AddProductController {
                 .observableArrayList(supplierService.findAll());
 
         cmbMaterial.setItems(materialObservableList);
+        cmbMaterial.setValue(cmbMaterial.getItems().stream().filter(x -> x.getId() == product.getMaterial().getId()).findFirst().get());
         cmbCategory.setItems(categoryObservableList);
+        cmbCategory.setValue(cmbCategory.getItems().stream().filter(x -> x.getId() == product.getCategory().getId()).findFirst().get());
+        loadSizeBottons(cmbCategory.getValue().getSizeType());
+        sizeToggleGroup.selectToggle(sizeToggleGroup.getToggles().stream()
+                .filter(x -> ((Size)x.getUserData()).getId() == product.getSize().getId()).findFirst().get());
         cmbStyle.setItems(styleObservableList);
+        cmbStyle.setValue(cmbStyle.getItems().stream().filter(x -> x.getId() == product.getStyle().getId()).findFirst().get());
         cmbColor.setItems(colorObservableList);
+        cmbColor.setValue(cmbColor.getItems().stream().filter(x -> x.getId() == product.getColor().getId()).findFirst().get());
         cmbSupplier.setItems(supplierObservableList);
+        cmbSupplier.setValue(cmbSupplier.getItems().stream().filter(x -> x.getId() == supply.getSupplier().getId()).findFirst().get());
+        dtSupplyDate.setValue(supply.getDate());
+
+        genderRadioToggleGroup = new ToggleGroup();
+        radGenderMale.setToggleGroup(genderRadioToggleGroup);
+        radGenderMale.setUserData(Gender.MALE);
+        radGenderFemale.setToggleGroup(genderRadioToggleGroup);
+        radGenderFemale.setUserData(Gender.FEMALE);
+        radGenderUnisex.setToggleGroup(genderRadioToggleGroup);
+        radGenderUnisex.setUserData(Gender.UNISEX);
+        txtProductName.setText(product.getName());
+
+        genderRadioToggleGroup.selectToggle(genderRadioToggleGroup.getToggles().stream()
+                .filter(x -> ((Gender)x.getUserData()) == product.getGender()).findFirst().get());
 
         flowPriceAndStock.getChildren().stream().filter(x -> x instanceof VBox)
             .forEach(x -> ((VBox) x).prefWidthProperty().bind(Bindings.createDoubleBinding(() -> {
@@ -273,14 +311,8 @@ public class AddProductController {
             loadSizeBottons(selected.getSizeType());
         });
 
-        genderRadioToggleGroup = new ToggleGroup();
-        radGenderMale.setToggleGroup(genderRadioToggleGroup);
-        radGenderMale.setUserData(Gender.MALE);
-        radGenderFemale.setToggleGroup(genderRadioToggleGroup);
-        radGenderFemale.setUserData(Gender.FEMALE);
-        radGenderUnisex.setToggleGroup(genderRadioToggleGroup);
-        radGenderUnisex.setUserData(Gender.UNISEX);
 
+        txtProductPrice.setText(String.format(Locale.US, "%.2f", product.getPrice()));
         txtProductPrice.end();
         txtProductPrice.setTextFormatter(new TextFormatter<>(change -> {
             if (change.isContentChange() && change.getText().matches("\\d*|\\.")) {
@@ -290,6 +322,9 @@ public class AddProductController {
             }
             return null;
         }));
+
+
+        txtProductCost.setText(String.format(Locale.US, "%.2f", supply.getPrice()));
 
         txtProductCost.end();
         txtProductCost.setTextFormatter(new TextFormatter<>(change -> {
@@ -302,6 +337,7 @@ public class AddProductController {
         }));
 
         spnAmountInStock.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE, 0, 1));
+        spnAmountInStock.getEditor().setText(product.getAmount().toString());
         spnAmountInStock.getEditor().setTextFormatter(new TextFormatter<>(change -> {
             if (change.getText().matches("\\d*"))
                 return change;
@@ -375,7 +411,14 @@ public class AddProductController {
             stackPane.setAlignment(Pos.BOTTOM_RIGHT);
             stackPane.getChildren().add(svgStackPane);
             svgStackPane.addEventHandler(MouseEvent.MOUSE_CLICKED, event1 -> {
+                Image image = ((Image) spSelectedImage.getUserData());
+
+                if(!(addedImages.stream().anyMatch(x -> x.getId() == image.getId()))) {
+                    removedImages.add(image.getId());
+                }
+
                 flowImageList.getChildren().remove(spSelectedImage);
+                addedImages.removeIf(x -> x.getId() == image.getId());
                 imageListCount--;
             });
             spSelectedImage.getChildren().add(stackPane);
@@ -384,6 +427,8 @@ public class AddProductController {
         EventHandler<MouseEvent> exited = event -> {
             spSelectedImage.getChildren().removeIf(x -> x instanceof StackPane);
         };
+
+        loadImages(entered, exited);
 
         spAddImage.setOnMouseClicked(event -> {
             FileChooser fileChooser = new FileChooser();
@@ -410,10 +455,14 @@ public class AddProductController {
                 imageAdded.setMinHeight(80);
                 imageAdded.getStyleClass().addAll("bg-rounded-8", "bg-light");
                 imageAdded.setAlignment(Pos.CENTER);
-                imageAdded.setUserData(new Image() {{
+                Image image = new Image() {{
                     setData(Files.readAllBytes(selectedFile.toPath()));
                     setFormat(Files.probeContentType(selectedFile.toPath()).split("/")[1]);
-                }});
+                }};
+
+                imageAdded.setUserData(image);
+
+                addedImages.add(image);
 
                 Rectangle clip = new Rectangle(80 - 4, 80 - 4);
                 clip.setArcWidth(12);
@@ -440,6 +489,50 @@ public class AddProductController {
                 ex.printStackTrace();
             }
         });
+    }
+
+    private void loadImages (EventHandler<MouseEvent> entered, EventHandler<MouseEvent> exited) {
+        var images = product.getImages();
+        for (var image : images) {
+            ImageView imageView = new ImageView();
+            ByteArrayInputStream inputStream = new ByteArrayInputStream(image.getData());
+            imageView.setImage(new javafx.scene.image.Image(inputStream));
+            imageView.setFitWidth(90);
+            imageView.setFitHeight(90);
+
+            StackPane imageAdded = new StackPane();
+            imageAdded.setMaxWidth(80);
+            imageAdded.setPrefWidth(80);
+            imageAdded.setMinWidth(80);
+            imageAdded.setMaxHeight(80);
+            imageAdded.setPrefHeight(80);
+            imageAdded.setMinHeight(80);
+            imageAdded.getStyleClass().addAll("bg-rounded-8", "bg-light");
+            imageAdded.setAlignment(Pos.CENTER);
+            imageAdded.setUserData(image);
+
+            Rectangle clip = new Rectangle(80 - 4, 80 - 4);
+            clip.setArcWidth(12);
+            clip.setArcHeight(12);
+            clip.setLayoutY(7);
+            clip.setLayoutX(7);
+            imageView.setClip(clip);
+
+            imageAdded.getChildren().add(imageView);
+            imageAdded.setOnMouseClicked(event1 -> {
+                spSelectedImage.getStyleClass().removeAll("b-primary", "b-2", "rounded-8");
+                spSelectedImage.removeEventHandler(MouseEvent.MOUSE_ENTERED, entered);
+                spSelectedImage.removeEventHandler(MouseEvent.MOUSE_EXITED, exited);
+
+                spSelectedImage = imageAdded;
+                imgImageDisplay.setImage(imageView.getImage());
+
+                spSelectedImage.getStyleClass().addAll("b-primary", "b-2", "rounded-8");
+                spSelectedImage.addEventHandler(MouseEvent.MOUSE_ENTERED, entered);
+                spSelectedImage.addEventHandler(MouseEvent.MOUSE_EXITED, exited);
+            });
+            flowImageList.getChildren().add(imageListCount++, imageAdded);
+        }
     }
 
     private void loadSizeBottons (SizeType sizeType) {
@@ -541,7 +634,7 @@ public class AddProductController {
     }
 
     @FXML
-    public void saveProduct(ActionEvent event) {
+    public void alterProduct(ActionEvent event) {
         try {
             var productName = txtProductName.getText().trim();
             var category = cmbCategory.getSelectionModel().getSelectedItem();
@@ -555,7 +648,7 @@ public class AddProductController {
             var amountInStock = spnAmountInStock.getValue();
             var supplier = cmbSupplier.getSelectionModel().getSelectedItem();
             var supplyDate = dtSupplyDate.getValue();
-            var images = flowImageList.getChildren().stream().map(x -> (Image)x.getUserData()).toList();
+            //var images = flowImageList.getChildren().stream().map(x -> (Image)x.getUserData()).toList();
 
             if(productName.isBlank() || productName.isEmpty() || category == null || material == null || style == null ||
                 color == null || size == null || gender == null || productCost < 0 || productPrice < 0 || supplier == null ||
@@ -564,39 +657,49 @@ public class AddProductController {
                 return;
             }
 
-            Product product = new Product();
-            product.setName(productName);
-            product.setCategory(category);
-            product.setMaterial(material);
-            product.setStyle(style);
-            product.setColor(color);
-            product.setSize(size);
-            product.setGender(gender);
-            product.setPrice(productPrice);
-            product.setAmount((long)amountInStock);
-            productService.save(product);
-            Product savedProduct = productService.findFirst(product);
+            if(!product.getName().equals(productName))
+                product.setName(productName);
+            if(product.getCategory().getId() != category.getId())
+                product.setCategory(category);
+            if(product.getMaterial().getId() != material.getId())
+                product.setMaterial(material);
+            if(product.getStyle().getId() != style.getId())
+                product.setStyle(style);
+            if(product.getColor().getId() != color.getId())
+                product.setColor(color);
+            if(product.getSize().getId() != size.getId())
+                product.setSize(size);
+            if(product.getGender() != gender)
+                product.setGender(gender);
+            if(product.getPrice() != productPrice)
+                product.setPrice(productPrice);
+            if(product.getAmount() != (long) amountInStock)
+                product.setAmount((long)amountInStock);
 
-            Supply supply = new Supply();
-            supply.setPrice(productCost);
-            supply.setDate(supplyDate);
-            supply.setProduct(savedProduct);
-            supply.setSupplier(supplier);
-            supplyService.save(supply);
+            productService.update(product.getId(), product);
 
-            images.forEach(x -> imageService.addToProduct(x, savedProduct.getId()));
+            if(supply.getPrice() != productCost)
+                supply.setPrice(productCost);
+            if(supply.getDate() != supplyDate)
+                supply.setDate(supplyDate);
+            if(supply.getSupplier() != supplier)
+                supply.setSupplier(supplier);
+            supplyService.update(supply.getId(), supply);
 
-            showAlert(Alert.AlertType.INFORMATION, "Produto Adicionado", "O produto " + savedProduct.getName() +
-                    " foi adicionado com sucesso!");
+            removedImages.forEach(x -> imageService.delete(x));
+            addedImages.forEach(x -> {
+                imageService.addToProduct(x, product.getId());
+            });
+
+            showAlert(Alert.AlertType.INFORMATION, "Produto Alterado", "O produto " + product.getName() +
+                    " foi alterado com sucesso!");
             goToProductList();
         } catch (Exception ex) {
             showAlert(Alert.AlertType.WARNING, "Campos Ausentes", "Preencha todos os campos!");
         }
-
-
     }
 
     private void goToProductList () {
-        btnAddNewProduct.fireEvent(new ChangeSubSceneEvent(ChangeSubSceneEvent.SUBSCENE_CHANGED, "product-list-view"));
+        btnAlterProduct.fireEvent(new ChangeSubSceneEvent(ChangeSubSceneEvent.SUBSCENE_CHANGED, "product-list-view"));
     }
 }

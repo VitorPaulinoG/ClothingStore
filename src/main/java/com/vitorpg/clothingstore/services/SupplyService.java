@@ -8,4 +8,8 @@ public class SupplyService extends GenericEntityService<Supply, SupplyDao> {
     public SupplyService() {
         super(new SupplyDao());
     }
+
+    public Supply findByProductId (Long productId) {
+        return this.dao.findByProductId(productId);
+    }
 }

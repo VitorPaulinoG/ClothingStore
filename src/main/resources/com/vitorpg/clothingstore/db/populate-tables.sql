@@ -50,22 +50,26 @@ INSERT INTO tb_Category (name, sizeType) VALUES
 ('Camisas', 'LETTER'),
 ('Calças', 'NUMBER'),
 ('Jaquetas', 'LETTER'),
-('Sapatos', 'LETTER'),
 ('Suéteres', 'LETTER'),
 ('Bermudas', 'NUMBER'),
-('Casacos', 'LETTER'),
-('Chapéus', 'LETTER');
+('Casacos', 'LETTER');
 
 -- Inserção na tabela tb_Size
 INSERT INTO tb_Size (value, sizeType) VALUES
+('PP', 'LETTER'),
 ('P', 'LETTER'),
 ('M', 'LETTER'),
 ('G', 'LETTER'),
-('42', 'NUMBER'),
+('GG', 'LETTER'),
+('34', 'NUMBER'),
+('36', 'NUMBER'),
+('38', 'NUMBER'),
 ('40', 'NUMBER'),
+('42', 'NUMBER'),
+('44', 'NUMBER'),
 ('46', 'NUMBER'),
 ('48', 'NUMBER'),
-('44', 'NUMBER');
+('50', 'NUMBER');
 
 -- Inserção na tabela tb_Product
 INSERT INTO tb_Product (name, gender, amount, price, categoryId, styleId, sizeId, colorId, materialId) VALUES
@@ -98,14 +102,14 @@ INSERT INTO tb_Sale (amount, dateTime, totalPrice, productId, vendorId) VALUES
 (1, '2024-02-28 14:30:00', 49.99, 10, 2);
 
 -- Inserção na tabela tb_Supply
-INSERT INTO tb_Supply (deliveryPrice, price, productId, supplierId, date, status) VALUES
-(10.00, 20.00, 1, 1, '2024-01-05', 'Entregue'),
-(15.00, 35.00, 2, 2, '2024-01-07', 'Pendente'),
-(8.00, 55.00, 3, 3, '2024-01-09', 'Entregue'),
-(12.00, 90.00, 4, 4, '2024-01-11', 'Em Trânsito'),
-(12.00, 35.00, 5, 1, '2024-02-05', 'Entregue'),
-(18.00, 45.00, 6, 2, '2024-02-07', 'Pendente'),
-(10.00, 120.00, 7, 3, '2024-02-09', 'Entregue'),
-(6.00, 20.00, 8, 4, '2024-02-11', 'Em Trânsito'),
-(14.00, 40.00, 9, 1, '2024-02-13', 'Entregue'),
-(8.00, 55.00, 10, 2, '2024-02-14', 'Pendente');
+INSERT INTO tb_Supply (deliveryPrice, price, productId, supplierId, date) VALUES
+(10.00, 20.00, 1, 1, '2024-01-05'),
+(15.00, 35.00, 2, 2, '2024-01-07'),
+(8.00, 55.00, 3, 3, '2024-01-09'),
+(12.00, 90.00, 4, 4, '2024-01-11'),
+(12.00, 35.00, 5, 1, '2024-02-05'),
+(18.00, 45.00, 6, 2, '2024-02-07'),
+(10.00, 120.00, 7, 3, '2024-02-09'),
+(6.00, 20.00, 8, 4, '2024-02-11'),
+(14.00, 40.00, 9, 1, '2024-02-13'),
+(8.00, 55.00, 10, 2, '2024-02-14');
