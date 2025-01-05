@@ -39,6 +39,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.function.Consumer;
 
 
 public class SaleListController {
@@ -220,7 +221,15 @@ public class SaleListController {
                         });
 
                         btn_Remove.setOnAction(event -> {
-//                            Product product = getTableView().getItems().get(getIndex());
+                            Sale sale = getTableView().getItems().get(getIndex());
+                            showAlert(Alert.AlertType.CONFIRMATION, "Remover Venda",
+                                    "Você tem certeza de que deseja remover esta venda?",
+                                event1 -> {
+                                    if(event1 == ButtonType.OK) {
+                                        saleService.delete(sale.getId());
+                                        refreshAll();
+                                    }
+                                });
                         });
                     }
 
@@ -250,6 +259,15 @@ public class SaleListController {
                 };
             }
         });
+    }
+
+    private void showAlert (Alert.AlertType alertType, String headerText, String contentText, Consumer<ButtonType> alertEvent) {
+        Alert alert = new Alert(alertType);
+        var alertPane = alert.getDialogPane();
+        alertPane.getStylesheets().add("/main-styles.css");
+        alert.setHeaderText(headerText);
+        alert.setContentText(contentText);
+        alert.showAndWait().ifPresent(alertEvent);
     }
 
     public void showRegisterSaleView(ActionEvent event) {
