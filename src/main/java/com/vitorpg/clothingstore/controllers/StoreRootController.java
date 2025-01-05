@@ -45,7 +45,7 @@ public class StoreRootController {
         });
         btnSale.setOnAction(event -> {
             setCurrentPage(btnSale);
-//            loadSubScene("");
+            loadSubScene("sale-list-view");
         });
         btnOverview.fire();
 

@@ -356,6 +356,86 @@
 
 
 
+.composed-spinner-container .spinner {
+    -fx-background-color: -fx-white-color;    
+}
+
+
+.composed-spinner-container .choice-box {
+    -fx-background-color: transparent;
+    -fx-border-color: -fx-gray-color;
+    -fx-border-width: 2 1 2 2;
+    -fx-border-radius: 8 0 0 8;
+    -fx-border-style: solid line-join bevel line-cap square;
+    -fx-padding: 0;
+    -fx-background-radius: 8;
+}
+
+.composed-spinner-container .spinner > .text-field {
+    -fx-padding: 0 10 0 10;
+    -fx-font-size: 24px;
+    -fx-text-fill: -fx-gray-color;
+    -fx-background-color: 
+        transparent transparent transparent transparent, 
+        -fx-gray-color -fx-gray-color -fx-gray-color -fx-gray-color,
+        -fx-white-color -fx-white-color -fx-white-color -fx-white-color;
+    -fx-background-insets: 
+        0 0 0 0, 
+        0 5 0 0,
+        2 7 2 1;
+    -fx-background-radius: 
+        0 0 0 0,
+        0 8 8 0,
+        0 6 6 0;
+}
+
+.composed-spinner-container .spinner .increment-arrow-button {
+    -fx-background-color: -fx-primary-color; 
+    -fx-border-color: -fx-white-color;
+    -fx-border-width: 0 0 1 0;
+    -fx-background-radius: 4 4 0 0;
+    -fx-padding: 0 13 0 13; 
+}
+
+.composed-spinner-container .spinner .increment-arrow-button:hover {
+    -fx-background-color: -fx-primary-light-color;
+}
+
+.composed-spinner-container .spinner .increment-arrow-button .increment-arrow {
+    -fx-shape: "M11.0698 13.0217H5.06982V11.0217H11.0698V5.02173H13.0698V11.0217H19.0698V13.0217H13.0698V19.0217H11.0698V13.0217Z";
+    -fx-scale-x: 1;
+    -fx-scale-y: 1;
+    -fx-scale-shape: false;
+    -fx-effect: none;
+    -fx-fill: -fx-white-color;
+    -fx-stroke: -fx-white-color;
+    -fx-background-color: -fx-white-color;
+}
+
+.composed-spinner-container .spinner .decrement-arrow-button:hover {
+    -fx-background-color: -fx-primary-light-color;
+}
+
+.composed-spinner-container .spinner .decrement-arrow-button {
+    -fx-background-color: -fx-primary-color; 
+    -fx-border-color: -fx-white-color;
+    -fx-border-width: 1 0 0 0;
+    -fx-background-radius: 0 0 4 4;
+    -fx-padding: 0 13 0 13; 
+}
+
+.composed-spinner-container .spinner .decrement-arrow-button .decrement-arrow {
+    -fx-shape: "M5.56982 13.0217V11.0217H19.5698V13.0217H5.56982Z";
+    -fx-scale-x: 1;
+    -fx-scale-y: 1;
+    -fx-scale-shape: false;
+    -fx-effect: none;
+    -fx-fill: -fx-white-color;
+    -fx-stroke: -fx-white-color;
+    -fx-background-color: -fx-white-color;
+}
+
+
 
 .basic-text-field:focused {
     -fx-stroke: -fx-gray-color;
@@ -447,6 +527,7 @@
     -fx-border-width: 3 1.5 3 3;
     -fx-background-color: -fx-white-color;
     -fx-background-radius: 28 0 0 28;
+    -fx-border-style: solid line-join bevel line-cap square;
     -fx-background-insets: 1;
 }
 
@@ -454,6 +535,7 @@
     -fx-border-width: 3 3 3 1.5;
     -fx-background-color: -fx-white-color;
     -fx-background-radius: 0 28 28 0;
+    -fx-border-style: solid line-join bevel line-cap square;
     -fx-background-insets: 1;
 }
 
@@ -827,6 +909,33 @@
 }
 
 
+
+.text-combo-box .combo-box .arrow {
+    -fx-shape: "";
+    -fx-mark-color: transparent;
+    -fx-stroke: transparent;
+    -fx-fill: transparent;
+}
+
+.text-combo-box .combo-box .arrow-button {
+    -fx-background-color: transparent;
+    -fx-mark-color: transparent;
+}
+
+.text-combo-box .combo-box .list-view {
+    -fx-border-color: -fx-gray-color;
+    -fx-border-width: 2px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-background-color: -fx-white-color;
+    -fx-min-width: 325;
+    -fx-max-width: 325;
+    -fx-pref-width: 325;
+    -fx-min-height: 360;
+    -fx-max-height: 360;
+    -fx-pref-height: 360;
+}
+
 .filter-flow-pane {
     -fx-hgap: 10;
     -fx-vgap: 10
@@ -856,6 +965,10 @@
 
 .p-32-8 {
     -fx-padding: 8 32 8 32;
+}
+
+.p-45-16 {
+    -fx-padding: 16 45 16 45;
 }
 
 .p-16 {

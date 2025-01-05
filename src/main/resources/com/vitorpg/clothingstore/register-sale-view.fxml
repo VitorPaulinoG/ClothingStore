@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.SVGPath?>
+
+<VBox prefHeight="346.0" prefWidth="726.0" stylesheets="@css/main-styles.css"
+      xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<!--      fx:controller="com.vitorpg.clothingstore.controllers.RegisterSaleController"-->
+   <children>
+      <VBox>
+         <children>
+            <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="61.0" styleClass="gap-10">
+               <children>
+                  <SVGPath content="M7.77792 43.1666C7.01403 43.1666 6.36 42.8947 5.81583 42.3508C5.27194 41.8066 5 41.1526 5 40.3887V19C5 18.2361 5.27194 17.5822 5.81583 17.0383C6.36 16.4941 7.01403 16.222 7.77792 16.222H11.9446C11.9446 14.0093 12.7107 12.1134 14.2429 10.5345C15.7754 8.95593 17.6482 8.16663 19.8613 8.16663C22.1282 8.16663 24.0607 8.94676 25.6588 10.507C27.2565 12.067 28.0554 13.972 28.0554 16.222H32.2221C32.986 16.222 33.64 16.4941 34.1842 17.0383C34.7281 17.5822 35 18.2361 35 19V40.3887C35 41.1526 34.7281 41.8066 34.1842 42.3508C33.64 42.8947 32.986 43.1666 32.2221 43.1666H7.77792ZM7.77792 40.3887H32.2221V19H7.77792V40.3887ZM20 29C22.2314 29 24.155 28.192 25.7708 26.5762C27.3867 24.9607 28.1946 23.037 28.1946 20.8054H25.4167C25.4167 22.287 24.8843 23.5602 23.8196 24.625C22.7546 25.6897 21.4814 26.222 20 26.222C18.5186 26.222 17.2454 25.6897 16.1804 24.625C15.1157 23.5602 14.5833 22.287 14.5833 20.8054H11.8054C11.8054 23.037 12.6133 24.9607 14.2292 26.5762C15.845 28.192 17.7686 29 20 29ZM14.7221 16.222H25.2779C25.2779 14.7407 24.7686 13.4907 23.75 12.472C22.7314 11.4537 21.4814 10.9445 20 10.9445C18.5186 10.9445 17.2686 11.4537 16.25 12.472C15.2314 13.4907 14.7221 14.7407 14.7221 16.222Z M38.8626 13.6375H32.7969V11.3625H38.8626V5.29675H41.1376V11.3625H47.2034V13.6375H41.1376V19.7033H38.8626V13.6375Z" styleClass="fill-secundary" />
+                  <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Cadastrar Venda">
+                     <styleClass>
+                        <String fx:value="fs-40" />
+                        <String fx:value="khand-medium-font" />
+                        <String fx:value="txt-secundary" />
+                     </styleClass>
+                  </Label>
+               </children>
+            </HBox>
+            <VBox>
+               <children>
+                  <HBox prefWidth="200.0" styleClass="gap-10">
+                     <children>
+                        <VBox maxWidth="1.7976931348623157E308" prefWidth="388.0" styleClass="text-combo-box" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label text="Produto">
+                                 <styleClass>
+                                    <String fx:value="txt-gray" />
+                                    <String fx:value="khand-font" />
+                                    <String fx:value="fs-24" />
+                                 </styleClass>
+                              </Label>
+                              <ComboBox fx:id="cmbProductName" editable="true" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="48.0" prefWidth="325.0">
+                                 <styleClass>
+                                    <String fx:value="khand-font" />
+                                    <String fx:value="fs-24" />
+                                    <String fx:value="p-0" />
+                                 </styleClass>
+                                 <items>
+                                    <FXCollections fx:factory="observableArrayList">
+                                       <String fx:value="Item 1" />
+                                       <String fx:value="Item 2" />
+                                       <String fx:value="Item 3" />
+                                    </FXCollections>
+                                 </items>
+                              </ComboBox>
+                           </children>
+                        </VBox>
+                        <VBox prefWidth="341.0" styleClass="spinner-container">
+                           <children>
+                              <Label text="Quantidade">
+                                 <styleClass>
+                                    <String fx:value="txt-gray" />
+                                    <String fx:value="khand-font" />
+                                    <String fx:value="fs-24" />
+                                 </styleClass>
+                              </Label>
+                              <Spinner fx:id="spnAmount" editable="true" maxWidth="1.7976931348623157E308" minWidth="200.0" prefHeight="48.0" prefWidth="241.0">
+                                 <styleClass>
+                                    <String fx:value="khand-font" />
+                                    <String fx:value="number-spinner" />
+                                 </styleClass>
+                              </Spinner>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+                  <HBox prefWidth="200.0" styleClass="gap-10">
+                     <children>
+                        <VBox maxWidth="1.7976931348623157E308" prefWidth="388.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label text="Preço Unitário">
+                                 <styleClass>
+                                    <String fx:value="txt-gray" />
+                                    <String fx:value="khand-font" />
+                                    <String fx:value="fs-24" />
+                                 </styleClass>
+                              </Label>
+                              <TextField fx:id="txtUnitPrice" editable="false" focusTraversable="false"
+                                         maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity"
+                                         prefHeight="48.0">
+                                 <styleClass>
+                                    <String fx:value="khand-font" />
+                                    <String fx:value="b-2" />
+                                    <String fx:value="fs-24" />
+                                    <String fx:value="prompt-txt-gray" />
+                                    <String fx:value="rounded-8" />
+                                    <String fx:value="bg-rounded-8" />
+                                    <String fx:value="b-gray" />
+                                    <String fx:value="basic-text-field" />
+                                    <String fx:value="txt-gray" />
+                                 </styleClass>
+                              </TextField>
+                           </children>
+                        </VBox>
+                        <VBox maxWidth="1.7976931348623157E308" prefWidth="388.0">
+                           <children>
+                              <Label text="Preço Total">
+                                 <styleClass>
+                                    <String fx:value="txt-gray" />
+                                    <String fx:value="khand-font" />
+                                    <String fx:value="fs-24" />
+                                 </styleClass>
+                              </Label>
+                              <TextField fx:id="txtTotalPrice" focusTraversable="false" maxWidth="1.7976931348623157E308"
+                                         minHeight="-Infinity" minWidth="-Infinity" prefHeight="48.0" editable="false">
+                                 <styleClass>
+                                    <String fx:value="khand-font" />
+                                    <String fx:value="b-2" />
+                                    <String fx:value="fs-24" />
+                                    <String fx:value="prompt-txt-gray" />
+                                    <String fx:value="rounded-8" />
+                                    <String fx:value="bg-rounded-8" />
+                                    <String fx:value="b-gray" />
+                                    <String fx:value="basic-text-field" />
+                                    <String fx:value="txt-gray" />
+                                 </styleClass>
+                              </TextField>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+      <HBox prefWidth="200.0">
+         <children>
+            <Button fx:id="btnRegisterSale" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity"
+                    maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="56.0" text="Cadastrar"
+                    textAlignment="CENTER" HBox.hgrow="ALWAYS" onAction="#registerSale">
+               <styleClass>
+                  <String fx:value="fs-24" />
+                  <String fx:value="khand-medium-font" />
+                  <String fx:value="p-0" />
+                  <String fx:value="btn-outline" />
+               </styleClass>
+            </Button>
+         </children>
+      </HBox>
+   </children>
+   <styleClass>
+      <String fx:value="p-45-16" />
+      <String fx:value="gap-10" />
+      <String fx:value="bg-white" />
+   </styleClass>
+</VBox>

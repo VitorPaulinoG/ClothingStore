@@ -12,6 +12,7 @@ dbconfig.properties
 *.iws
 *.iml
 *.ipr
+*.log
 
 ### Eclipse ###
 .apt_generated

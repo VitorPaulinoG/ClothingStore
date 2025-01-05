@@ -106,9 +106,7 @@ public class ProductListController {
                 .observableArrayList(productService.findPaginated(pageMaxCount, pageOffset));
         txtName.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
-                refreshFilter();
-                refreshPagination();
-                loadProducts();
+                refreshAll();
             }
 
         });
@@ -353,6 +351,7 @@ public class ProductListController {
         refreshPagination();
         loadProducts();
     }
+
     private void refreshPagination () {
         productsTotalCount = (int) (long) productService.getTotalCountFiltered(productFilter);
         pageCount = (int) Math.ceil((double) productsTotalCount / pageMaxCount);

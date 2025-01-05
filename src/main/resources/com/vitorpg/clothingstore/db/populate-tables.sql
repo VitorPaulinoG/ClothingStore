@@ -90,16 +90,7 @@ INSERT INTO tb_Product (name, gender, amount, price, categoryId, styleId, sizeId
 
 -- Inserção na tabela tb_Sale
 INSERT INTO tb_Sale (amount, dateTime, totalPrice, productId, vendorId) VALUES
-(3, '2024-01-10 14:30:00', 89.97, 1, 1),
-(1, '2024-01-12 10:00:00', 49.99, 2, 2),
-(2, '2024-01-15 16:45:00', 199.98, 3, 3),
-(1, '2024-01-20 12:00:00', 120.00, 4, 4),
-(3, '2024-02-10 14:30:00', 179.97, 5, 1),
-(2, '2024-02-12 10:00:00', 79.98, 6, 2),
-(1, '2024-02-15 16:45:00', 129.99, 7, 3),
-(4, '2024-02-20 12:00:00', 79.96, 8, 4),
-(2, '2024-02-25 11:00:00', 119.98, 9, 1),
-(1, '2024-02-28 14:30:00', 49.99, 10, 2);
+(2, '2024-01-10 14:30:00', 375.00, 1, 1),
 
 -- Inserção na tabela tb_Supply
 INSERT INTO tb_Supply (deliveryPrice, price, productId, supplierId, date) VALUES

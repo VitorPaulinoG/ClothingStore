@@ -157,7 +157,7 @@ public class ProductDao extends BaseDao<Product> implements Dao<Product>, Pagina
             properties.add(productFilter.getStatus().get().name());
         }
 
-        query += "limit ? offset ? ";
+        query += "order by name limit ? offset ? ";
         return super.queryMany(
                 query,
                 result -> buildEntity(result),

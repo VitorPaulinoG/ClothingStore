@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Pagination?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.SVGPath?>
+
+<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="350.0" prefHeight="1024.0" prefWidth="1338.0" stylesheets="@css/main-styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.vitorpg.clothingstore.controllers.SaleListController">
+   <styleClass>
+      <String fx:value="bg-light" />
+      <String fx:value="p-10-10-32-24" />
+      <String fx:value="gap-16" />
+   </styleClass>
+   <children>
+      <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="61.0" styleClass="gap-10">
+         <children>
+            <SVGPath content="M7.7784 37.1884C7.01452 37.1884 6.36049 36.9165 5.81632 36.3726C5.27243 35.8284 5.00049 35.1744 5.00049 34.4105V13.0217C5.00049 12.2579 5.27243 11.604 5.81632 11.0601C6.36049 10.5159 7.01452 10.2438 7.7784 10.2438H11.9451C11.9451 8.03106 12.7112 6.13522 14.2434 4.55633C15.7759 2.97772 17.6487 2.18842 19.8617 2.18842C22.1287 2.18842 24.0612 2.96855 25.6592 4.52883C27.257 6.08883 28.0559 7.99383 28.0559 10.2438H32.2226C32.9865 10.2438 33.6405 10.5159 34.1847 11.0601C34.7285 11.604 35.0005 12.2579 35.0005 13.0217V34.4105C35.0005 35.1744 34.7285 35.8284 34.1847 36.3726C33.6405 36.9165 32.9865 37.1884 32.2226 37.1884H7.7784ZM7.7784 34.4105H32.2226V13.0217H7.7784V34.4105ZM20.0005 23.0217C22.2319 23.0217 24.1555 22.2138 25.7713 20.598C27.3872 18.9824 28.1951 17.0588 28.1951 14.8272H25.4172C25.4172 16.3088 24.8848 17.582 23.8201 18.6467C22.7551 19.7115 21.4819 20.2438 20.0005 20.2438C18.5191 20.2438 17.2459 19.7115 16.1809 18.6467C15.1162 17.582 14.5838 16.3088 14.5838 14.8272H11.8059C11.8059 17.0588 12.6138 18.9824 14.2297 20.598C15.8455 22.2138 17.7691 23.0217 20.0005 23.0217ZM14.7226 10.2438H25.2784C25.2784 8.76244 24.7691 7.51244 23.7505 6.49383C22.7319 5.4755 21.4819 4.96633 20.0005 4.96633C18.5191 4.96633 17.2691 5.4755 16.2505 6.49383C15.2319 7.51244 14.7226 8.76244 14.7226 10.2438Z" styleClass="fill-secundary" />
+            <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Vendas">
+               <styleClass>
+                  <String fx:value="fs-40" />
+                  <String fx:value="khand-medium-font" />
+                  <String fx:value="txt-secundary" />
+               </styleClass>
+            </Label>
+            <Region minWidth="5.0" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+            <Button fx:id="btnRegisterSale" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#showRegisterSaleView" prefHeight="56.0" prefWidth="180.0" text="Cadastrar" textAlignment="CENTER">
+               <styleClass>
+                  <String fx:value="fs-24" />
+                  <String fx:value="khand-medium-font" />
+                  <String fx:value="p-0" />
+                  <String fx:value="btn-outline" />
+               </styleClass>
+            </Button>
+         </children>
+      </HBox>
+      <HBox maxHeight="1.7976931348623157E308" prefHeight="159.0" styleClass="b-0">
+         <children>
+            <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" HBox.hgrow="ALWAYS">
+               <styleClass>
+                  <String fx:value="p-16" />
+                  <String fx:value="gap-10" />
+                  <String fx:value="bg-white" />
+                  <String fx:value="bg-rounded-top-12" />
+                  <String fx:value="b-0" />
+               </styleClass>
+               <children>
+                  <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="55.0" styleClass="gap-10">
+                     <children>
+                        <StackPane alignment="CENTER_LEFT" prefHeight="55.0" prefWidth="640.0">
+                           <children>
+                              <TextField fx:id="txtName" focusTraversable="false" minWidth="-Infinity" prefHeight="57.0">
+                                 <styleClass>
+                                    <String fx:value="khand-font" />
+                                    <String fx:value="fs-24" />
+                                    <String fx:value="prompt-txt-gray" />
+                                    <String fx:value="rounded-12" />
+                                    <String fx:value="bg-rounded-12" />
+                                    <String fx:value="b-2" />
+                                    <String fx:value="b-gray" />
+                                    <String fx:value="search-field" />
+                                 </styleClass>
+                              </TextField>
+                              <SVGPath content="M33.0698 35.4938L22.2644 24.6884C21.4311 25.392 20.4639 25.9429 19.3627 26.3413C18.2616 26.7393 17.09 26.9384 15.8477 26.9384C12.8355 26.9384 10.2861 25.8943 8.19941 23.8063C6.11302 21.7185 5.06982 19.1885 5.06982 16.2163C5.06982 13.2441 6.11385 10.7139 8.20191 8.62586C10.2897 6.5378 12.8244 5.49377 15.8061 5.49377C18.7875 5.49377 21.3175 6.5378 23.3961 8.62586C25.475 10.7139 26.5144 13.2454 26.5144 16.2204C26.5144 17.4213 26.32 18.5727 25.9311 19.6746C25.5422 20.7763 24.9773 21.7902 24.2365 22.7163L35.0698 33.4938L33.0698 35.4938ZM15.8198 24.1604C18.019 24.1604 19.8882 23.385 21.4273 21.8342C22.9668 20.2834 23.7365 18.4107 23.7365 16.2163C23.7365 14.0218 22.9668 12.1491 21.4273 10.5979C19.8882 9.04711 18.019 8.27169 15.8198 8.27169C13.6054 8.27169 11.723 9.04711 10.1727 10.5979C8.62274 12.1491 7.84774 14.0218 7.84774 16.2163C7.84774 18.4107 8.62274 20.2834 10.1727 21.8342C11.723 23.385 13.6054 24.1604 15.8198 24.1604Z" styleClass="fill-gray">
+                                 <StackPane.margin>
+                                    <Insets left="10.0" />
+                                 </StackPane.margin>
+                              </SVGPath>
+                           </children>
+                        </StackPane>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefHeight="72.0">
+                     <styleClass>
+                        <String fx:value="py-10" />
+                        <String fx:value="gap-10" />
+                     </styleClass>
+                     <children>
+                        <FlowPane fx:id="flowFilters" alignment="CENTER_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefWidth="200.0" rowValignment="TOP" HBox.hgrow="ALWAYS">
+                           <children>
+                              <VBox>
+                                 <children>
+                                    <Label text="Após a Data">
+                                       <styleClass>
+                                          <String fx:value="txt-gray" />
+                                          <String fx:value="khand-font" />
+                                          <String fx:value="fs-18" />
+                                       </styleClass>
+                                    </Label>
+                                    <DatePicker fx:id="dtAfter" maxWidth="1.7976931348623157E308" minWidth="250.0" prefHeight="52.0">
+                                       <styleClass>
+                                          <String fx:value="khand-font" />
+                                          <String fx:value="fs-24" />
+                                          <String fx:value="txt-gray" />
+                                       </styleClass>
+                                    </DatePicker>
+                                 </children>
+                              </VBox>
+                              <VBox>
+                                 <children>
+                                    <Label text="Antes da Data">
+                                       <styleClass>
+                                          <String fx:value="txt-gray" />
+                                          <String fx:value="khand-font" />
+                                          <String fx:value="fs-18" />
+                                       </styleClass>
+                                    </Label>
+                                    <DatePicker fx:id="dtBefore" maxWidth="1.7976931348623157E308" minWidth="250.0" prefHeight="52.0">
+                                       <styleClass>
+                                          <String fx:value="khand-font" />
+                                          <String fx:value="fs-24" />
+                                          <String fx:value="txt-gray" />
+                                       </styleClass>
+                                    </DatePicker>
+                                 </children>
+                              </VBox>
+                              <VBox styleClass="composed-spinner-container">
+                                 <children>
+                                    <Label text="Quantidade">
+                                       <styleClass>
+                                          <String fx:value="txt-gray" />
+                                          <String fx:value="khand-font" />
+                                          <String fx:value="fs-18" />
+                                       </styleClass>
+                                    </Label>
+                                    <HBox>
+                                       <children>
+                                          <ChoiceBox fx:id="cbAmount" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="52.0" prefWidth="91.0">
+                                             <styleClass>
+                                                <String fx:value="khand-medium-font" />
+                                                <String fx:value="fs-24" />
+                                                <String fx:value="txt-gray" />
+                                                <String fx:value="p-0" />
+                                             </styleClass>
+                                             <items>
+                                                <FXCollections fx:factory="observableArrayList">
+                                                   <String fx:value="Opção 1" />
+                                                   <String fx:value="Opção 2" />
+                                                   <String fx:value="Opção 3" />
+                                                </FXCollections>
+                                             </items>
+                                          </ChoiceBox>
+                                          <Spinner fx:id="spnAmount" editable="true" maxWidth="1.7976931348623157E308" minWidth="200.0" prefHeight="52.0" prefWidth="241.0">
+                                             <styleClass>
+                                                <String fx:value="khand-font" />
+                                                <String fx:value="number-spinner" />
+                                             </styleClass>
+                                          </Spinner>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                           <styleClass>
+                              <String fx:value="gap-10" />
+                              <String fx:value="filter-flow-pane" />
+                           </styleClass>
+                        </FlowPane>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="350.0" VBox.vgrow="ALWAYS">
+         <styleClass>
+            <String fx:value="b-0" />
+            <String fx:value="bg-white" />
+            <String fx:value="bg-rounded-bottom-12" />
+            <String fx:value="px-16" />
+         </styleClass>
+         <children>
+            <TableView fx:id="tbSaleList" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="350.0" styleClass="product-table-view" VBox.vgrow="ALWAYS">
+              <columns>
+               <TableColumn fx:id="colDate" minWidth="50.0" prefWidth="159.0" reorderable="false" resizable="false" text="Data" />
+               <TableColumn fx:id="colProductName" minWidth="150.0" prefWidth="284.0" reorderable="false" text="Produto" />
+               <TableColumn fx:id="colAmount" minWidth="100.0" prefWidth="121.0" reorderable="false" resizable="true" text="Qtd." />
+               <TableColumn fx:id="colUnitValue" minWidth="100.0" prefWidth="204.0" reorderable="false" resizable="true" text="Valor Unitário (R$)" />
+               <TableColumn fx:id="colTotalValue" minWidth="100.0" prefWidth="204.0" reorderable="false" resizable="true" text="Valor Total (R$)" />
+               <TableColumn fx:id="colSaleActions" editable="false" maxWidth="1.7976931348623157E308" minWidth="200.0" prefWidth="276.0" reorderable="false" resizable="false" sortable="false" text="Ações" />
+              </columns>
+            </TableView>
+            <Pagination fx:id="pagSaleList" maxHeight="1.7976931348623157E308" maxPageIndicatorCount="3" minHeight="-Infinity" prefHeight="262.0" prefWidth="1286.0">
+               <styleClass>
+                  <String fx:value="khand-medium-font" />
+                  <String fx:value="fs-24" />
+               </styleClass></Pagination>
+         </children>
+      </VBox>
+   </children>
+</VBox>
