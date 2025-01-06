@@ -217,7 +217,8 @@ public class SaleListController {
 
                     {
                         btn_Alter.setOnAction(event -> {
-//                            Product product = getTableView().getItems().get(getIndex());
+                            Sale sale = getTableView().getItems().get(getIndex());
+                            showAlterSaleView(event, sale);
                         });
 
                         btn_Remove.setOnAction(event -> {
@@ -275,6 +276,30 @@ public class SaleListController {
             Stage stage = new Stage();
             FXMLLoader loader = new FXMLLoader(App.class.getResource("register-sale-view.fxml"));
             loader.setController(new RegisterSaleController() {{ setParentScene(btnRegisterSale.getScene());}});
+            Scene scene = new Scene(loader.load(), 726, 365);
+            cbAmount.getScene().addEventHandler(RefreshPageEvent.REFRESH_PAGE_REQUESTED, event1 -> {
+                refreshAll();
+            });
+            stage.setTitle("ClothingStore - Cadastrar Venda");
+            stage.setScene(scene);
+            stage.setMaxWidth(726);
+            stage.setMinWidth(726);
+            stage.setMinHeight(365);
+            stage.setMaxHeight(365);
+            stage.show();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void showAlterSaleView(ActionEvent event, Sale sale) {
+        try {
+            Stage stage = new Stage();
+            FXMLLoader loader = new FXMLLoader(App.class.getResource("alter-sale-view.fxml"));
+            loader.setController(new AlterSaleController() {{
+                setParentScene(btnRegisterSale.getScene());
+                setSale(sale);
+            }});
             Scene scene = new Scene(loader.load(), 726, 365);
             cbAmount.getScene().addEventHandler(RefreshPageEvent.REFRESH_PAGE_REQUESTED, event1 -> {
                 refreshAll();

@@ -3,6 +3,7 @@ package com.vitorpg.clothingstore.controllers;
 import com.vitorpg.clothingstore.events.ChangeSubSceneEvent;
 import com.vitorpg.clothingstore.models.*;
 import com.vitorpg.clothingstore.models.enums.Gender;
+import com.vitorpg.clothingstore.models.enums.ProductStatus;
 import com.vitorpg.clothingstore.models.enums.SizeType;
 import com.vitorpg.clothingstore.repositories.interfaces.Dao;
 import com.vitorpg.clothingstore.services.*;
@@ -574,6 +575,7 @@ public class AddProductController {
             product.setGender(gender);
             product.setPrice(productPrice);
             product.setAmount((long)amountInStock);
+            product.setStatus(ProductStatus.ACTIVE);
             productService.save(product);
             Product savedProduct = productService.findFirst(product);
 

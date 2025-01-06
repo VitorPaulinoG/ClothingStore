@@ -1,10 +1,10 @@
 package com.vitorpg.clothingstore.controllers;
 
-import com.vitorpg.clothingstore.App;
 import com.vitorpg.clothingstore.dtos.ProductFilter;
-import com.vitorpg.clothingstore.events.ChangeSubSceneEvent;
 import com.vitorpg.clothingstore.events.RefreshPageEvent;
-import com.vitorpg.clothingstore.models.*;
+import com.vitorpg.clothingstore.models.Product;
+import com.vitorpg.clothingstore.models.Sale;
+import com.vitorpg.clothingstore.models.User;
 import com.vitorpg.clothingstore.services.ProductService;
 import com.vitorpg.clothingstore.services.SaleService;
 import javafx.collections.FXCollections;
@@ -14,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.time.LocalDateTime;
@@ -23,7 +24,7 @@ import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
 
-public class RegisterSaleController {
+public class AlterSaleController {
     private ProductService productService = new ProductService();
     private SaleService saleService = new SaleService();
 
@@ -44,6 +45,10 @@ public class RegisterSaleController {
 
     private Product selectedProduct;
 
+    private Sale sale;
+
+    private Sale oldSale;
+
     private List<Product> products;
 
     private Scene parentScene;
@@ -51,6 +56,15 @@ public class RegisterSaleController {
     public void setParentScene(Scene scene) {
         this.parentScene = scene;
     }
+
+    public Sale getSale() {
+        return sale;
+    }
+
+    public void setSale(Sale sale) {
+        this.sale = sale;
+    }
+
 
     @FXML
     public void initialize () {
@@ -79,20 +93,35 @@ public class RegisterSaleController {
 
             cmbProductName.show();
         });
+        sale.setProduct(productService.findById(sale.getProduct().getId()));
+        oldSale = new Sale(sale.getId(), new Product(){{setId(sale.getProduct().getId());}},
+                sale.getAmount(), sale.getDateTime(), sale.getTotalPrice(), sale.getVendor());
 
         cmbProductName.getSelectionModel().selectedItemProperty().addListener((obs, oldValue, newValue) -> {
             if(newValue != null && !newValue.isBlank() && !newValue.isEmpty()) {
                 selectedProduct = products.stream().filter(x -> x.getName().equals(newValue)).findFirst().get();
-                System.out.println(selectedProduct.getName());
 
-                spnAmount.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, (int) (long) selectedProduct.getAmount(), 0, 1));
+                sale.setProduct(selectedProduct);
+                spnAmount.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0,
+                        (int) (long) selectedProduct.getAmount(), 0, 1));
                 txtUnitPrice.setText(String.format(Locale.US, "%.2f", selectedProduct.getPrice()));
                 updateTotalPrice();
             } else {
                 spnAmount.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE, 0, 1));
             }
         });
-
+        cmbProductName.getEditor().setText(sale.getProduct().getName());
+        cmbProductName.getEditor().fireEvent(new KeyEvent(
+                KeyEvent.KEY_TYPED,
+                sale.getProduct().getName(),
+                sale.getProduct().getName(),
+                KeyCode.UNDEFINED,
+                false, false, false, false
+        ));
+        cmbProductName.getSelectionModel().select(0);
+        cmbProductName.hide();
+        spnAmount.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, (int) (long) selectedProduct.getAmount(), sale.getAmount().intValue(), 1));
+        updateTotalPrice();
     }
 
     private void updateTotalPrice () {
@@ -107,13 +136,13 @@ public class RegisterSaleController {
     }
 
 
-    public void registerSale(ActionEvent event) {
+    public void alterSale(ActionEvent event) {
         var amount = (long) spnAmount.getValue();
         if(amount <= 0)
             return;
 
         AtomicBoolean hasToContinue = new AtomicBoolean(false);
-        showAlert(Alert.AlertType.CONFIRMATION, "Cadastrar Venda", "Você tem certeza de que deseja cadastrar essa venda?",
+        showAlert(Alert.AlertType.CONFIRMATION, "Alterar Venda", "Você tem certeza de que deseja alterar essa venda?",
             x -> {
                 if(x == ButtonType.OK) {
                     hasToContinue.set(true);
@@ -122,15 +151,21 @@ public class RegisterSaleController {
 
         if(!hasToContinue.get())
             return;
-        Sale sale = new Sale();
-        sale.setAmount(amount);
-        sale.setTotalPrice(Double.parseDouble(txtTotalPrice.getText()));
-        sale.setDateTime(LocalDateTime.now());
-        sale.setVendor(new User() {{ setId(1L);}}); //// MODIFICAR
-        sale.setProduct(selectedProduct);
 
-        saleService.save(sale);
-        productService.adjustAmount(selectedProduct.getId(), -sale.getAmount());
+        this.sale.setAmount(amount);
+        this.sale.setTotalPrice(Double.parseDouble(txtTotalPrice.getText()));
+        this.sale.setVendor(new User() {{ setId(1L);}}); //// MODIFICAR
+        this.sale.setProduct(selectedProduct);
+
+
+        saleService.update(sale.getId(), sale);
+        if(sale.getProduct().getId() == oldSale.getProduct().getId()) {
+            productService.adjustAmount(selectedProduct.getId(), oldSale.getAmount() - sale.getAmount());
+        } else {
+            productService.adjustAmount(selectedProduct.getId(), -sale.getAmount());
+            productService.adjustAmount(oldSale.getProduct().getId(), oldSale.getAmount());
+        }
+
         Event.fireEvent(parentScene, new RefreshPageEvent(RefreshPageEvent.REFRESH_PAGE_REQUESTED));
         Stage stage = (Stage) cmbProductName.getScene().getWindow();
         stage.close();

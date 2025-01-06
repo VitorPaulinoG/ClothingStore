@@ -324,8 +324,8 @@ public class AlterProductController {
         }));
 
 
-        txtProductCost.setText(String.format(Locale.US, "%.2f", supply.getPrice()));
 
+        txtProductCost.setText(String.format(Locale.US, "%.2f", supply.getPrice()));
         txtProductCost.end();
         txtProductCost.setTextFormatter(new TextFormatter<>(change -> {
             if (change.isContentChange() && change.getText().matches("\\d*|\\.")) {
@@ -336,8 +336,7 @@ public class AlterProductController {
             return null;
         }));
 
-        spnAmountInStock.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE, 0, 1));
-        spnAmountInStock.getEditor().setText(product.getAmount().toString());
+        spnAmountInStock.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE, (int) (long) product.getAmount(), 1));
         spnAmountInStock.getEditor().setTextFormatter(new TextFormatter<>(change -> {
             if (change.getText().matches("\\d*"))
                 return change;
