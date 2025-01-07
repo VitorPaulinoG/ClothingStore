@@ -185,7 +185,7 @@ public class SaleDao extends BaseDao<Sale> implements Dao<Sale>, PaginatedDao<Sa
         query += " where 1=1";
 
         if (saleFilter.getAmountComparator().isPresent() && saleFilter.getAmount().isPresent()) {
-            query += " and amount " + saleFilter.getAmountComparator().get() + " ?";
+            query += " and s.amount " + saleFilter.getAmountComparator().get() + " ?";
             properties.add(saleFilter.getAmount().get());
         }
 
@@ -249,7 +249,7 @@ public class SaleDao extends BaseDao<Sale> implements Dao<Sale>, PaginatedDao<Sa
         query += " where 1=1";
 
         if (saleFilter.getAmountComparator().isPresent() && saleFilter.getAmount().isPresent()) {
-            query += " and amount " + saleFilter.getAmountComparator().get() + " ?";
+            query += " and s.amount " + saleFilter.getAmountComparator().get() + " ?";
             properties.add(saleFilter.getAmount().get());
         }
 
