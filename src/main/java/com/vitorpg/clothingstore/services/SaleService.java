@@ -19,6 +19,18 @@ public class SaleService extends GenericEntityService<Sale, SaleDao> {
         return this.dao.findPaginatedFiltered(maxCount, offset, saleFilter);
     }
 
+    public Double getTotalRevenue () {
+        return this.dao.getTotalRevenue();
+    }
+
+    public Long getSoldItemsCount () {
+        return this.dao.getSoldItemsCount();
+    }
+
+    public Double getTotalProfit () {
+        return this.dao.getTotalProfit();
+    }
+
     public Long getTotalCountFiltered (SaleFilter saleFilter) {
         return this.dao.getTotalCountFiltered(saleFilter);
     }

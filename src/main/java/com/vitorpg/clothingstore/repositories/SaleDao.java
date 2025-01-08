@@ -229,6 +229,50 @@ public class SaleDao extends BaseDao<Sale> implements Dao<Sale>, PaginatedDao<Sa
         );
     }
 
+    public Double getTotalRevenue () {
+        String query =
+                """
+                select sum(totalPrice) as revenue
+                from tb_sale
+                """;
+
+        return super.queryScalar(
+                query,
+                "revenue",
+                Double.class
+        );
+    }
+
+    public Long getSoldItemsCount () {
+        String query =
+                """
+                select CAST(sum(amount) AS BIGINT) as soldItemsCount
+                from tb_sale
+                """;
+
+        return super.queryScalar(
+                query,
+                "soldItemsCount",
+                Long.class
+        );
+    }
+
+    public Double getTotalProfit () {
+        String query =
+                """
+                select sum(s.totalPrice - (s.amount * su.price)) as profit
+                from tb_sale s
+                join tb_supply su
+                    on s.productId = su.productId
+                """;
+
+        return super.queryScalar(
+                query,
+                "profit",
+                Double.class
+        );
+    }
+
     public Long getTotalCountFiltered (SaleFilter saleFilter) {
         List<Object> properties = new ArrayList<>();
         String query =
