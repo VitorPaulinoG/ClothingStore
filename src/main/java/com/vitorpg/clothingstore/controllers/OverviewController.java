@@ -75,21 +75,22 @@ public class OverviewController {
         clip.setArcWidth(12);
         clip.setArcHeight(12);
         spHeader.setClip(clip);
-        spHeader.layoutBoundsProperty().addListener((obs, oldBounds, newBounds) -> {
-            clip.setWidth(newBounds.getWidth());
-            clip.setHeight(newBounds.getHeight());
-        });
+
+        clip.widthProperty().bind(spHeader.widthProperty());
+        clip.heightProperty().bind(spHeader.heightProperty());
     }
 
     private void showStatistics () {
         try {
-            lbTotalRevenue.setText(String.format(Locale.US, "R$ %.2f",
-                    saleService.getTotalRevenue()));
+            var totalRevenue = saleService.getTotalRevenue();
+            var totalProfit = saleService.getTotalProfit();
+            var soldItemsCount = saleService.getSoldItemsCount();
 
-            lbSoldItems.setText(saleService.getSoldItemsCount().toString());
+            lbTotalRevenue.setText(String.format(Locale.US, "R$ %.2f", totalRevenue == null? 0.00 : totalRevenue));
 
-            lbTotalProfit.setText(String.format(Locale.US, "R$ %.2f",
-                    saleService.getTotalProfit()));
+            lbSoldItems.setText(soldItemsCount == null? "0" : soldItemsCount.toString());
+
+            lbTotalProfit.setText(String.format(Locale.US, "R$ %.2f", totalProfit == null? 0.00 : totalProfit));
         } catch (Exception ex) {
             ex.printStackTrace();
         }

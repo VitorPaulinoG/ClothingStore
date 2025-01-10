@@ -1,4 +1,4 @@
-package com.vitorpg.clothingstore.interfaces;
+package com.vitorpg.clothingstore.exceptions;
 
 public class EntityNotFoundException extends RuntimeException {
     public EntityNotFoundException (String message) {

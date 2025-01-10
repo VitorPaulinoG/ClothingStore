@@ -1,12 +1,11 @@
 package com.vitorpg.clothingstore.controllers;
 
-import com.vitorpg.clothingstore.App;
 import com.vitorpg.clothingstore.dtos.ProductFilter;
-import com.vitorpg.clothingstore.events.ChangeSubSceneEvent;
 import com.vitorpg.clothingstore.events.RefreshPageEvent;
 import com.vitorpg.clothingstore.models.*;
 import com.vitorpg.clothingstore.services.ProductService;
 import com.vitorpg.clothingstore.services.SaleService;
+import com.vitorpg.clothingstore.services.SessionManager;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
@@ -126,7 +125,7 @@ public class RegisterSaleController {
         sale.setAmount(amount);
         sale.setTotalPrice(Double.parseDouble(txtTotalPrice.getText()));
         sale.setDateTime(LocalDateTime.now());
-        sale.setVendor(new User() {{ setId(1L);}}); //// MODIFICAR
+        sale.setVendor(SessionManager.getInstance().getUser());
         sale.setProduct(selectedProduct);
 
         saleService.save(sale);

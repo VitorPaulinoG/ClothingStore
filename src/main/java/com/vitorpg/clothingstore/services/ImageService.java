@@ -1,15 +1,9 @@
 package com.vitorpg.clothingstore.services;
 
-import com.vitorpg.clothingstore.interfaces.EntityNotFoundException;
+import com.vitorpg.clothingstore.exceptions.EntityNotFoundException;
 import com.vitorpg.clothingstore.models.*;
 import com.vitorpg.clothingstore.repositories.ImageDao;
-import javafx.embed.swing.SwingFXUtils;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.util.List;
 
 public class ImageService {

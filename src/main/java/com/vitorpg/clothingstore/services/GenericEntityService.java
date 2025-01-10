@@ -1,6 +1,6 @@
 package com.vitorpg.clothingstore.services;
 
-import com.vitorpg.clothingstore.interfaces.EntityNotFoundException;
+import com.vitorpg.clothingstore.exceptions.EntityNotFoundException;
 import com.vitorpg.clothingstore.repositories.interfaces.Dao;
 
 import java.util.List;

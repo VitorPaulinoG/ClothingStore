@@ -2,8 +2,9 @@ module com.vitorpg.clothingstore {
     requires javafx.base;
     requires javafx.controls;
     requires javafx.fxml;
-    requires java.sql;
     requires javafx.swing;
+    requires org.bouncycastle.provider;
+    requires java.sql;
 
 
     opens com.vitorpg.clothingstore to javafx.fxml;

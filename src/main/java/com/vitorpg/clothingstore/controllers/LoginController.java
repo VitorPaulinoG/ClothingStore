@@ -1,6 +1,9 @@
 package com.vitorpg.clothingstore.controllers;
 
 import com.vitorpg.clothingstore.App;
+import com.vitorpg.clothingstore.exceptions.EntityNotFoundException;
+import com.vitorpg.clothingstore.services.SessionManager;
+import com.vitorpg.clothingstore.services.UserService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -13,6 +16,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class LoginController {
+
+    private UserService userService = new UserService();
+
     @FXML
     private TextField txtEmail;
     @FXML
@@ -23,7 +29,6 @@ public class LoginController {
     @FXML
     public void initialize() {
 
-//        imgPicture.setEffect(null);
     }
 
     @FXML
@@ -38,25 +43,31 @@ public class LoginController {
             alert.showAndWait();
             return;
         }
-
-        // Autenticar
-
-        // Entrar no Sistema
+        var email = txtEmail.getText();
+        var password = txtPassword.getText();
         try {
-            FXMLLoader storeFxmlLoader = new FXMLLoader(App.class.getResource("store-root-view.fxml"));
-            Scene storeScene = new Scene(storeFxmlLoader.load());
-            Stage mainStage = App.mainStage;
-            mainStage.setTitle("ClothingStore");
-            mainStage.setScene(storeScene);
-        } catch (IOException ex) {
+            if (userService.authenticate(email, password)) {
+                SessionManager.getInstance().login(userService.findFirstByEmail(email));
+                goToStoreRoot();
+                return;
+            }
+
             Alert alert = new Alert(Alert.AlertType.ERROR);
             var alertPane = alert.getDialogPane();
             alertPane.getStylesheets().add("/main-styles.css");
-            alert.setTitle("Erro Interno");
-            alert.setHeaderText(null);
-            alert.setContentText("Erro de IO");
+            alert.setTitle("Erro");
+            alert.setHeaderText("Senha Inválida");
+            alert.setContentText("A senha digitada não está correta! \nTente novamente.");
+            alert.showAndWait();
+        } catch (EntityNotFoundException ex) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            var alertPane = alert.getDialogPane();
+            alertPane.getStylesheets().add("/main-styles.css");
+            alert.setTitle("Erro");
+            alert.setHeaderText("Usuário não encontrado.");
+            alert.setContentText(ex.getMessage() + "\nTente novamente.");
+            alert.showAndWait();
         }
-
     }
 
     @FXML
@@ -74,6 +85,26 @@ public class LoginController {
             alert.setTitle("Erro Interno");
             alert.setHeaderText(null);
             alert.setContentText("Erro de IO");
+            alert.showAndWait();
         }
     }
+
+    private void goToStoreRoot() {
+        try {
+            FXMLLoader storeFxmlLoader = new FXMLLoader(App.class.getResource("store-root-view.fxml"));
+            Scene storeScene = new Scene(storeFxmlLoader.load());
+            Stage mainStage = App.mainStage;
+            mainStage.setTitle("ClothingStore");
+            mainStage.setScene(storeScene);
+        } catch (IOException ex) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            var alertPane = alert.getDialogPane();
+            alertPane.getStylesheets().add("/main-styles.css");
+            alert.setTitle("Erro Interno");
+            alert.setHeaderText(null);
+            alert.setContentText("Erro de IO");
+            alert.showAndWait();
+        }
+    }
+
 }

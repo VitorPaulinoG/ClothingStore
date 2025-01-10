@@ -3,6 +3,7 @@ package com.vitorpg.clothingstore.controllers;
 
 import com.vitorpg.clothingstore.App;
 import com.vitorpg.clothingstore.models.User;
+import com.vitorpg.clothingstore.services.UserService;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -15,6 +16,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class SigninController {
+
+    private UserService userService = new UserService();
+
     @FXML
     private TextField txtName;
     @FXML
@@ -29,7 +33,6 @@ public class SigninController {
     @FXML
     public void initialize() {
 
-//        imgPicture.setEffect(null);
     }
 
     @FXML
@@ -50,7 +53,7 @@ public class SigninController {
             var alertPane = alert.getDialogPane();
             alertPane.getStylesheets().add("/main-styles.css");
             alert.setTitle("Aviso");
-            alert.setHeaderText(null); // Sem título
+            alert.setHeaderText(null);
             alert.setContentText("As senhas digitadas não coincidem. Por favor, tente novamente.");
             alert.showAndWait();
             return;
@@ -61,21 +64,13 @@ public class SigninController {
         user.setEmail(txtEmail.getText());
         user.setPassword(txtPassword.getText());
 
-        // Cadastrar Usuário
-
-
-        // Remover Isso Abaixo
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        userService.save(user);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
         var alertPane = alert.getDialogPane();
         alertPane.getStylesheets().add("/main-styles.css");
-        alert.setTitle("Sucesso");
-        alert.setHeaderText(null);
-        alert.setContentText(
-            "O usuário foi criado com sucesso! \n" +
-            "Name: " + user.getName() + "\n" +
-            "Email: " + user.getEmail() + "\n" +
-            "Password: " + user.getPassword() + "\n"
-        );
+        alert.setTitle("Caixa de Contexto");
+        alert.setHeaderText("Usuário salvo com sucesso!");
+        alert.setContentText("Agora você pode fazer login com esse usuário!");
         alert.showAndWait();
     }
 

@@ -1,6 +1,6 @@
 package com.vitorpg.clothingstore.services;
 
-import com.vitorpg.clothingstore.interfaces.EntityNotFoundException;
+import com.vitorpg.clothingstore.exceptions.EntityNotFoundException;
 import com.vitorpg.clothingstore.models.Size;
 import com.vitorpg.clothingstore.models.enums.SizeType;
 import com.vitorpg.clothingstore.repositories.SizeDao;
