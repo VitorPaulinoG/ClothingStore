@@ -17,29 +17,33 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.TextFlow?>
 
-<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1440.0" spacing="20.0" stylesheets="@css/main-styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.vitorpg.clothingstore.controllers.SigninController">
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="-Infinity" prefHeight="1024.0" prefWidth="1440.0" spacing="20.0" stylesheets="@css/main-styles.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.vitorpg.clothingstore.controllers.SigninController">
    <styleClass>
       <String fx:value="bg-dark" />
       <String fx:value="p-32" />
    </styleClass>
    <children>
-      <StackPane prefHeight="960.0" prefWidth="678.0">
+      <VBox maxHeight="1.7976931348623157E308" minHeight="0.0" prefHeight="960.0">
          <children>
-            <ImageView fx:id="imgPicture" fitHeight="960.0" fitWidth="640.0" pickOnBounds="true" preserveRatio="true" smooth="no" styleClass="bg-upscaling">
-               <image>
-                  <Image url="@images/pawel-czerwinski-unsplash.jpg" />
-               </image>
-               <effect>
-                  <ColorAdjust hue="-0.04" />
-               </effect>
-            </ImageView>
-            <SVGPath blendMode="DIFFERENCE" content="M117.403 155.899L102.531 164.123C100.248 165.408 97.8892 165.747 95.4537 165.139C93.0199 164.531 91.1604 163.085 89.875 160.8L72.6457 130.648C71.3604 128.364 71.0217 125.988 71.6297 123.52C72.2377 121.051 73.6839 119.174 75.9684 117.888L131.968 85.3551H147.763C149.567 85.3551 151.01 85.8956 152.091 86.9764C153.17 88.0573 153.71 89.5 153.71 91.3044V94.9978C153.71 101.069 155.919 106.313 160.336 110.731C164.754 115.147 169.999 117.355 176.07 117.355C182.141 117.355 187.385 115.147 191.803 110.731C196.221 106.313 198.43 101.069 198.43 94.9978V91.3044C198.43 89.5 198.969 88.0573 200.048 86.9764C201.129 85.8956 202.572 85.3551 204.376 85.3551H220.171L276.171 117.888C278.455 119.174 279.902 121.051 280.51 123.52C281.118 125.988 280.779 128.364 279.494 130.648L262.264 160.8C260.979 163.085 259.146 164.504 256.766 165.056C254.387 165.611 252.001 165.246 249.608 163.96L234.736 156.062V257.251C234.736 259.932 233.833 262.175 232.027 263.979C230.223 265.785 227.98 266.688 225.299 266.688H126.84C124.159 266.688 121.917 265.785 120.112 263.979C118.306 262.175 117.403 259.932 117.403 257.251V155.899ZM133.403 129.088V250.688H218.736V129.088L251.598 147.12L262.592 128.555L216.83 101.683H213.443C211.802 110.682 207.55 118.21 200.686 124.267C193.82 130.326 185.615 133.355 176.07 133.355C166.525 133.355 158.319 130.326 151.454 124.267C144.59 118.21 140.337 110.682 138.696 101.683H135.31L89.547 128.555L100.542 147.12L133.403 129.088Z" fill="#f3f4f7" styleClass="cloth-icon" />
-            <Circle blendMode="DIFFERENCE" fill="DODGERBLUE" radius="175.0" stroke="BLACK" strokeType="INSIDE" styleClass="circle-18" />
+            <StackPane fx:id="spPicture" maxHeight="1.7976931348623157E308" minHeight="0.0" prefHeight="960.0" prefWidth="678.0">
+               <children>
+                  <ImageView fx:id="imgPicture" fitHeight="960.0" fitWidth="640.0" pickOnBounds="true" preserveRatio="true" smooth="no" styleClass="bg-upscaling">
+                     <image>
+                        <Image url="@images/pawel-czerwinski-unsplash.jpg" />
+                     </image>
+                     <effect>
+                        <ColorAdjust hue="-0.04" />
+                     </effect>
+                  </ImageView>
+                  <SVGPath blendMode="DIFFERENCE" content="M117.403 155.899L102.531 164.123C100.248 165.408 97.8892 165.747 95.4537 165.139C93.0199 164.531 91.1604 163.085 89.875 160.8L72.6457 130.648C71.3604 128.364 71.0217 125.988 71.6297 123.52C72.2377 121.051 73.6839 119.174 75.9684 117.888L131.968 85.3551H147.763C149.567 85.3551 151.01 85.8956 152.091 86.9764C153.17 88.0573 153.71 89.5 153.71 91.3044V94.9978C153.71 101.069 155.919 106.313 160.336 110.731C164.754 115.147 169.999 117.355 176.07 117.355C182.141 117.355 187.385 115.147 191.803 110.731C196.221 106.313 198.43 101.069 198.43 94.9978V91.3044C198.43 89.5 198.969 88.0573 200.048 86.9764C201.129 85.8956 202.572 85.3551 204.376 85.3551H220.171L276.171 117.888C278.455 119.174 279.902 121.051 280.51 123.52C281.118 125.988 280.779 128.364 279.494 130.648L262.264 160.8C260.979 163.085 259.146 164.504 256.766 165.056C254.387 165.611 252.001 165.246 249.608 163.96L234.736 156.062V257.251C234.736 259.932 233.833 262.175 232.027 263.979C230.223 265.785 227.98 266.688 225.299 266.688H126.84C124.159 266.688 121.917 265.785 120.112 263.979C118.306 262.175 117.403 259.932 117.403 257.251V155.899ZM133.403 129.088V250.688H218.736V129.088L251.598 147.12L262.592 128.555L216.83 101.683H213.443C211.802 110.682 207.55 118.21 200.686 124.267C193.82 130.326 185.615 133.355 176.07 133.355C166.525 133.355 158.319 130.326 151.454 124.267C144.59 118.21 140.337 110.682 138.696 101.683H135.31L89.547 128.555L100.542 147.12L133.403 129.088Z" fill="#f3f4f7" styleClass="cloth-icon" />
+                  <Circle blendMode="DIFFERENCE" fill="DODGERBLUE" radius="175.0" stroke="BLACK" strokeType="INSIDE" styleClass="circle-18" />
+               </children>
+               <clip>
+                  <Rectangle fx:id="clip" arcHeight="16" arcWidth="16" height="960.0" width="678.0" />
+               </clip>
+            </StackPane>
          </children>
-         <clip>
-            <Rectangle arcHeight="16" arcWidth="16" height="960.0" width="678.0" />
-         </clip>
-      </StackPane>
+      </VBox>
 
       <VBox maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefHeight="960.0" prefWidth="255.0" styleClass="p-85" HBox.hgrow="ALWAYS">
          <children>
@@ -61,7 +65,7 @@
                               <Font name="Ubuntu" size="24.0" />
                            </font>
                         </Label>
-                        <Label prefHeight="53.0" styleClass="link" text="Login" onMouseClicked="#goToLogin">
+                        <Label onMouseClicked="#goToLogin" prefHeight="53.0" styleClass="link" text="Login">
                            <font>
                               <Font name="Ubuntu" size="24.0" />
                            </font>

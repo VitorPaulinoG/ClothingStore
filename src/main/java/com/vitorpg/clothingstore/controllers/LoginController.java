@@ -11,6 +11,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -21,14 +23,24 @@ public class LoginController {
 
     @FXML
     private TextField txtEmail;
+
     @FXML
     private PasswordField txtPassword;
+
     @FXML
     private ImageView imgPicture;
 
     @FXML
-    public void initialize() {
+    private Rectangle clip;
 
+    @FXML
+    private StackPane spPicture;
+
+    @FXML
+    public void initialize() {
+        clip.setArcWidth(16);
+        clip.setArcHeight(16);
+        clip.heightProperty().bind(spPicture.heightProperty());
     }
 
     @FXML
