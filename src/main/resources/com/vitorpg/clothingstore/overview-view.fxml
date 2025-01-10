@@ -33,7 +33,7 @@
                               <String fx:value="bg-dark" />
                            </styleClass>
                            <children>
-                              <Label fx:id="lbIntervalDate" text="12/2024 - 01/2025">
+                              <Label fx:id="lbIntervalDate" text="Total">
                                  <styleClass>
                                     <String fx:value="txt-white" />
                                     <String fx:value="khand-font" />
@@ -124,7 +124,7 @@
                                           </Label>
                                        </children>
                                     </VBox>
-                                    <StackPane maxHeight="-Infinity" maxWidth="1.7976931348623157E308" onMouseClicked="#toggleStatistics" prefWidth="46.0" styleClass="p-0">
+                                    <StackPane fx:id="spEye" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" onMouseClicked="#toggleStatistics" prefWidth="46.0">
                                        <children>
                                           <Circle fill="DODGERBLUE" radius="36.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" StackPane.alignment="CENTER">
                                              <styleClass>
@@ -138,6 +138,10 @@
                                              </children>
                                           </HBox>
                                        </children>
+                                       <styleClass>
+                                          <String fx:value="p-0" />
+                                          <String fx:value="cursor-hand" />
+                                       </styleClass>
                                     </StackPane>
                                  </children>
                               </HBox>

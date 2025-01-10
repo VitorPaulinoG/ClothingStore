@@ -2,11 +2,18 @@ package com.vitorpg.clothingstore.controllers;
 
 import com.vitorpg.clothingstore.App;
 import com.vitorpg.clothingstore.events.ChangeSubSceneEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Tooltip;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.EventListener;
@@ -21,12 +28,16 @@ public class StoreRootController {
     private Button btnSale;
     @FXML
     private ScrollPane paneSubScene;
+    @FXML
+    private StackPane spHome;
 
     private String currentPage = null;
     private Button currentPageButton = null;
 
     @FXML
     public void initialize() {
+
+
         paneSubScene.addEventHandler(ChangeSubSceneEvent.SUBSCENE_CHANGED, event -> {
             loadSubScene(event.getSceneFxmlName());
         });
@@ -49,7 +60,17 @@ public class StoreRootController {
         });
         btnOverview.fire();
 
+        Tooltip overviewTooltip = new Tooltip("Visão Geral");
+        Tooltip.install(btnOverview, overviewTooltip);
 
+        Tooltip productsTooltip = new Tooltip("Lista de Produtos");
+        Tooltip.install(btnProducts, productsTooltip);
+
+        Tooltip saleTooltip = new Tooltip("Lista de Vendas");
+        Tooltip.install(btnSale, saleTooltip);
+
+        Tooltip homeTooltip = new Tooltip("Tela inicial");
+        Tooltip.install(spHome, homeTooltip);
     }
 
     private void setCurrentPage(Button button) {
@@ -93,4 +114,21 @@ public class StoreRootController {
             ex.printStackTrace();
         }
     }
+
+    @FXML
+    private void goToHome(MouseEvent mouseEvent) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("signin-view.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 1440, 1024);
+            Stage mainStage = (Stage) ((Node) mouseEvent.getSource()).getScene().getWindow();
+            mainStage.setScene(scene);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+//    @FXML
+//    private void goToHome(Event event) {
+
+//    }
 }
