@@ -65,9 +65,13 @@ public class AlterSaleController {
         this.sale = sale;
     }
 
-
     @FXML
     public void initialize () {
+        configureFields();
+        updateTotalPrice();
+    }
+
+    private void configureFields() {
         spnAmount.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE, 0, 1));
         spnAmount.getEditor().setTextFormatter(new TextFormatter<>(change -> {
             if (change.getText().matches("\\d*"))
@@ -120,8 +124,7 @@ public class AlterSaleController {
         ));
         cmbProductName.getSelectionModel().select(0);
         cmbProductName.hide();
-        spnAmount.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, (int) (long) selectedProduct.getAmount(), sale.getAmount().intValue(), 1));
-        updateTotalPrice();
+        spnAmount.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Math.max((int) (long) selectedProduct.getAmount(), sale.getAmount().intValue()), sale.getAmount().intValue(), 1));
     }
 
     private void updateTotalPrice () {
@@ -135,8 +138,8 @@ public class AlterSaleController {
         }
     }
 
-
-    public void alterSale(ActionEvent event) {
+    @FXML
+    private void alterSale(ActionEvent event) {
         var amount = (long) spnAmount.getValue();
         if(amount <= 0)
             return;

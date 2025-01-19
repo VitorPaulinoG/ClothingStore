@@ -1,8 +1,5 @@
 package com.vitorpg.clothingstore;
 
-import com.vitorpg.clothingstore.models.*;
-import com.vitorpg.clothingstore.models.enums.Gender;
-import com.vitorpg.clothingstore.models.enums.SizeType;
 import com.vitorpg.clothingstore.repositories.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -10,9 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 
 public class App extends Application {
     public static Stage mainStage;

@@ -53,6 +53,10 @@ public class RegisterSaleController {
 
     @FXML
     public void initialize () {
+        configureFields();
+    }
+
+    private void configureFields() {
         spnAmount.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE, 0, 1));
         spnAmount.getEditor().setTextFormatter(new TextFormatter<>(change -> {
             if (change.getText().matches("\\d*"))
@@ -91,7 +95,6 @@ public class RegisterSaleController {
                 spnAmount.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE, 0, 1));
             }
         });
-
     }
 
     private void updateTotalPrice () {
@@ -104,7 +107,6 @@ public class RegisterSaleController {
             ex.printStackTrace();
         }
     }
-
 
     public void registerSale(ActionEvent event) {
         var amount = (long) spnAmount.getValue();

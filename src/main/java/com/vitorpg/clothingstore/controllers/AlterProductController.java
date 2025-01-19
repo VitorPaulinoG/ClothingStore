@@ -165,51 +165,6 @@ public class AlterProductController {
 
     @FXML
     public void initialize () {
-        supply = supplyService.findByProductId(product.getId());
-        spSelectedImage = new StackPane();
-        Rectangle imageDisplayClip = new Rectangle(spImageDisplay.getPrefWidth(), spImageDisplay.getPrefHeight());
-        imageDisplayClip.setArcWidth(12);
-        imageDisplayClip.setArcHeight(12);
-        imgImageDisplay.setClip(imageDisplayClip);
-
-        categoryObservableList = FXCollections
-                .observableArrayList(categoryService.findAll());
-        materialObservableList = FXCollections
-                .observableArrayList(materialService.findAll());
-        colorObservableList = FXCollections
-                .observableArrayList(colorService.findAll());
-        styleObservableList = FXCollections
-                .observableArrayList(styleService.findAll());
-        supplierObservableList = FXCollections
-                .observableArrayList(supplierService.findAll());
-
-        cmbMaterial.setItems(materialObservableList);
-        cmbMaterial.setValue(cmbMaterial.getItems().stream().filter(x -> x.getId() == product.getMaterial().getId()).findFirst().get());
-        cmbCategory.setItems(categoryObservableList);
-        cmbCategory.setValue(cmbCategory.getItems().stream().filter(x -> x.getId() == product.getCategory().getId()).findFirst().get());
-        loadSizeBottons(cmbCategory.getValue().getSizeType());
-        sizeToggleGroup.selectToggle(sizeToggleGroup.getToggles().stream()
-                .filter(x -> ((Size)x.getUserData()).getId() == product.getSize().getId()).findFirst().get());
-        cmbStyle.setItems(styleObservableList);
-        cmbStyle.setValue(cmbStyle.getItems().stream().filter(x -> x.getId() == product.getStyle().getId()).findFirst().get());
-        cmbColor.setItems(colorObservableList);
-        cmbColor.setValue(cmbColor.getItems().stream().filter(x -> x.getId() == product.getColor().getId()).findFirst().get());
-        cmbSupplier.setItems(supplierObservableList);
-        cmbSupplier.setValue(cmbSupplier.getItems().stream().filter(x -> x.getId() == supply.getSupplier().getId()).findFirst().get());
-        dtSupplyDate.setValue(supply.getDate());
-
-        genderRadioToggleGroup = new ToggleGroup();
-        radGenderMale.setToggleGroup(genderRadioToggleGroup);
-        radGenderMale.setUserData(Gender.MALE);
-        radGenderFemale.setToggleGroup(genderRadioToggleGroup);
-        radGenderFemale.setUserData(Gender.FEMALE);
-        radGenderUnisex.setToggleGroup(genderRadioToggleGroup);
-        radGenderUnisex.setUserData(Gender.UNISEX);
-        txtProductName.setText(product.getName());
-
-        genderRadioToggleGroup.selectToggle(genderRadioToggleGroup.getToggles().stream()
-                .filter(x -> ((Gender)x.getUserData()) == product.getGender()).findFirst().get());
-
         flowPriceAndStock.getChildren().stream().filter(x -> x instanceof VBox)
             .forEach(x -> ((VBox) x).prefWidthProperty().bind(Bindings.createDoubleBinding(() -> {
                 int maxColumns = Math.max((int) ((flowPriceAndStock.getWidth()) / (250.0 + flowPriceAndStock.getHgap())), 1);
@@ -224,12 +179,58 @@ public class AlterProductController {
                 return prefWidth;
             }, flowProductProps.widthProperty())));
 
+        configureFields();
+        configureImageList();
+    }
+
+    private void configureFields() {
+        configureComboBoxes();
+        configureRadioButtons();
+
+        txtProductPrice.setText(String.format(Locale.US, "%.2f", product.getPrice()));
+        txtProductPrice.end();
+        txtProductPrice.setTextFormatter(new TextFormatter<>(change -> {
+            if (change.isContentChange() && change.getText().matches("\\d*|\\.")) {
+                if(txtProductPrice.getText().contains(".") && change.getText().contains("."))
+                    return null;
+                return change;
+            }
+            return null;
+        }));
+
+        txtProductCost.setText(String.format(Locale.US, "%.2f", supply.getPrice()));
+        txtProductCost.end();
+        txtProductCost.setTextFormatter(new TextFormatter<>(change -> {
+            if (change.isContentChange() && change.getText().matches("\\d*|\\.")) {
+                if(txtProductCost.getText().contains(".") && change.getText().contains("."))
+                    return null;
+                return change;
+            }
+            return null;
+        }));
+
+        spnAmountInStock.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE, (int) (long) product.getAmount(), 1));
+        spnAmountInStock.getEditor().setTextFormatter(new TextFormatter<>(change -> {
+            if (change.getText().matches("\\d*"))
+                return change;
+            return null;
+        }));
+
         cmbCategory.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if(newValue != null) {
                 hboxSizes.getChildren().clear();
                 loadSizeBottons(newValue.getSizeType());
             }
         });
+        cmbCategory.setOnAction(event -> {
+            Category selected = cmbCategory.getSelectionModel().getSelectedItem();
+            loadSizeBottons(selected.getSizeType());
+        });
+
+    }
+
+    private void configureComboBoxes() {
+        configureComboBoxesData();
 
         cmbCategory.setConverter(new StringConverter<Category>() {
             @Override
@@ -306,44 +307,40 @@ public class AlterProductController {
             }
         });
 
-        cmbCategory.setOnAction(event -> {
-            Category selected = cmbCategory.getSelectionModel().getSelectedItem();
-            loadSizeBottons(selected.getSizeType());
-        });
+        configureComboBoxesButtons();
+    }
 
+    private void configureComboBoxesData() {
+        categoryObservableList = FXCollections
+                .observableArrayList(categoryService.findAll());
+        materialObservableList = FXCollections
+                .observableArrayList(materialService.findAll());
+        colorObservableList = FXCollections
+                .observableArrayList(colorService.findAll());
+        styleObservableList = FXCollections
+                .observableArrayList(styleService.findAll());
+        supplierObservableList = FXCollections
+                .observableArrayList(supplierService.findAll());
 
-        txtProductPrice.setText(String.format(Locale.US, "%.2f", product.getPrice()));
-        txtProductPrice.end();
-        txtProductPrice.setTextFormatter(new TextFormatter<>(change -> {
-            if (change.isContentChange() && change.getText().matches("\\d*|\\.")) {
-                if(txtProductPrice.getText().contains(".") && change.getText().contains("."))
-                    return null;
-                return change;
-            }
-            return null;
-        }));
+        supply = supplyService.findByProductId(product.getId());
 
+        cmbMaterial.setItems(materialObservableList);
+        cmbMaterial.setValue(cmbMaterial.getItems().stream().filter(x -> x.getId() == product.getMaterial().getId()).findFirst().get());
+        cmbCategory.setItems(categoryObservableList);
+        cmbCategory.setValue(cmbCategory.getItems().stream().filter(x -> x.getId() == product.getCategory().getId()).findFirst().get());
+        loadSizeBottons(cmbCategory.getValue().getSizeType());
+        sizeToggleGroup.selectToggle(sizeToggleGroup.getToggles().stream()
+                .filter(x -> ((Size)x.getUserData()).getId() == product.getSize().getId()).findFirst().get());
+        cmbStyle.setItems(styleObservableList);
+        cmbStyle.setValue(cmbStyle.getItems().stream().filter(x -> x.getId() == product.getStyle().getId()).findFirst().get());
+        cmbColor.setItems(colorObservableList);
+        cmbColor.setValue(cmbColor.getItems().stream().filter(x -> x.getId() == product.getColor().getId()).findFirst().get());
+        cmbSupplier.setItems(supplierObservableList);
+        cmbSupplier.setValue(cmbSupplier.getItems().stream().filter(x -> x.getId() == supply.getSupplier().getId()).findFirst().get());
+        dtSupplyDate.setValue(supply.getDate());
+    }
 
-
-        txtProductCost.setText(String.format(Locale.US, "%.2f", supply.getPrice()));
-        txtProductCost.end();
-        txtProductCost.setTextFormatter(new TextFormatter<>(change -> {
-            if (change.isContentChange() && change.getText().matches("\\d*|\\.")) {
-                if(txtProductCost.getText().contains(".") && change.getText().contains("."))
-                    return null;
-                return change;
-            }
-            return null;
-        }));
-
-        spnAmountInStock.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE, (int) (long) product.getAmount(), 1));
-        spnAmountInStock.getEditor().setTextFormatter(new TextFormatter<>(change -> {
-            if (change.getText().matches("\\d*"))
-                return change;
-            return null;
-        }));
-
-
+    private void configureComboBoxesButtons () {
         btnAddCategory.setOnAction(event -> {
             confirmAddCategory();
         });
@@ -387,6 +384,29 @@ public class AlterProductController {
                 cmbSupplier.setItems(this.supplierObservableList);
             }, "Fornecedor(a)");
         });
+    }
+
+    private void configureRadioButtons () {
+        genderRadioToggleGroup = new ToggleGroup();
+        radGenderMale.setToggleGroup(genderRadioToggleGroup);
+        radGenderMale.setUserData(Gender.MALE);
+        radGenderFemale.setToggleGroup(genderRadioToggleGroup);
+        radGenderFemale.setUserData(Gender.FEMALE);
+        radGenderUnisex.setToggleGroup(genderRadioToggleGroup);
+        radGenderUnisex.setUserData(Gender.UNISEX);
+        txtProductName.setText(product.getName());
+
+        genderRadioToggleGroup.selectToggle(genderRadioToggleGroup.getToggles().stream()
+                .filter(x -> ((Gender)x.getUserData()) == product.getGender()).findFirst().get());
+    }
+
+    private void configureImageList() {
+
+        spSelectedImage = new StackPane();
+        Rectangle imageDisplayClip = new Rectangle(spImageDisplay.getPrefWidth(), spImageDisplay.getPrefHeight());
+        imageDisplayClip.setArcWidth(12);
+        imageDisplayClip.setArcHeight(12);
+        imgImageDisplay.setClip(imageDisplayClip);
 
         EventHandler<MouseEvent> entered = event -> {
             SVGPath svgPath = new SVGPath();
@@ -489,6 +509,7 @@ public class AlterProductController {
             }
         });
     }
+
 
     private void loadImages (EventHandler<MouseEvent> entered, EventHandler<MouseEvent> exited) {
         var images = product.getImages();

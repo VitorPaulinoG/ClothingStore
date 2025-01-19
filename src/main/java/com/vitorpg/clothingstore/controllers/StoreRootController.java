@@ -36,8 +36,14 @@ public class StoreRootController {
 
     @FXML
     public void initialize() {
+        configureEventHandlers();
 
+        btnOverview.fire();
 
+        configureTooltips();
+    }
+
+    private void configureEventHandlers() {
         paneSubScene.addEventHandler(ChangeSubSceneEvent.SUBSCENE_CHANGED, event -> {
             loadSubScene(event.getSceneFxmlName());
         });
@@ -54,23 +60,11 @@ public class StoreRootController {
             setCurrentPage(btnProducts);
             loadSubScene("product-list-view");
         });
+
         btnSale.setOnAction(event -> {
             setCurrentPage(btnSale);
             loadSubScene("sale-list-view");
         });
-        btnOverview.fire();
-
-        Tooltip overviewTooltip = new Tooltip("Visão Geral");
-        Tooltip.install(btnOverview, overviewTooltip);
-
-        Tooltip productsTooltip = new Tooltip("Lista de Produtos");
-        Tooltip.install(btnProducts, productsTooltip);
-
-        Tooltip saleTooltip = new Tooltip("Lista de Vendas");
-        Tooltip.install(btnSale, saleTooltip);
-
-        Tooltip homeTooltip = new Tooltip("Tela inicial");
-        Tooltip.install(spHome, homeTooltip);
     }
 
     private void setCurrentPage(Button button) {
@@ -80,8 +74,6 @@ public class StoreRootController {
 
         button.getStyleClass().add("nav-button-current");
         currentPageButton = button;
-
-
     }
 
     private void loadSubScene(String sceneFxmlName) {
@@ -115,6 +107,21 @@ public class StoreRootController {
         }
     }
 
+    private void configureTooltips() {
+        Tooltip overviewTooltip = new Tooltip("Visão Geral");
+        Tooltip.install(btnOverview, overviewTooltip);
+
+        Tooltip productsTooltip = new Tooltip("Lista de Produtos");
+        Tooltip.install(btnProducts, productsTooltip);
+
+        Tooltip saleTooltip = new Tooltip("Lista de Vendas");
+        Tooltip.install(btnSale, saleTooltip);
+
+        Tooltip homeTooltip = new Tooltip("Tela inicial");
+        Tooltip.install(spHome, homeTooltip);
+    }
+
+
     @FXML
     private void goToHome(MouseEvent mouseEvent) {
         try {
@@ -126,9 +133,4 @@ public class StoreRootController {
             ex.printStackTrace();
         }
     }
-
-//    @FXML
-//    private void goToHome(Event event) {
-
-//    }
 }

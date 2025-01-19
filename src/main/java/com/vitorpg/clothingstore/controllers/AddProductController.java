@@ -150,29 +150,6 @@ public class AddProductController {
 
     @FXML
     public void initialize () {
-        spSelectedImage = new StackPane();
-        Rectangle imageDisplayClip = new Rectangle(spImageDisplay.getPrefWidth(), spImageDisplay.getPrefHeight());
-        imageDisplayClip.setArcWidth(12);
-        imageDisplayClip.setArcHeight(12);
-        imgImageDisplay.setClip(imageDisplayClip);
-
-        categoryObservableList = FXCollections
-                .observableArrayList(categoryService.findAll());
-        materialObservableList = FXCollections
-                .observableArrayList(materialService.findAll());
-        colorObservableList = FXCollections
-                .observableArrayList(colorService.findAll());
-        styleObservableList = FXCollections
-                .observableArrayList(styleService.findAll());
-        supplierObservableList = FXCollections
-                .observableArrayList(supplierService.findAll());
-
-        cmbMaterial.setItems(materialObservableList);
-        cmbCategory.setItems(categoryObservableList);
-        cmbStyle.setItems(styleObservableList);
-        cmbColor.setItems(colorObservableList);
-        cmbSupplier.setItems(supplierObservableList);
-
         flowPriceAndStock.getChildren().stream().filter(x -> x instanceof VBox)
             .forEach(x -> ((VBox) x).prefWidthProperty().bind(Bindings.createDoubleBinding(() -> {
                 int maxColumns = Math.max((int) ((flowPriceAndStock.getWidth()) / (250.0 + flowPriceAndStock.getHgap())), 1);
@@ -187,12 +164,56 @@ public class AddProductController {
                 return prefWidth;
             }, flowProductProps.widthProperty())));
 
+        configureFields();
+        configureImageList();
+    }
+
+    private void configureFields() {
+        configureComboBoxes();
+        configureRadioButtons();
+
+        txtProductPrice.end();
+        txtProductPrice.setTextFormatter(new TextFormatter<>(change -> {
+            if (change.isContentChange() && change.getText().matches("\\d*|\\.")) {
+                if(txtProductPrice.getText().contains(".") && change.getText().contains("."))
+                    return null;
+                return change;
+            }
+            return null;
+        }));
+
+        txtProductCost.end();
+        txtProductCost.setTextFormatter(new TextFormatter<>(change -> {
+            if (change.isContentChange() && change.getText().matches("\\d*|\\.")) {
+                if(txtProductCost.getText().contains(".") && change.getText().contains("."))
+                    return null;
+                return change;
+            }
+            return null;
+        }));
+
+        spnAmountInStock.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE, 0, 1));
+        spnAmountInStock.getEditor().setTextFormatter(new TextFormatter<>(change -> {
+            if (change.getText().matches("\\d*"))
+                return change;
+            return null;
+        }));
+
         cmbCategory.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if(newValue != null) {
                 hboxSizes.getChildren().clear();
                 loadSizeBottons(newValue.getSizeType());
             }
         });
+
+        cmbCategory.setOnAction(event -> {
+            Category selected = cmbCategory.getSelectionModel().getSelectedItem();
+            loadSizeBottons(selected.getSizeType());
+        });
+    }
+
+    private void configureComboBoxes() {
+        configureComboBoxesData();
 
         cmbCategory.setConverter(new StringConverter<Category>() {
             @Override
@@ -269,47 +290,29 @@ public class AddProductController {
             }
         });
 
-        cmbCategory.setOnAction(event -> {
-            Category selected = cmbCategory.getSelectionModel().getSelectedItem();
-            loadSizeBottons(selected.getSizeType());
-        });
+        configureComboBoxesButtons();
+    }
 
-        genderRadioToggleGroup = new ToggleGroup();
-        radGenderMale.setToggleGroup(genderRadioToggleGroup);
-        radGenderMale.setUserData(Gender.MALE);
-        radGenderFemale.setToggleGroup(genderRadioToggleGroup);
-        radGenderFemale.setUserData(Gender.FEMALE);
-        radGenderUnisex.setToggleGroup(genderRadioToggleGroup);
-        radGenderUnisex.setUserData(Gender.UNISEX);
+    private void configureComboBoxesData() {
+        categoryObservableList = FXCollections
+                .observableArrayList(categoryService.findAll());
+        materialObservableList = FXCollections
+                .observableArrayList(materialService.findAll());
+        colorObservableList = FXCollections
+                .observableArrayList(colorService.findAll());
+        styleObservableList = FXCollections
+                .observableArrayList(styleService.findAll());
+        supplierObservableList = FXCollections
+                .observableArrayList(supplierService.findAll());
 
-        txtProductPrice.end();
-        txtProductPrice.setTextFormatter(new TextFormatter<>(change -> {
-            if (change.isContentChange() && change.getText().matches("\\d*|\\.")) {
-                if(txtProductPrice.getText().contains(".") && change.getText().contains("."))
-                    return null;
-                return change;
-            }
-            return null;
-        }));
+        cmbMaterial.setItems(materialObservableList);
+        cmbCategory.setItems(categoryObservableList);
+        cmbStyle.setItems(styleObservableList);
+        cmbColor.setItems(colorObservableList);
+        cmbSupplier.setItems(supplierObservableList);
+    }
 
-        txtProductCost.end();
-        txtProductCost.setTextFormatter(new TextFormatter<>(change -> {
-            if (change.isContentChange() && change.getText().matches("\\d*|\\.")) {
-                if(txtProductCost.getText().contains(".") && change.getText().contains("."))
-                    return null;
-                return change;
-            }
-            return null;
-        }));
-
-        spnAmountInStock.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE, 0, 1));
-        spnAmountInStock.getEditor().setTextFormatter(new TextFormatter<>(change -> {
-            if (change.getText().matches("\\d*"))
-                return change;
-            return null;
-        }));
-
-
+    private void configureComboBoxesButtons () {
         btnAddCategory.setOnAction(event -> {
             confirmAddCategory();
         });
@@ -353,7 +356,19 @@ public class AddProductController {
                 cmbSupplier.setItems(this.supplierObservableList);
             }, "Fornecedor(a)");
         });
+    }
 
+    private void configureRadioButtons () {
+        genderRadioToggleGroup = new ToggleGroup();
+        radGenderMale.setToggleGroup(genderRadioToggleGroup);
+        radGenderMale.setUserData(Gender.MALE);
+        radGenderFemale.setToggleGroup(genderRadioToggleGroup);
+        radGenderFemale.setUserData(Gender.FEMALE);
+        radGenderUnisex.setToggleGroup(genderRadioToggleGroup);
+        radGenderUnisex.setUserData(Gender.UNISEX);
+    }
+
+    private void configureImageList() {
         EventHandler<MouseEvent> entered = event -> {
             SVGPath svgPath = new SVGPath();
             svgPath.setContent("M7.72656 21.3688C7.17656 21.3688 6.70573 21.1729 6.31406 20.7813C5.9224 20.3896 5.72656 19.9188 5.72656 19.3688V6.36877H4.72656V4.36877H9.72656V3.36877H15.7266V4.36877H20.7266V6.36877H19.7266V19.3688C19.7266 19.9188 19.5307 20.3896 19.1391 20.7813C18.7474 21.1729 18.2766 21.3688 17.7266 21.3688H7.72656ZM17.7266 6.36877H7.72656V19.3688H17.7266V6.36877ZM9.72656 17.3688H11.7266V8.36877H9.72656V17.3688ZM13.7266 17.3688H15.7266V8.36877H13.7266V17.3688Z");
@@ -385,6 +400,12 @@ public class AddProductController {
         EventHandler<MouseEvent> exited = event -> {
             spSelectedImage.getChildren().removeIf(x -> x instanceof StackPane);
         };
+
+        spSelectedImage = new StackPane();
+        Rectangle imageDisplayClip = new Rectangle(spImageDisplay.getPrefWidth(), spImageDisplay.getPrefHeight());
+        imageDisplayClip.setArcWidth(12);
+        imageDisplayClip.setArcHeight(12);
+        imgImageDisplay.setClip(imageDisplayClip);
 
         spAddImage.setOnMouseClicked(event -> {
             FileChooser fileChooser = new FileChooser();

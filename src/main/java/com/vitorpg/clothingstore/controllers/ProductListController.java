@@ -24,7 +24,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.TextAlignment;
-import javafx.util.Callback;
 
 import java.util.Optional;
 
@@ -101,80 +100,151 @@ public class ProductListController {
 
     @FXML
     public void initialize () {
+        configureChoiceBoxesData();
+        configureFiltersEvents();
+        configureTableColumns();
+        
+        tbProductList.addEventFilter(javafx.scene.input.ScrollEvent.SCROLL, event -> {
+            ScrollPane parentScene = (ScrollPane) tbProductList.getScene().lookup("#paneSubScene");
 
-        productObservableList = FXCollections
-                .observableArrayList(productService.findPaginated(pageMaxCount, pageOffset));
-        txtName.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.ENTER) {
-                refreshAll();
+            if (parentScene != null) {
+                double deltaY = event.getDeltaY();
+                parentScene.setVvalue(parentScene.getVvalue() - deltaY / parentScene.getHeight());
+                event.consume();
             }
-
         });
+        tbProductList.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_LAST_COLUMN);
+        flowFilters.getChildren().stream().filter(x -> x instanceof VBox)
+                .forEach(x -> ((VBox) x).prefWidthProperty().bind(Bindings.createDoubleBinding(() -> {
+                    int maxColumns = Math.max((int) ((flowFilters.getWidth()) / (200.0 + flowFilters.getHgap())), 1);
+                    var prefWidth = ((flowFilters.getWidth()) / maxColumns) - flowFilters.getHgap();
+                    return prefWidth;
+                }, flowFilters.widthProperty())));
+
+        refreshFilters();
+        refreshPagination();
+        pagProductList.setPageFactory(pageNumber -> {
+            pageOffset = ((long) pageNumber) * pageMaxCount;
+            loadProducts();
+            return new VBox();
+        });
+    }
+
+    public boolean showAlert (Alert.AlertType alertType, String headerText, String contentText) {
+        Alert alert = new Alert(alertType);
+        var alertPane = alert.getDialogPane();
+        alertPane.getStylesheets().add("/main-styles.css");
+        alert.setHeaderText(headerText);
+        alert.setContentText(contentText);
+        var result = alert.showAndWait();
+        return result.get() == ButtonType.OK;
+    }
+
+    private void refreshAll () {
+        refreshFilters();
+        refreshPagination();
+        loadProducts();
+    }
+
+    private void refreshPagination () {
+        productsTotalCount = (int) (long) productService.getTotalCountFiltered(productFilter);
+        pageCount = (int) Math.ceil((double) productsTotalCount / pageMaxCount);
+        pagProductList.setPageCount(pageCount);
+        pagProductList.setCurrentPageIndex((int) (long) pageOffset);
+    }
+
+    private void refreshFilters() {
+        if(txtName.getText().isEmpty() && txtName.getText().isBlank())
+            productFilter.setName(Optional.ofNullable(null));
+        else
+            productFilter.setName(Optional.ofNullable(txtName.getText().trim()));
+
+        productFilter.setGender(Optional.ofNullable(cbGender.getSelectionModel().getSelectedItem()));
+
+        productFilter.setCategory(Optional.ofNullable(cbCategory.getSelectionModel().getSelectedItem()));
+
+        productFilter.setSize(Optional.ofNullable(cbSize.getSelectionModel().getSelectedItem()));
+
+        productFilter.setColor(Optional.ofNullable(cbColor.getSelectionModel().getSelectedItem()));
+
+        productFilter.setMaterial(Optional.ofNullable(cbMaterial.getSelectionModel().getSelectedItem()));
+
+        productFilter.setStyle(Optional.ofNullable(cbStyle.getSelectionModel().getSelectedItem()));
+
+        productFilter.setStatus(Optional.ofNullable(cbStatus.getSelectionModel().getSelectedItem()));
+    }
+
+    public void loadProducts () {
+        productObservableList = FXCollections
+                .observableArrayList(productService.findPaginatedFiltered(pageMaxCount, pageOffset, productFilter));
+
+        tbProductList.setItems(productObservableList);
+        tbProductList.setFixedCellSize(156);
+        tbProductList.prefHeightProperty().bind(tbProductList.fixedCellSizeProperty()
+                .multiply(Math.min(productObservableList.size() + 5, pageMaxCount + 1)));
+        tbProductList.setMinHeight(0);
+    }
+
+    public Image getFirstImage(Product product) {
+        return product.getImages().getFirst();
+    }
+
+    private void configureChoiceBoxesData() {
         cbGender.setItems(FXCollections
                 .observableArrayList(Gender.values()));
         cbGender.getItems().add(0, null);
         cbGender.setValue(cbGender.getItems().get(0));
+
         cbCategory.setItems(FXCollections
                 .observableArrayList(categoryService.findAll()));
         cbCategory.getItems().add(0, null);
         cbCategory.setValue(cbCategory.getItems().get(0));
+
         cbMaterial.setItems(FXCollections
                 .observableArrayList(materialService.findAll()));
         cbMaterial.getItems().add(0, null);
         cbMaterial.setValue(cbMaterial.getItems().get(0));
+
         cbColor.setItems(FXCollections
                 .observableArrayList(colorService.findAll()));
         cbColor.getItems().add(0, null);
         cbColor.setValue(cbColor.getItems().get(0));
+
         cbSize.setItems(FXCollections
                 .observableArrayList(sizeService.findAll()));
         cbSize.getItems().add(0, null);
         cbSize.setValue(cbSize.getItems().get(0));
+
         cbStyle.setItems(FXCollections
                 .observableArrayList(styleService.findAll()));
         cbStyle.getItems().add(0, null);
         cbStyle.setValue(cbStyle.getItems().get(0));
+
         cbStatus.setItems(FXCollections
                 .observableArrayList(ProductStatus.values()));
         cbStatus.getItems().add(0, null);
         cbStatus.setValue(cbStatus.getItems().get(1));
+    }
 
-        flowFilters.getChildren().stream().filter(x -> x instanceof VBox)
-            .forEach(x -> ((VBox) x).prefWidthProperty().bind(Bindings.createDoubleBinding(() -> {
-                int maxColumns = Math.max((int) ((flowFilters.getWidth()) / (200.0 + flowFilters.getHgap())), 1);
-                var prefWidth = ((flowFilters.getWidth()) / maxColumns) - flowFilters.getHgap();
-                return prefWidth;
-            }, flowFilters.widthProperty())));
-
-
-        cbGender.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
-            refreshAll();
+    private void configureFiltersEvents() {
+        txtName.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                refreshAll();
+            }
         });
 
-        cbCategory.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
-            refreshAll();
-        });
+        configureChoiceBoxesEvents(cbGender, cbCategory, cbMaterial, cbColor, cbSize, cbStyle, cbStatus);
+    }
 
-        cbMaterial.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
-            refreshAll();
-        });
+    private void configureChoiceBoxesEvents(ChoiceBox... choiceBoxes){
+        for(var choiceBox : choiceBoxes) {
+            choiceBox.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
+                refreshAll();
+            });
+        }
+    }
 
-        cbColor.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
-            refreshAll();
-        });
-
-        cbSize.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
-            refreshAll();
-        });
-
-        cbStyle.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
-            refreshAll();
-        });
-
-        cbStatus.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
-            refreshAll();
-        });
-
+    private void configureTableColumns() {
         colProductId.setCellFactory(column -> new TableCell<Product, Long>() {
             @Override
             protected void updateItem(Long item, boolean empty) {
@@ -224,175 +294,89 @@ public class ProductListController {
         });
 
         colProductName.setCellValueFactory(new PropertyValueFactory<Product, String>("name"));
+
         colProductPrice.setCellValueFactory(new PropertyValueFactory<Product, Double>("price"));
 
-        setBasicActions ();
-
-        tbProductList.addEventFilter(javafx.scene.input.ScrollEvent.SCROLL, event -> {
-            ScrollPane parentScene = (ScrollPane) tbProductList.getScene().lookup("#paneSubScene");
-
-            if (parentScene != null) {
-                double deltaY = event.getDeltaY();
-                parentScene.setVvalue(parentScene.getVvalue() - deltaY / parentScene.getHeight());
-                event.consume();
-            }
-        });
-
-        tbProductList.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_LAST_COLUMN);
-
-        tbProductList.setItems(productObservableList);
-
-        refreshFilter();
-        refreshPagination();
-        pagProductList.setPageFactory(pageNumber -> {
-            pageOffset = ((long) pageNumber) * pageMaxCount;
-            loadProducts();
-            return new VBox();
-        });
-    }
-
-    public boolean showAlert (Alert.AlertType alertType, String headerText, String contentText) {
-        Alert alert = new Alert(alertType);
-        var alertPane = alert.getDialogPane();
-        alertPane.getStylesheets().add("/main-styles.css");
-        alert.setHeaderText(headerText);
-        alert.setContentText(contentText);
-        var result = alert.showAndWait();
-        return result.get() == ButtonType.OK;
+        setBasicActions();
     }
 
     private void setBasicActions () {
-        colProductActions.setCellFactory(new Callback<TableColumn<Product, Void>, TableCell<Product, Void>>() {
-            @Override
-            public TableCell<Product, Void> call (TableColumn<Product, Void> param) {
-                return new TableCell<Product, Void>() {
-                    private final Button btn_Alter = new Button("Alterar");
-                    private final Button btn_Active = new Button("Ativar");
-                    private final Button btn_Remove = new Button("Remover");
-                    private final Button btn_Delete = new Button("Deletar");
+        colProductActions.setCellFactory(column -> new TableCell<Product, Void>() {
+            private final Button btn_Alter = new Button("Alterar");
+            private final Button btn_Active = new Button("Ativar");
+            private final Button btn_Remove = new Button("Remover");
+            private final Button btn_Delete = new Button("Deletar");
 
+            {
+                btn_Alter.setOnAction(event -> {
+                    Product product = getTableView().getItems().get(getIndex());
+                    AlterProductController alterProductController = new AlterProductController();
+                    alterProductController.setProduct(product);
+                    btn_Alter.fireEvent(new ChangeSubSceneEvent(ChangeSubSceneEvent.SUBSCENE_CHANGED_AND_COMMUNICATION, "alter-product-view", alterProductController));
+                });
 
-                    {
-                        btn_Alter.setOnAction(event -> {
-                            Product product = getTableView().getItems().get(getIndex());
-                            AlterProductController alterProductController = new AlterProductController();
-                            alterProductController.setProduct(product);
-                            btn_Alter.fireEvent(new ChangeSubSceneEvent(ChangeSubSceneEvent.SUBSCENE_CHANGED_AND_COMMUNICATION, "alter-product-view", alterProductController));
-                        });
+                btn_Active.setOnAction(event -> {
+                    Product product = getTableView().getItems().get(getIndex());
+                    product.setStatus(ProductStatus.ACTIVE);
+                    productService.update(product.getId(), product);
+                    refreshAll();
+                });
 
-                        btn_Active.setOnAction(event -> {
-                            Product product = getTableView().getItems().get(getIndex());
-                            product.setStatus(ProductStatus.ACTIVE);
-                            productService.update(product.getId(), product);
-                            refreshAll();
-                        });
+                btn_Remove.setOnAction(event -> {
+                    Product product = getTableView().getItems().get(getIndex());
+                    boolean result = showAlert(Alert.AlertType.CONFIRMATION, "Remover Produto", "Você tem certeza de que deseja remover esse produto? ");
+                    if (result)
+                        productService.remove(product.getId());
+                    loadProducts();
+                });
 
-                        btn_Remove.setOnAction(event -> {
-                            Product product = getTableView().getItems().get(getIndex());
-                            boolean result = showAlert(Alert.AlertType.CONFIRMATION, "Remover Produto", "Você tem certeza de que deseja remover esse produto? ");
-                            if (result)
-                                productService.remove(product.getId());
-                            loadProducts();
-                        });
-
-                        btn_Delete.setOnAction(event -> {
-                            Product product = getTableView().getItems().get(getIndex());
-                            boolean result = showAlert(Alert.AlertType.CONFIRMATION, "Deletar Produto", "Você tem certeza de que deseja deletar permanentemente esse produto? ");
-                            if (result)
-                                productService.delete(product.getId());
-                            loadProducts();
-                        });
-                    }
-
-                    @Override
-                    protected void updateItem(Void item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (empty) {
-                            setGraphic(null);
-                        } else {
-                            btn_Alter.setTextAlignment(TextAlignment.CENTER);
-                            btn_Alter.setPrefWidth(166.0);
-                            btn_Alter.getStyleClass().addAll("b-primary", "rounded-left-28", "btn-group-outline",
-                                    "btn-group-outline-start", "fs-24", "khand-medium-font");
-
-                            btn_Remove.setTextAlignment(TextAlignment.CENTER);
-                            btn_Remove.setPrefWidth(166.0);
-                            btn_Remove.getStyleClass().addAll("b-primary", "rounded-right-28", "btn-group-outline",
-                                    "btn-group-outline-end", "fs-24", "khand-medium-font");
-
-                            btn_Active.setTextAlignment(TextAlignment.CENTER);
-                            btn_Active.setPrefWidth(166.0);
-                            btn_Active.getStyleClass().addAll("b-primary", "rounded-left-28", "btn-group-outline",
-                                    "btn-group-outline-start", "fs-24", "khand-medium-font");
-
-                            btn_Delete.setTextAlignment(TextAlignment.CENTER);
-                            btn_Delete.setPrefWidth(166.0);
-                            btn_Delete.getStyleClass().addAll("b-primary", "rounded-right-28", "btn-group-outline",
-                                    "btn-group-outline-end", "fs-24", "khand-medium-font");
-
-                            HBox hBox = new HBox(0);
-                            hBox.setAlignment(Pos.CENTER);
-                            if(getTableView().getItems().get(getIndex()).getStatus() == ProductStatus.REMOVED) {
-                                hBox.getChildren().addAll(btn_Active, btn_Delete);
-                            } else {
-                                hBox.getChildren().addAll(btn_Alter, btn_Remove);
-                            }
-
-                            setGraphic(hBox);
-                        }
-                    }
-                };
+                btn_Delete.setOnAction(event -> {
+                    Product product = getTableView().getItems().get(getIndex());
+                    boolean result = showAlert(Alert.AlertType.CONFIRMATION, "Deletar Produto", "Você tem certeza de que deseja deletar permanentemente esse produto? ");
+                    if (result)
+                        productService.delete(product.getId());
+                    loadProducts();
+                });
             }
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    btn_Alter.setTextAlignment(TextAlignment.CENTER);
+                    btn_Alter.setPrefWidth(166.0);
+                    btn_Alter.getStyleClass().addAll("b-primary", "rounded-left-28", "btn-group-outline",
+                            "btn-group-outline-start", "fs-24", "khand-medium-font");
+
+                    btn_Remove.setTextAlignment(TextAlignment.CENTER);
+                    btn_Remove.setPrefWidth(166.0);
+                    btn_Remove.getStyleClass().addAll("b-primary", "rounded-right-28", "btn-group-outline",
+                            "btn-group-outline-end", "fs-24", "khand-medium-font");
+
+                    btn_Active.setTextAlignment(TextAlignment.CENTER);
+                    btn_Active.setPrefWidth(166.0);
+                    btn_Active.getStyleClass().addAll("b-primary", "rounded-left-28", "btn-group-outline",
+                            "btn-group-outline-start", "fs-24", "khand-medium-font");
+
+                    btn_Delete.setTextAlignment(TextAlignment.CENTER);
+                    btn_Delete.setPrefWidth(166.0);
+                    btn_Delete.getStyleClass().addAll("b-primary", "rounded-right-28", "btn-group-outline",
+                            "btn-group-outline-end", "fs-24", "khand-medium-font");
+
+                    HBox hBox = new HBox(0);
+                    hBox.setAlignment(Pos.CENTER);
+                    if(getTableView().getItems().get(getIndex()).getStatus() == ProductStatus.REMOVED) {
+                        hBox.getChildren().addAll(btn_Active, btn_Delete);
+                    } else {
+                        hBox.getChildren().addAll(btn_Alter, btn_Remove);
+                    }
+
+                    setGraphic(hBox);
+                }
+            };
         });
-    }
-
-    private void refreshAll () {
-        refreshFilter();
-        refreshPagination();
-        loadProducts();
-    }
-
-    private void refreshPagination () {
-        productsTotalCount = (int) (long) productService.getTotalCountFiltered(productFilter);
-        pageCount = (int) Math.ceil((double) productsTotalCount / pageMaxCount);
-        pagProductList.setPageCount(pageCount);
-        pagProductList.setCurrentPageIndex((int) (long) pageOffset);
-    }
-
-    private void refreshFilter () {
-        if(txtName.getText().isEmpty() && txtName.getText().isBlank())
-            productFilter.setName(Optional.ofNullable(null));
-        else
-            productFilter.setName(Optional.ofNullable(txtName.getText().trim()));
-
-        productFilter.setGender(Optional.ofNullable(cbGender.getSelectionModel().getSelectedItem()));
-
-        productFilter.setCategory(Optional.ofNullable(cbCategory.getSelectionModel().getSelectedItem()));
-
-        productFilter.setSize(Optional.ofNullable(cbSize.getSelectionModel().getSelectedItem()));
-
-        productFilter.setColor(Optional.ofNullable(cbColor.getSelectionModel().getSelectedItem()));
-
-        productFilter.setMaterial(Optional.ofNullable(cbMaterial.getSelectionModel().getSelectedItem()));
-
-        productFilter.setStyle(Optional.ofNullable(cbStyle.getSelectionModel().getSelectedItem()));
-
-        productFilter.setStatus(Optional.ofNullable(cbStatus.getSelectionModel().getSelectedItem()));
-    }
-
-    public void loadProducts () {
-        productObservableList = FXCollections
-                .observableArrayList(productService.findPaginatedFiltered(pageMaxCount, pageOffset, productFilter));
-
-        tbProductList.setItems(productObservableList);
-        tbProductList.setFixedCellSize(156);
-        tbProductList.prefHeightProperty().bind(tbProductList.fixedCellSizeProperty()
-                .multiply(Math.min(productObservableList.size() + 5, pageMaxCount + 1)));
-        tbProductList.setMinHeight(0);
-    }
-
-    public Image getFirstImage(Product product) {
-        return product.getImages().getFirst();
     }
 
     @FXML

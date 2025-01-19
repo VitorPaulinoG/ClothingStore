@@ -59,7 +59,11 @@ public class OverviewController {
 
     @FXML
     public void initialize () {
+        configureHeader();
         toggleStatistics();
+    }
+
+    private void configureHeader() {
         Image image = new Image(getClass().getResource("/com/vitorpg/clothingstore/images/header-background.png").toExternalForm());
 
         BackgroundImage background = new BackgroundImage(

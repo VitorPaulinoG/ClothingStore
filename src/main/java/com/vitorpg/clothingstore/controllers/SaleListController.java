@@ -102,35 +102,9 @@ public class SaleListController {
 
     @FXML
     public void initialize () {
-        cbAmount.setItems(FXCollections.observableArrayList(List.of(">=", ">", "=", "<", "<=")));
-        cbAmount.getItems().add(0, null);
-        spnAmount.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE, 0, 1));
-        spnAmount.getEditor().setTextFormatter(new TextFormatter<>(change -> {
-            if (change.getText().matches("\\d*"))
-                return change;
-            return null;
-        }));
-
-        txtName.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.ENTER) {
-                refreshAll();
-            }
-        });
-        cbAmount.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
-            refreshAll();
-        });
-
-        spnAmount.valueProperty().addListener((obs, oldValue, newValue) -> {
-            if (saleFilter.getAmountComparator().isPresent())
-                refreshAll();
-        });
-        dtBefore.valueProperty().addListener((obs, oldValue, newValue) -> {
-            refreshAll();
-        });
-        dtAfter.valueProperty().addListener((obs, oldValue, newValue) -> {
-            refreshAll();
-        });
-
+        configureFiltersData();
+        configureFiltersEvents();
+        configureTableColumns();
 
         flowFilters.getChildren().stream().filter(x -> x instanceof VBox)
             .forEach(x -> ((VBox) x).prefWidthProperty().bind(Bindings.createDoubleBinding(() -> {
@@ -138,13 +112,6 @@ public class SaleListController {
                 var prefWidth = ((flowFilters.getWidth()) / maxColumns) - flowFilters.getHgap();
                 return prefWidth;
             }, flowFilters.widthProperty())));
-
-        colDate.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getDateTime().toLocalDate()));
-        colAmount.setCellValueFactory(new PropertyValueFactory<Sale, Integer>("amount"));
-        colProductName.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(productService.findById(cellData.getValue().getProduct().getId()).getName()));
-        colUnitValue.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(productService.findById(cellData.getValue().getProduct().getId()).getPrice()));
-        colTotalValue.setCellValueFactory(new PropertyValueFactory<Sale, Double>("totalPrice"));
-
 
         setBasicActions ();
         refreshAll();
@@ -204,6 +171,47 @@ public class SaleListController {
         tbSaleList.prefHeightProperty().bind(tbSaleList.fixedCellSizeProperty()
                 .multiply(Math.min(saleObservableList.size() + 5, pageMaxCount + 1)));
         tbSaleList.setMinHeight(0);
+    }
+
+    private void configureFiltersEvents() {
+        txtName.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                refreshAll();
+            }
+        });
+        cbAmount.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
+            refreshAll();
+        });
+        spnAmount.valueProperty().addListener((obs, oldValue, newValue) -> {
+            if (saleFilter.getAmountComparator().isPresent())
+                refreshAll();
+        });
+        dtBefore.valueProperty().addListener((obs, oldValue, newValue) -> {
+            refreshAll();
+        });
+        dtAfter.valueProperty().addListener((obs, oldValue, newValue) -> {
+            refreshAll();
+        });
+    }
+
+    private void configureFiltersData() {
+        cbAmount.setItems(FXCollections.observableArrayList(List.of(">=", ">", "=", "<", "<=")));
+        cbAmount.getItems().add(0, null);
+
+        spnAmount.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE, 0, 1));
+        spnAmount.getEditor().setTextFormatter(new TextFormatter<>(change -> {
+            if (change.getText().matches("\\d*"))
+                return change;
+            return null;
+        }));
+    }
+
+    private void configureTableColumns() {
+        colDate.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getDateTime().toLocalDate()));
+        colAmount.setCellValueFactory(new PropertyValueFactory<Sale, Integer>("amount"));
+        colProductName.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(productService.findById(cellData.getValue().getProduct().getId()).getName()));
+        colUnitValue.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(productService.findById(cellData.getValue().getProduct().getId()).getPrice()));
+        colTotalValue.setCellValueFactory(new PropertyValueFactory<Sale, Double>("totalPrice"));
     }
 
     private void setBasicActions () {
