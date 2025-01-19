@@ -510,7 +510,6 @@ public class AlterProductController {
         });
     }
 
-
     private void loadImages (EventHandler<MouseEvent> entered, EventHandler<MouseEvent> exited) {
         var images = product.getImages();
         for (var image : images) {
