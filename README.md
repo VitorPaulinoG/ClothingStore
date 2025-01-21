@@ -16,8 +16,8 @@ Sistema de gerência de loja de roupas, que permite:
 - Remover roupas e vendas
 ## Documentação
 ### Dicionário de Dados
-Link: [Dicionário de Dados](ClothingStore - Dicionário de Dados - Página1.pdf)
-### DER 
-Link: [Diagrama Entidade-Relacionamento](docs/ClothingStore - Diagrama Entidade-Relacionamento.pdf)
+Link: ![Dicionário de Dados](https://github.com/VitorPaulinoG/ClothingStore/blob/master/docs/ClothingStore%20-%20Diagrama%20Entidade-Relacionamento.pdf)
+### DER
+Link: ![Diagrama Entidade-Relacionamento](https://github.com/VitorPaulinoG/ClothingStore/blob/master/docs/ClothingStore%20-%20Diagrama%20de%20Classes.pdf)
 ### Diagrama de Classes
-Link: [Diagrama de Classes](docs/ClothingStore - Diagrama de Classes.pdf)
+Link: [Diagrama de Classes](https://github.com/VitorPaulinoG/ClothingStore/blob/master/docs/ClothingStore%20-%20Dicion%C3%A1rio%20de%20Dados%20-%20P%C3%A1gina1.pdf)
