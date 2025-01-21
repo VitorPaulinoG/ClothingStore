@@ -106,13 +106,13 @@ public class SaleListController {
         configureFiltersEvents();
         configureTableColumns();
 
+        tbSaleList.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_LAST_COLUMN);
         flowFilters.getChildren().stream().filter(x -> x instanceof VBox)
             .forEach(x -> ((VBox) x).prefWidthProperty().bind(Bindings.createDoubleBinding(() -> {
                 int maxColumns = Math.max((int) ((flowFilters.getWidth()) / (200.0 + flowFilters.getHgap())), 1);
                 var prefWidth = ((flowFilters.getWidth()) / maxColumns) - flowFilters.getHgap();
                 return prefWidth;
             }, flowFilters.widthProperty())));
-
         setBasicActions ();
         refreshAll();
         pagSaleList.setPageFactory(pageNumber -> {
