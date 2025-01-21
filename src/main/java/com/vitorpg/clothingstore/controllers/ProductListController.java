@@ -292,10 +292,19 @@ public class ProductListController {
                 }
             }
         });
-
         colProductName.setCellValueFactory(new PropertyValueFactory<Product, String>("name"));
-
         colProductPrice.setCellValueFactory(new PropertyValueFactory<Product, Double>("price"));
+        colProductPrice.setCellFactory(column -> new TableCell<Product, Double>() {
+            @Override
+            protected void updateItem(Double item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    setText(String.format("%.2f", item));
+                }
+            }
+        });
 
         setBasicActions();
     }

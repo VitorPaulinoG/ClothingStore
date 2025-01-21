@@ -212,6 +212,17 @@ public class SaleListController {
         colProductName.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(productService.findById(cellData.getValue().getProduct().getId()).getName()));
         colUnitValue.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(productService.findById(cellData.getValue().getProduct().getId()).getPrice()));
         colTotalValue.setCellValueFactory(new PropertyValueFactory<Sale, Double>("totalPrice"));
+        colTotalValue.setCellFactory(column -> new TableCell<>() {
+            @Override
+            protected void updateItem(Double item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    setText(String.format("%.2f", item));
+                }
+            }
+        });
     }
 
     private void setBasicActions () {
